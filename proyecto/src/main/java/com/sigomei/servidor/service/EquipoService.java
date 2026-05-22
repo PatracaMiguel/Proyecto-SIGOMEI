@@ -4,14 +4,14 @@ import com.sigomei.api.catalogos.Criticidad;
 import com.sigomei.api.catalogos.EstadoOperativo;
 import com.sigomei.api.catalogos.TipoEquipo;
 import com.sigomei.api.dto.EquipoDTO;
+import com.sigomei.api.dto.OrdenDTO;
 import com.sigomei.api.excepciones.ReglaNegocioException;
 import com.sigomei.api.excepciones.RegistroNoEncontradoException;
 import com.sigomei.api.excepciones.ValidacionException;
 import com.sigomei.servidor.config.ServerLog;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
-import java.util.stream.Collectors;
 
 public class EquipoService {
 
@@ -23,32 +23,46 @@ public class EquipoService {
             throws ValidacionException, ReglaNegocioException {
 
         validarEquipo(equipo);
-        boolean serieDuplicada = InMemorySigomeiStore.EQUIPOS.values().stream()
-                .anyMatch(actual -> actual.getIdEquipo() != equipo.getIdEquipo()
-                        && actual.getNumeroSerie().equalsIgnoreCase(equipo.getNumeroSerie()));
-        if (serieDuplicada) {
-            throw new ReglaNegocioException("Ya existe un equipo con el numero de serie indicado");
+
+        for (EquipoDTO actual : InMemorySigomeiStore.EQUIPOS.values()) {
+            boolean mismoId = actual.getIdEquipo() == equipo.getIdEquipo();
+            boolean mismaSerie = actual.getNumeroSerie().equalsIgnoreCase(equipo.getNumeroSerie());
+            if (!mismoId && mismaSerie) {
+                ServerLog.warning("Equipo rechazado: numero de serie duplicado " + equipo.getNumeroSerie());
+                throw new ReglaNegocioException("Ya existe un equipo con el numero de serie indicado");
+            }
         }
+
         InMemorySigomeiStore.EQUIPOS.put(equipo.getIdEquipo(), copiar(equipo));
         ServerLog.info("Equipo registrado id=" + equipo.getIdEquipo());
         return copiar(equipo);
     }
 
     public List<EquipoDTO> consultarEquipos() {
+        List<EquipoDTO> equipos = new ArrayList<>();
+        for (EquipoDTO equipo : InMemorySigomeiStore.EQUIPOS.values()) {
+            equipos.add(copiar(equipo));
+        }
         ServerLog.info("Consulta de equipos");
-        return InMemorySigomeiStore.EQUIPOS.values().stream().map(this::copiar).collect(Collectors.toList());
+        return equipos;
     }
 
     public List<EquipoDTO> filtrarEquipos(String nombre, TipoEquipo tipo, Criticidad criticidad) {
-        String nombreNormalizado = nombre == null ? "" : nombre.toLowerCase(Locale.ROOT);
+        List<EquipoDTO> resultado = new ArrayList<>();
+
+        for (EquipoDTO equipo : InMemorySigomeiStore.EQUIPOS.values()) {
+            boolean coincideNombre = nombre == null || nombre.isBlank()
+                    || equipo.getNombre().toLowerCase().contains(nombre.toLowerCase());
+            boolean coincideTipo = tipo == null || equipo.getTipo() == tipo;
+            boolean coincideCriticidad = criticidad == null || equipo.getCriticidad() == criticidad;
+
+            if (coincideNombre && coincideTipo && coincideCriticidad) {
+                resultado.add(copiar(equipo));
+            }
+        }
+
         ServerLog.info("Filtro de equipos tipo=" + tipo);
-        return InMemorySigomeiStore.EQUIPOS.values().stream()
-                .filter(equipo -> nombreNormalizado.isBlank()
-                        || equipo.getNombre().toLowerCase(Locale.ROOT).contains(nombreNormalizado))
-                .filter(equipo -> tipo == null || equipo.getTipo() == tipo)
-                .filter(equipo -> criticidad == null || equipo.getCriticidad() == criticidad)
-                .map(this::copiar)
-                .collect(Collectors.toList());
+        return resultado;
     }
 
     public EquipoDTO actualizarEquipo(EquipoDTO equipo)
@@ -57,6 +71,7 @@ public class EquipoService {
         if (equipo == null || !InMemorySigomeiStore.EQUIPOS.containsKey(equipo.getIdEquipo())) {
             throw new RegistroNoEncontradoException("Equipo no encontrado");
         }
+
         validarEquipo(equipo);
         InMemorySigomeiStore.EQUIPOS.put(equipo.getIdEquipo(), copiar(equipo));
         ServerLog.info("Equipo actualizado id=" + equipo.getIdEquipo());
@@ -70,17 +85,23 @@ public class EquipoService {
         if (equipo == null) {
             throw new RegistroNoEncontradoException("Equipo no encontrado");
         }
+
         if (nuevoEstado == EstadoOperativo.INACTIVO && tieneOrdenesRelacionadas(idEquipo)) {
+            ServerLog.warning("Equipo rechazado RN-03: equipo relacionado a orden id=" + idEquipo);
             throw new ReglaNegocioException("Este equipo esta relacionado a una orden, no puedes cambiarle el estado");
         }
+
         equipo.setEstadoOperativo(nuevoEstado);
         ServerLog.info("Estado equipo actualizado id=" + idEquipo + " estado=" + nuevoEstado);
         return copiar(equipo);
     }
 
     private void validarEquipo(EquipoDTO equipo) throws ValidacionException {
-        if (equipo == null || equipo.getIdEquipo() <= 0 || esBlanco(equipo.getNombre())
-                || equipo.getTipo() == null || esBlanco(equipo.getMarca()) || esBlanco(equipo.getModelo())
+        if (equipo == null) {
+            throw new ValidacionException("El equipo tiene datos obligatorios incompletos");
+        }
+        if (equipo.getIdEquipo() <= 0 || esBlanco(equipo.getNombre()) || equipo.getTipo() == null
+                || esBlanco(equipo.getMarca()) || esBlanco(equipo.getModelo())
                 || esBlanco(equipo.getNumeroSerie()) || esBlanco(equipo.getUbicacionPlanta())
                 || equipo.getFechaInstalacion() == null || equipo.getEstadoOperativo() == null
                 || equipo.getCriticidad() == null) {
@@ -89,7 +110,12 @@ public class EquipoService {
     }
 
     private boolean tieneOrdenesRelacionadas(int idEquipo) {
-        return InMemorySigomeiStore.ORDENES.values().stream().anyMatch(orden -> orden.getIdEquipo() == idEquipo);
+        for (OrdenDTO orden : InMemorySigomeiStore.ORDENES.values()) {
+            if (orden.getIdEquipo() == idEquipo) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private boolean esBlanco(String valor) {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.099" tests="26" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.058" tests="26" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="23"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="MX"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-23\bin"/>
-    <property name="sun.java.command" value="C:\Users\Migue\AppData\Local\Temp\surefire14055925228755052289\surefirebooter-20260521201436588_3.jar C:\Users\Migue\AppData\Local\Temp\surefire14055925228755052289 2026-05-21T20-14-36_415-jvmRun1 surefire-20260521201436588_1tmp surefire_0-20260521201436588_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\Migue\AppData\Local\Temp\surefire4199570553609141817\surefirebooter-20260522112949156_3.jar C:\Users\Migue\AppData\Local\Temp\surefire4199570553609141817 2026-05-22T11-29-49_036-jvmRun1 surefire-20260522112949156_1tmp surefire_0-20260522112949156_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\Migue\proyecto_Sigomei\Proyecto-SIGOMEI\proyecto\target\test-classes;C:\Users\Migue\proyecto_Sigomei\Proyecto-SIGOMEI\proyecto\target\classes;C:\Users\Migue\.m2\repository\com\mysql\mysql-connector-j\9.1.0\mysql-connector-j-9.1.0.jar;C:\Users\Migue\.m2\repository\com\google\protobuf\protobuf-java\4.26.1\protobuf-java-4.26.1.jar;C:\Users\Migue\.m2\repository\org\junit\jupiter\junit-jupiter\5.10.2\junit-jupiter-5.10.2.jar;C:\Users\Migue\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.2\junit-jupiter-api-5.10.2.jar;C:\Users\Migue\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\Migue\.m2\repository\org\junit\platform\junit-platform-commons\1.10.2\junit-platform-commons-1.10.2.jar;C:\Users\Migue\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\Migue\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.2\junit-jupiter-params-5.10.2.jar;C:\Users\Migue\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.2\junit-jupiter-engine-5.10.2.jar;C:\Users\Migue\.m2\repository\org\junit\platform\junit-platform-engine\1.10.2\junit-platform-engine-1.10.2.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -30,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\Migue\AppData\Local\Temp\surefire14055925228755052289\surefirebooter-20260521201436588_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\Migue\AppData\Local\Temp\surefire4199570553609141817\surefirebooter-20260522112949156_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="23.0.1+11-39"/>
@@ -50,7 +50,7 @@
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
     <property name="sun.os.patch.level" value=""/>
     <property name="native.encoding" value="Cp1252"/>
-    <property name="java.library.path" value="C:\Program Files\Java\jdk-23\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Users\Migue\.codex\tmp\arg0\codex-arg0g3pCcJ;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Windows\System32\HWAudioDriverLibs;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;C:\xampp\mysql\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C:\Program Files\nodejs\;C:\Program Files\Java\jdk-23\bin;C:\Program Files\Git\cmd;C:\Users\Migue\Downloads\maven-mvnd-1.0.3-windows-amd64\maven-mvnd-1.0.3-windows-amd64\bin;C:\Users\Migue\AppData\Local\Android\Sdk\build-tools;C:\Users\Migue\AppData\Local\Android\Sdk\platform-tools;C:\Users\Migue\Downloads\apache-maven-3.9.11-bin\apache-maven-3.9.11\bin;C:\Program Files\Docker\Docker\resources\bin;C:\Users\Migue\AppData\Local\Programs\Python\Launcher\;C:\Users\Migue\AppData\Local\Programs\Eclipse Adoptium\jdk-21.0.5.11-hotspot\bin;C:\Users\Migue\AppData\Local\Programs\Python\Python312\Scripts\;C:\Users\Migue\AppData\Local\Programs\Python\Python312\;C:\Users\Migue\AppData\Local\Microsoft\WindowsApps;C:\Program Files\CodeBlocks\MinGW\bin;C:\Users\Migue\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Migue\.dotnet\tools;C:\Users\Migue\AppData\Roaming\npm;C:\Users\Migue\AppData\Local\JetBrains\IntelliJ IDEA 2024.3.5\bin;;C:\Users\Migue\AppData\Local\Microsoft\WinGet\Packages\OCaml.opam_Microsoft.Winget.Source_8wekyb3d8bbwe;;c:\Users\Migue\.vscode\extensions\openai.chatgpt-26.513.21555-win32-x64\bin\windows-x86_64;."/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk-23\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;c:\Users\Migue\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\debugCommand;c:\Users\Migue\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\copilotCli;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Windows\System32\HWAudioDriverLibs;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;C:\xampp\mysql\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C:\Program Files\nodejs\;C:\Program Files\Java\jdk-23\bin;C:\Program Files\Git\cmd;C:\Users\Migue\Downloads\maven-mvnd-1.0.3-windows-amd64\maven-mvnd-1.0.3-windows-amd64\bin;C:\Users\Migue\AppData\Local\Android\Sdk\build-tools;C:\Users\Migue\AppData\Local\Android\Sdk\platform-tools;C:\Users\Migue\Downloads\apache-maven-3.9.11-bin\apache-maven-3.9.11\bin;C:\Program Files\Docker\Docker\resources\bin;C:\Users\Migue\AppData\Local\Programs\Python\Launcher\;C:\Users\Migue\AppData\Local\Programs\Eclipse Adoptium\jdk-21.0.5.11-hotspot\bin;C:\Users\Migue\AppData\Local\Programs\Python\Python312\Scripts\;C:\Users\Migue\AppData\Local\Programs\Python\Python312\;C:\Users\Migue\AppData\Local\Microsoft\WindowsApps;C:\Program Files\CodeBlocks\MinGW\bin;C:\Users\Migue\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Migue\.dotnet\tools;C:\Users\Migue\AppData\Roaming\npm;C:\Users\Migue\AppData\Local\JetBrains\IntelliJ IDEA 2024.3.5\bin;;C:\Users\Migue\AppData\Local\Microsoft\WinGet\Packages\OCaml.opam_Microsoft.Winget.Source_8wekyb3d8bbwe;c:\Users\Migue\.vscode\extensions\vscjava.vscode-java-debug-0.59.0\bundled\scripts\noConfigScripts;."/>
     <property name="java.vm.info" value="mixed mode, sharing"/>
     <property name="stderr.encoding" value="Cp1252"/>
     <property name="java.vendor" value="Oracle Corporation"/>
@@ -59,29 +59,29 @@
     <property name="java.class.version" value="67.0"/>
   </properties>
   <testcase name="rn05_negativo_fechaCierreAntesDeInicio" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.006"/>
-  <testcase name="rn02_positivo_permiteNuevaOrdenCuandoLaPreviaEstaFinalizada" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.004"/>
-  <testcase name="rn10_positivo_registrarOrdenNoAlteraTecnicoNiEquipo" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.006"/>
+  <testcase name="rn02_positivo_permiteNuevaOrdenCuandoLaPreviaEstaFinalizada" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.0"/>
+  <testcase name="rn10_positivo_registrarOrdenNoAlteraTecnicoNiEquipo" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.009"/>
   <testcase name="rn09_negativo_cancelarOrdenFinalizada" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.002"/>
-  <testcase name="rn06_negativo_finalizarSinCostoReal" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.0"/>
+  <testcase name="rn06_negativo_finalizarSinCostoReal" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.003"/>
   <testcase name="rn03_negativo_eliminarTecnicoConOrdenes" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.002"/>
-  <testcase name="rn08_negativo_transicionInvalida" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.008"/>
-  <testcase name="rn03_positivo_cambiarEstadoEquipoSinOrdenesRelacionadas" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.002"/>
-  <testcase name="rn03_positivo_eliminarTecnicoSinOrdenes" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.009"/>
-  <testcase name="rn06_positivo_finalizarConDatosCompletos" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.004"/>
+  <testcase name="rn08_negativo_transicionInvalida" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.0"/>
+  <testcase name="rn03_positivo_cambiarEstadoEquipoSinOrdenesRelacionadas" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.004"/>
+  <testcase name="rn03_positivo_eliminarTecnicoSinOrdenes" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.0"/>
+  <testcase name="rn06_positivo_finalizarConDatosCompletos" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.005"/>
   <testcase name="rn08_positivo_transicionEnEjecucionAFinalizada" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.002"/>
-  <testcase name="rn02_negativo_ordenDuplicada" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.003"/>
-  <testcase name="rn07_positivo_criticidadAltaConNivelII" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.0"/>
-  <testcase name="rn02_positivo_sinOrdenDuplicada" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.0"/>
-  <testcase name="rn05_negativo_fechaInicioAntesDeProgramada" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.0"/>
+  <testcase name="rn02_negativo_ordenDuplicada" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.002"/>
+  <testcase name="rn07_positivo_criticidadAltaConNivelII" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.002"/>
+  <testcase name="rn02_positivo_sinOrdenDuplicada" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.002"/>
+  <testcase name="rn05_negativo_fechaInicioAntesDeProgramada" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.001"/>
   <testcase name="rn06_negativo_finalizarSinDatos" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.001"/>
-  <testcase name="rn08_positivo_transicionValida" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.0"/>
-  <testcase name="rn09_positivo_cancelarOrdenProgramada" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.0"/>
-  <testcase name="rn05_positivo_fechasCorrectas" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.007"/>
-  <testcase name="rn04_negativo_tecnicoInactivo" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.0"/>
+  <testcase name="rn08_positivo_transicionValida" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.001"/>
+  <testcase name="rn09_positivo_cancelarOrdenProgramada" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.001"/>
+  <testcase name="rn05_positivo_fechasCorrectas" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.002"/>
+  <testcase name="rn04_negativo_tecnicoInactivo" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.002"/>
   <testcase name="rn07_negativo_criticidadAltaConNivelI" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.0"/>
   <testcase name="rn01_negativo_tecnicoIncompatible" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.0"/>
-  <testcase name="rn09_positivo_cancelarOrdenEnEjecucion" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.009"/>
+  <testcase name="rn09_positivo_cancelarOrdenEnEjecucion" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.005"/>
   <testcase name="rn01_positivo_tecnicoCompatible" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.0"/>
-  <testcase name="rn03_negativo_cambiarEstadoEquipoConOrdenesRelacionadas" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.004"/>
-  <testcase name="rn04_positivo_tecnicoActivo" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.002"/>
+  <testcase name="rn03_negativo_cambiarEstadoEquipoConOrdenesRelacionadas" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.0"/>
+  <testcase name="rn04_positivo_tecnicoActivo" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.0"/>
 </testsuite>

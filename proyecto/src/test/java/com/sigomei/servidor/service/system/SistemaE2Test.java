@@ -1,4 +1,4 @@
-package com.sigomei.servidor.service;
+package com.sigomei.servidor.service.system;
 
 import com.sigomei.api.catalogos.*;
 import com.sigomei.api.dto.EquipoDTO;
@@ -8,6 +8,10 @@ import com.sigomei.api.dto.UsuarioDTO;
 import com.sigomei.api.excepciones.AutenticacionException;
 import com.sigomei.api.excepciones.ReglaNegocioException;
 import com.sigomei.api.excepciones.ValidacionException;
+import com.sigomei.servidor.service.EquipoService;
+import com.sigomei.servidor.service.OrdenService;
+import com.sigomei.servidor.service.TecnicoService;
+import com.sigomei.servidor.service.UsuarioService;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;

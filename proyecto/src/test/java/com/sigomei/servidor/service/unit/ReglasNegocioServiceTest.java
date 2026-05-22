@@ -1,10 +1,13 @@
-package com.sigomei.servidor.service;
+package com.sigomei.servidor.service.unit;
 
 import com.sigomei.api.catalogos.*;
 import com.sigomei.api.dto.EquipoDTO;
 import com.sigomei.api.dto.OrdenDTO;
 import com.sigomei.api.dto.TecnicoDTO;
 import com.sigomei.api.excepciones.ReglaNegocioException;
+import com.sigomei.servidor.service.EquipoService;
+import com.sigomei.servidor.service.OrdenService;
+import com.sigomei.servidor.service.TecnicoService;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
