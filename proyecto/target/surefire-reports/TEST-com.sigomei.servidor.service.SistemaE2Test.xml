@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.099" tests="26" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.sigomei.servidor.service.SistemaE2Test" time="0.217" tests="32" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="23"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -58,30 +58,36 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="67.0"/>
   </properties>
-  <testcase name="rn05_negativo_fechaCierreAntesDeInicio" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.006"/>
-  <testcase name="rn02_positivo_permiteNuevaOrdenCuandoLaPreviaEstaFinalizada" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.004"/>
-  <testcase name="rn10_positivo_registrarOrdenNoAlteraTecnicoNiEquipo" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.006"/>
-  <testcase name="rn09_negativo_cancelarOrdenFinalizada" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.002"/>
-  <testcase name="rn06_negativo_finalizarSinCostoReal" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.0"/>
-  <testcase name="rn03_negativo_eliminarTecnicoConOrdenes" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.002"/>
-  <testcase name="rn08_negativo_transicionInvalida" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.008"/>
-  <testcase name="rn03_positivo_cambiarEstadoEquipoSinOrdenesRelacionadas" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.002"/>
-  <testcase name="rn03_positivo_eliminarTecnicoSinOrdenes" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.009"/>
-  <testcase name="rn06_positivo_finalizarConDatosCompletos" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.004"/>
-  <testcase name="rn08_positivo_transicionEnEjecucionAFinalizada" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.002"/>
-  <testcase name="rn02_negativo_ordenDuplicada" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.003"/>
-  <testcase name="rn07_positivo_criticidadAltaConNivelII" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.0"/>
-  <testcase name="rn02_positivo_sinOrdenDuplicada" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.0"/>
-  <testcase name="rn05_negativo_fechaInicioAntesDeProgramada" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.0"/>
-  <testcase name="rn06_negativo_finalizarSinDatos" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.001"/>
-  <testcase name="rn08_positivo_transicionValida" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.0"/>
-  <testcase name="rn09_positivo_cancelarOrdenProgramada" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.0"/>
-  <testcase name="rn05_positivo_fechasCorrectas" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.007"/>
-  <testcase name="rn04_negativo_tecnicoInactivo" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.0"/>
-  <testcase name="rn07_negativo_criticidadAltaConNivelI" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.0"/>
-  <testcase name="rn01_negativo_tecnicoIncompatible" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.0"/>
-  <testcase name="rn09_positivo_cancelarOrdenEnEjecucion" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.009"/>
-  <testcase name="rn01_positivo_tecnicoCompatible" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.0"/>
-  <testcase name="rn03_negativo_cambiarEstadoEquipoConOrdenesRelacionadas" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.004"/>
-  <testcase name="rn04_positivo_tecnicoActivo" classname="com.sigomei.servidor.service.ReglasNegocioServiceTest" time="0.002"/>
+  <testcase name="cp06_filtrarTecnicosMecanicos" classname="com.sigomei.servidor.service.SistemaE2Test" time="0.001"/>
+  <testcase name="cp01_clienteConectaYAccedeModulos" classname="com.sigomei.servidor.service.SistemaE2Test" time="0.014"/>
+  <testcase name="cp13_cambiarOrdenProgramadaAEnEjecucion" classname="com.sigomei.servidor.service.SistemaE2Test" time="0.005"/>
+  <testcase name="cp14_finalizarOrdenEnEjecucionConDatos" classname="com.sigomei.servidor.service.SistemaE2Test" time="0.005"/>
+  <testcase name="cp09_eliminarTecnicoSinOrdenes" classname="com.sigomei.servidor.service.SistemaE2Test" time="0.0"/>
+  <testcase name="cp08_cambiarEstatusTecnicoActivoAInactivo" classname="com.sigomei.servidor.service.SistemaE2Test" time="0.003"/>
+  <testcase name="cp11_filtrarOrdenesProgramadas" classname="com.sigomei.servidor.service.SistemaE2Test" time="0.003"/>
+  <testcase name="cp28_rechazarFinalizarSinFechaCierre" classname="com.sigomei.servidor.service.SistemaE2Test" time="0.001"/>
+  <testcase name="cp29_rechazarCancelarOrdenFinalizada" classname="com.sigomei.servidor.service.SistemaE2Test" time="0.001"/>
+  <testcase name="cp27_rechazarCambioFinalizadaAProgramada" classname="com.sigomei.servidor.service.SistemaE2Test" time="0.002"/>
+  <testcase name="cp21_rechazarOrdenConCampoVacio" classname="com.sigomei.servidor.service.SistemaE2Test" time="0.002"/>
+  <testcase name="cp30_rechazarInactivarTecnicoConOrdenesActivas" classname="com.sigomei.servidor.service.SistemaE2Test" time="0.002"/>
+  <testcase name="cp31_rechazarInactivarEquipoRelacionadoAOrden" classname="com.sigomei.servidor.service.SistemaE2Test" time="0.001"/>
+  <testcase name="cp16_consultarHistorialFiltrado" classname="com.sigomei.servidor.service.SistemaE2Test" time="0.002"/>
+  <testcase name="cp12_actualizarOrdenRegistrada" classname="com.sigomei.servidor.service.SistemaE2Test" time="0.002"/>
+  <testcase name="cp22_rechazarOrdenConTecnicoIncompatible" classname="com.sigomei.servidor.service.SistemaE2Test" time="0.0"/>
+  <testcase name="cp10_registrarOrdenConEquipoYTecnicoCompatibles" classname="com.sigomei.servidor.service.SistemaE2Test" time="0.001"/>
+  <testcase name="cp02_registrarEquipoValido" classname="com.sigomei.servidor.service.SistemaE2Test" time="0.0"/>
+  <testcase name="cp24_rechazarOrdenConTecnicoInactivo" classname="com.sigomei.servidor.service.SistemaE2Test" time="0.0"/>
+  <testcase name="cp15_cancelarOrdenProgramada" classname="com.sigomei.servidor.service.SistemaE2Test" time="0.0"/>
+  <testcase name="cp05_registrarTecnicoValido" classname="com.sigomei.servidor.service.SistemaE2Test" time="0.002"/>
+  <testcase name="cp26_rechazarFechaInicioAntesDeProgramada" classname="com.sigomei.servidor.service.SistemaE2Test" time="0.001"/>
+  <testcase name="cp32_mostrarErrorCuandoServidorRmiNoDisponible" classname="com.sigomei.servidor.service.SistemaE2Test" time="0.104"/>
+  <testcase name="cp07_actualizarTecnicoRegistrado" classname="com.sigomei.servidor.service.SistemaE2Test" time="0.001"/>
+  <testcase name="cp23_rechazarOrdenDuplicadaMismoEquipoYFecha" classname="com.sigomei.servidor.service.SistemaE2Test" time="0.002"/>
+  <testcase name="cp03_filtrarEquiposMecanicos" classname="com.sigomei.servidor.service.SistemaE2Test" time="0.002"/>
+  <testcase name="cp25_rechazarCriticidadAltaConCertificacionI" classname="com.sigomei.servidor.service.SistemaE2Test" time="0.0"/>
+  <testcase name="cp17_cambiarTecnicoSinOrdenesAInactivo" classname="com.sigomei.servidor.service.SistemaE2Test" time="0.0"/>
+  <testcase name="cp04_actualizarEquipoRegistrado" classname="com.sigomei.servidor.service.SistemaE2Test" time="0.008"/>
+  <testcase name="cp20_rechazarTecnicoConCorreoVacio" classname="com.sigomei.servidor.service.SistemaE2Test" time="0.0"/>
+  <testcase name="cp19_rechazarEquipoConNombreVacio" classname="com.sigomei.servidor.service.SistemaE2Test" time="0.0"/>
+  <testcase name="cp18_cambiarEquipoSinOrdenesAInactivo" classname="com.sigomei.servidor.service.SistemaE2Test" time="0.006"/>
 </testsuite>

@@ -74,3 +74,23 @@ CREATE INDEX idx_orden_equipo ON orden_mantenimiento(id_equipo);
 CREATE INDEX idx_orden_tecnico ON orden_mantenimiento(id_tecnico);
 CREATE INDEX idx_orden_equipo_fecha_estado
 ON orden_mantenimiento(id_equipo, fecha_programada, estado_orden);
+
+INSERT INTO usuario (nombre_usuario, contrasena, rol, estatus) VALUES
+('admin', 'admin123', 'COORDINADOR', 'ACTIVO'),
+('supervisor', 'supervisor123', 'SUPERVISOR', 'ACTIVO');
+
+INSERT INTO equipo (nombre, tipo, marca, modelo, numero_serie, ubicacion_planta, fecha_instalacion, estado_operativo, criticidad) VALUES
+('Compresor electrico', 'ELECTRICO', 'Atlas', 'AX-10', 'EQ-001', 'Planta Norte', '2024-01-10', 'OPERATIVO', 'ALTA'),
+('Bomba mecanica', 'MECANICO', 'Flow', 'BM-22', 'EQ-002', 'Planta Sur', '2024-02-12', 'OPERATIVO', 'MEDIA'),
+('Prensa hidraulica', 'HIDRAULICO', 'Hydra', 'PH-10', 'EQ-010', 'Planta Oeste', '2024-03-01', 'OPERATIVO', 'BAJA');
+
+INSERT INTO tecnico (nombre_completo, rfc, telefono, correo, especialidad, nivel_certificacion, fecha_ingreso, estatus) VALUES
+('Ana Lopez', 'LOAA900101AA1', '5551000001', 'ana@example.com', 'ELECTRICO', 'II', '2022-01-10', 'ACTIVO'),
+('Bruno Ruiz', 'RUBB900101BB1', '5551000002', 'bruno@example.com', 'MECANICO', 'II', '2022-02-10', 'ACTIVO'),
+('Carla Soto', 'SOCC900101CC1', '5551000003', 'carla@example.com', 'ELECTRICO', 'II', '2022-03-10', 'INACTIVO'),
+('Diego Mora', 'MODD900101DD1', '5551000004', 'diego@example.com', 'ELECTRICO', 'I', '2022-04-10', 'ACTIVO');
+
+INSERT INTO orden_mantenimiento (id_equipo, id_tecnico, tipo_mantenimiento, fecha_programada, fecha_inicio, fecha_cierre, descripcion_trabajo, costo_estimado, costo_real, estado_orden) VALUES
+(1, 1, 'PREVENTIVO', '2026-05-20', NULL, NULL, 'Orden programada base', 1500.00, NULL, 'PROGRAMADA'),
+(2, 2, 'CORRECTIVO', '2026-05-19', '2026-05-19', NULL, 'Orden en ejecucion base', 1800.00, NULL, 'EN_EJECUCION'),
+(2, 2, 'PREVENTIVO', '2026-05-18', '2026-05-18', '2026-05-19', 'Orden finalizada base', 1200.00, 1250.00, 'FINALIZADA');

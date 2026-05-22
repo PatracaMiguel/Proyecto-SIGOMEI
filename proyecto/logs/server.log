@@ -1,0 +1,211 @@
+2026-05-21 20:01:20 [INFO] Orden registrada id=105
+2026-05-21 20:01:20 [INFO] Consulta de tecnicos
+2026-05-21 20:01:20 [INFO] Consulta de equipos
+2026-05-21 20:01:20 [INFO] Orden registrada id=113
+2026-05-21 20:01:20 [INFO] Consulta de tecnicos
+2026-05-21 20:01:20 [INFO] Consulta de equipos
+2026-05-21 20:01:20 [WARNING] Transicion rechazada idOrden=3 nuevoEstado=CANCELADA
+2026-05-21 20:01:20 [WARNING] Transicion rechazada idOrden=2 nuevoEstado=PROGRAMADA
+2026-05-21 20:01:20 [INFO] Estado equipo actualizado id=10 estado=INACTIVO
+2026-05-21 20:01:20 [INFO] Tecnico eliminado id=10
+2026-05-21 20:01:20 [INFO] Estado de orden actualizado id=2 estado=FINALIZADA
+2026-05-21 20:01:20 [INFO] Estado de orden actualizado id=2 estado=FINALIZADA
+2026-05-21 20:01:20 [INFO] Orden registrada id=111
+2026-05-21 20:01:20 [INFO] Orden registrada id=103
+2026-05-21 20:01:20 [INFO] Estado de orden actualizado id=1 estado=EN_EJECUCION
+2026-05-21 20:01:20 [INFO] Estado de orden actualizado id=1 estado=CANCELADA
+2026-05-21 20:01:20 [INFO] Orden registrada id=108
+2026-05-21 20:01:20 [INFO] Estado de orden actualizado id=2 estado=CANCELADA
+2026-05-21 20:01:20 [INFO] Orden registrada id=101
+2026-05-21 20:01:20 [INFO] Orden registrada id=106
+2026-05-21 20:02:19 [INFO] Orden registrada id=220
+2026-05-21 20:02:19 [INFO] Orden actualizada id=220
+2026-05-21 20:02:19 [INFO] Estado de orden actualizado id=220 estado=EN_EJECUCION
+2026-05-21 20:02:19 [INFO] Consulta de ordenes
+2026-05-21 20:02:19 [INFO] Tecnico registrado id=20
+2026-05-21 20:02:19 [INFO] Tecnico actualizado id=20
+2026-05-21 20:02:19 [INFO] Tecnico eliminado id=20
+2026-05-21 20:02:19 [INFO] Consulta de tecnicos
+2026-05-21 20:02:19 [INFO] Equipo registrado id=20
+2026-05-21 20:02:19 [INFO] Equipo actualizado id=20
+2026-05-21 20:02:19 [INFO] Estado equipo actualizado id=20 estado=EN_MANTENIMIENTO
+2026-05-21 20:02:19 [INFO] Consulta de equipos
+2026-05-21 20:02:19 [INFO] Orden registrada id=105
+2026-05-21 20:02:19 [INFO] Consulta de tecnicos
+2026-05-21 20:02:19 [INFO] Consulta de equipos
+2026-05-21 20:02:19 [INFO] Orden registrada id=113
+2026-05-21 20:02:19 [INFO] Consulta de tecnicos
+2026-05-21 20:02:19 [INFO] Consulta de equipos
+2026-05-21 20:02:19 [WARNING] Transicion rechazada idOrden=3 nuevoEstado=CANCELADA
+2026-05-21 20:02:19 [WARNING] Transicion rechazada idOrden=2 nuevoEstado=PROGRAMADA
+2026-05-21 20:02:19 [INFO] Estado equipo actualizado id=10 estado=INACTIVO
+2026-05-21 20:02:19 [INFO] Tecnico eliminado id=10
+2026-05-21 20:02:19 [INFO] Estado de orden actualizado id=2 estado=FINALIZADA
+2026-05-21 20:02:19 [INFO] Estado de orden actualizado id=2 estado=FINALIZADA
+2026-05-21 20:02:19 [INFO] Orden registrada id=111
+2026-05-21 20:02:19 [INFO] Orden registrada id=103
+2026-05-21 20:02:19 [INFO] Estado de orden actualizado id=1 estado=EN_EJECUCION
+2026-05-21 20:02:19 [INFO] Estado de orden actualizado id=1 estado=CANCELADA
+2026-05-21 20:02:19 [INFO] Orden registrada id=108
+2026-05-21 20:02:19 [INFO] Estado de orden actualizado id=2 estado=CANCELADA
+2026-05-21 20:02:19 [INFO] Orden registrada id=101
+2026-05-21 20:02:19 [INFO] Orden registrada id=106
+2026-05-21 20:02:38 [INFO] Servidor SIGOMEI iniciado en puerto RMI 1099
+2026-05-21 20:02:40 [INFO] Consulta de equipos
+2026-05-21 20:02:40 [INFO] Consulta de tecnicos
+2026-05-21 20:02:40 [INFO] Consulta de ordenes
+2026-05-21 20:02:40 [INFO] Orden registrada id=300
+2026-05-21 20:04:42 [INFO] Orden registrada id=220
+2026-05-21 20:04:42 [INFO] Orden actualizada id=220
+2026-05-21 20:04:42 [INFO] Estado de orden actualizado id=220 estado=EN_EJECUCION
+2026-05-21 20:04:42 [INFO] Consulta de ordenes
+2026-05-21 20:04:42 [INFO] Tecnico registrado id=20
+2026-05-21 20:04:42 [INFO] Tecnico actualizado id=20
+2026-05-21 20:04:42 [INFO] Tecnico eliminado id=20
+2026-05-21 20:04:42 [INFO] Consulta de tecnicos
+2026-05-21 20:04:42 [INFO] Equipo registrado id=20
+2026-05-21 20:04:42 [INFO] Equipo actualizado id=20
+2026-05-21 20:04:42 [INFO] Estado equipo actualizado id=20 estado=EN_MANTENIMIENTO
+2026-05-21 20:04:42 [INFO] Consulta de equipos
+2026-05-21 20:04:42 [INFO] Orden registrada id=105
+2026-05-21 20:04:42 [INFO] Consulta de tecnicos
+2026-05-21 20:04:42 [INFO] Consulta de equipos
+2026-05-21 20:04:42 [INFO] Orden registrada id=113
+2026-05-21 20:04:42 [INFO] Consulta de tecnicos
+2026-05-21 20:04:42 [INFO] Consulta de equipos
+2026-05-21 20:04:42 [WARNING] Transicion rechazada idOrden=3 nuevoEstado=CANCELADA
+2026-05-21 20:04:42 [WARNING] Transicion rechazada idOrden=2 nuevoEstado=PROGRAMADA
+2026-05-21 20:04:42 [INFO] Estado equipo actualizado id=10 estado=INACTIVO
+2026-05-21 20:04:42 [INFO] Tecnico eliminado id=10
+2026-05-21 20:04:42 [INFO] Estado de orden actualizado id=2 estado=FINALIZADA
+2026-05-21 20:04:42 [INFO] Estado de orden actualizado id=2 estado=FINALIZADA
+2026-05-21 20:04:42 [INFO] Orden registrada id=111
+2026-05-21 20:04:42 [INFO] Orden registrada id=103
+2026-05-21 20:04:42 [INFO] Estado de orden actualizado id=1 estado=EN_EJECUCION
+2026-05-21 20:04:42 [INFO] Estado de orden actualizado id=1 estado=CANCELADA
+2026-05-21 20:04:42 [INFO] Orden registrada id=108
+2026-05-21 20:04:42 [INFO] Estado de orden actualizado id=2 estado=CANCELADA
+2026-05-21 20:04:42 [INFO] Orden registrada id=101
+2026-05-21 20:04:42 [INFO] Orden registrada id=106
+2026-05-21 20:13:14 [INFO] Orden registrada id=220
+2026-05-21 20:13:14 [INFO] Orden actualizada id=220
+2026-05-21 20:13:14 [INFO] Estado de orden actualizado id=220 estado=EN_EJECUCION
+2026-05-21 20:13:14 [INFO] Consulta de ordenes
+2026-05-21 20:13:14 [INFO] Tecnico registrado id=20
+2026-05-21 20:13:14 [INFO] Tecnico actualizado id=20
+2026-05-21 20:13:14 [INFO] Tecnico eliminado id=20
+2026-05-21 20:13:14 [INFO] Consulta de tecnicos
+2026-05-21 20:13:14 [INFO] Equipo registrado id=20
+2026-05-21 20:13:14 [INFO] Equipo actualizado id=20
+2026-05-21 20:13:14 [INFO] Estado equipo actualizado id=20 estado=EN_MANTENIMIENTO
+2026-05-21 20:13:14 [INFO] Consulta de equipos
+2026-05-21 20:13:14 [INFO] Orden registrada id=105
+2026-05-21 20:13:14 [INFO] Consulta de tecnicos
+2026-05-21 20:13:14 [INFO] Consulta de equipos
+2026-05-21 20:13:14 [INFO] Orden registrada id=113
+2026-05-21 20:13:14 [INFO] Consulta de tecnicos
+2026-05-21 20:13:14 [INFO] Consulta de equipos
+2026-05-21 20:13:14 [WARNING] Transicion rechazada idOrden=3 nuevoEstado=CANCELADA
+2026-05-21 20:13:14 [WARNING] Transicion rechazada idOrden=2 nuevoEstado=PROGRAMADA
+2026-05-21 20:13:14 [INFO] Estado equipo actualizado id=10 estado=INACTIVO
+2026-05-21 20:13:14 [INFO] Tecnico eliminado id=10
+2026-05-21 20:13:14 [INFO] Estado de orden actualizado id=2 estado=FINALIZADA
+2026-05-21 20:13:14 [INFO] Estado de orden actualizado id=2 estado=FINALIZADA
+2026-05-21 20:13:14 [INFO] Orden registrada id=111
+2026-05-21 20:13:14 [INFO] Orden registrada id=103
+2026-05-21 20:13:14 [INFO] Estado de orden actualizado id=1 estado=EN_EJECUCION
+2026-05-21 20:13:14 [INFO] Estado de orden actualizado id=1 estado=CANCELADA
+2026-05-21 20:13:14 [INFO] Orden registrada id=108
+2026-05-21 20:13:14 [INFO] Estado de orden actualizado id=2 estado=CANCELADA
+2026-05-21 20:13:15 [INFO] Orden registrada id=101
+2026-05-21 20:13:15 [INFO] Orden registrada id=106
+2026-05-21 20:13:15 [INFO] Filtro de tecnicos especialidad=MECANICO
+2026-05-21 20:13:15 [INFO] Sesion iniciada usuario=admin
+2026-05-21 20:13:15 [INFO] Consulta de equipos
+2026-05-21 20:13:15 [INFO] Consulta de tecnicos
+2026-05-21 20:13:15 [INFO] Consulta de ordenes
+2026-05-21 20:13:15 [INFO] Estado de orden actualizado id=1 estado=EN_EJECUCION
+2026-05-21 20:13:15 [INFO] Estado de orden actualizado id=2 estado=FINALIZADA
+2026-05-21 20:13:15 [INFO] Tecnico eliminado id=10
+2026-05-21 20:13:15 [INFO] Consulta de tecnicos
+2026-05-21 20:13:15 [INFO] Estatus tecnico actualizado id=10 estatus=INACTIVO
+2026-05-21 20:13:15 [INFO] Filtro de ordenes estado=PROGRAMADA
+2026-05-21 20:13:15 [WARNING] Transicion rechazada idOrden=3 nuevoEstado=CANCELADA
+2026-05-21 20:13:15 [WARNING] Transicion rechazada idOrden=3 nuevoEstado=PROGRAMADA
+2026-05-21 20:13:15 [INFO] Consulta historial ordenes
+2026-05-21 20:13:15 [INFO] Consulta de ordenes
+2026-05-21 20:13:15 [INFO] Orden actualizada id=1
+2026-05-21 20:13:15 [INFO] Orden registrada id=200
+2026-05-21 20:13:15 [INFO] Equipo registrado id=20
+2026-05-21 20:13:15 [INFO] Consulta de equipos
+2026-05-21 20:13:15 [INFO] Estado de orden actualizado id=1 estado=CANCELADA
+2026-05-21 20:13:15 [INFO] Tecnico registrado id=20
+2026-05-21 20:13:15 [INFO] Consulta de tecnicos
+2026-05-21 20:13:15 [INFO] Consulta de tecnicos
+2026-05-21 20:13:15 [INFO] Tecnico actualizado id=10
+2026-05-21 20:13:15 [INFO] Filtro de equipos tipo=MECANICO
+2026-05-21 20:13:15 [INFO] Estatus tecnico actualizado id=10 estatus=INACTIVO
+2026-05-21 20:13:15 [INFO] Consulta de equipos
+2026-05-21 20:13:15 [INFO] Equipo actualizado id=10
+2026-05-21 20:13:15 [INFO] Estado equipo actualizado id=10 estado=INACTIVO
+2026-05-21 20:14:37 [INFO] Orden registrada id=220
+2026-05-21 20:14:37 [INFO] Orden actualizada id=220
+2026-05-21 20:14:37 [INFO] Estado de orden actualizado id=220 estado=EN_EJECUCION
+2026-05-21 20:14:37 [INFO] Consulta de ordenes
+2026-05-21 20:14:37 [INFO] Tecnico registrado id=20
+2026-05-21 20:14:37 [INFO] Tecnico actualizado id=20
+2026-05-21 20:14:37 [INFO] Tecnico eliminado id=20
+2026-05-21 20:14:37 [INFO] Consulta de tecnicos
+2026-05-21 20:14:37 [INFO] Equipo registrado id=20
+2026-05-21 20:14:37 [INFO] Equipo actualizado id=20
+2026-05-21 20:14:37 [INFO] Estado equipo actualizado id=20 estado=EN_MANTENIMIENTO
+2026-05-21 20:14:37 [INFO] Consulta de equipos
+2026-05-21 20:14:37 [INFO] Orden registrada id=105
+2026-05-21 20:14:37 [INFO] Consulta de tecnicos
+2026-05-21 20:14:37 [INFO] Consulta de equipos
+2026-05-21 20:14:37 [INFO] Orden registrada id=113
+2026-05-21 20:14:37 [INFO] Consulta de tecnicos
+2026-05-21 20:14:37 [INFO] Consulta de equipos
+2026-05-21 20:14:37 [WARNING] Transicion rechazada idOrden=3 nuevoEstado=CANCELADA
+2026-05-21 20:14:37 [WARNING] Transicion rechazada idOrden=2 nuevoEstado=PROGRAMADA
+2026-05-21 20:14:37 [INFO] Estado equipo actualizado id=10 estado=INACTIVO
+2026-05-21 20:14:37 [INFO] Tecnico eliminado id=10
+2026-05-21 20:14:37 [INFO] Estado de orden actualizado id=2 estado=FINALIZADA
+2026-05-21 20:14:37 [INFO] Estado de orden actualizado id=2 estado=FINALIZADA
+2026-05-21 20:14:37 [INFO] Orden registrada id=111
+2026-05-21 20:14:37 [INFO] Orden registrada id=103
+2026-05-21 20:14:37 [INFO] Estado de orden actualizado id=1 estado=EN_EJECUCION
+2026-05-21 20:14:37 [INFO] Estado de orden actualizado id=1 estado=CANCELADA
+2026-05-21 20:14:37 [INFO] Orden registrada id=108
+2026-05-21 20:14:37 [INFO] Estado de orden actualizado id=2 estado=CANCELADA
+2026-05-21 20:14:37 [INFO] Orden registrada id=101
+2026-05-21 20:14:37 [INFO] Orden registrada id=106
+2026-05-21 20:14:37 [INFO] Filtro de tecnicos especialidad=MECANICO
+2026-05-21 20:14:37 [INFO] Sesion iniciada usuario=admin
+2026-05-21 20:14:37 [INFO] Consulta de equipos
+2026-05-21 20:14:37 [INFO] Consulta de tecnicos
+2026-05-21 20:14:37 [INFO] Consulta de ordenes
+2026-05-21 20:14:37 [INFO] Estado de orden actualizado id=1 estado=EN_EJECUCION
+2026-05-21 20:14:37 [INFO] Estado de orden actualizado id=2 estado=FINALIZADA
+2026-05-21 20:14:37 [INFO] Tecnico eliminado id=10
+2026-05-21 20:14:37 [INFO] Consulta de tecnicos
+2026-05-21 20:14:37 [INFO] Estatus tecnico actualizado id=10 estatus=INACTIVO
+2026-05-21 20:14:37 [INFO] Filtro de ordenes estado=PROGRAMADA
+2026-05-21 20:14:37 [WARNING] Transicion rechazada idOrden=3 nuevoEstado=CANCELADA
+2026-05-21 20:14:37 [WARNING] Transicion rechazada idOrden=3 nuevoEstado=PROGRAMADA
+2026-05-21 20:14:37 [INFO] Consulta historial ordenes
+2026-05-21 20:14:37 [INFO] Consulta de ordenes
+2026-05-21 20:14:37 [INFO] Orden actualizada id=1
+2026-05-21 20:14:37 [INFO] Orden registrada id=200
+2026-05-21 20:14:37 [INFO] Equipo registrado id=20
+2026-05-21 20:14:37 [INFO] Consulta de equipos
+2026-05-21 20:14:37 [INFO] Estado de orden actualizado id=1 estado=CANCELADA
+2026-05-21 20:14:37 [INFO] Tecnico registrado id=20
+2026-05-21 20:14:37 [INFO] Consulta de tecnicos
+2026-05-21 20:14:37 [INFO] Consulta de tecnicos
+2026-05-21 20:14:37 [INFO] Tecnico actualizado id=10
+2026-05-21 20:14:37 [INFO] Filtro de equipos tipo=MECANICO
+2026-05-21 20:14:37 [INFO] Estatus tecnico actualizado id=10 estatus=INACTIVO
+2026-05-21 20:14:37 [INFO] Consulta de equipos
+2026-05-21 20:14:37 [INFO] Equipo actualizado id=10
+2026-05-21 20:14:37 [INFO] Estado equipo actualizado id=10 estado=INACTIVO

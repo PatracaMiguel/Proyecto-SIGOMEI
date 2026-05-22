@@ -1,7 +1,9 @@
 package com.sigomei.servidor.service;
 
 import com.sigomei.api.catalogos.*;
+import com.sigomei.api.dto.EquipoDTO;
 import com.sigomei.api.dto.OrdenDTO;
+import com.sigomei.api.dto.TecnicoDTO;
 import com.sigomei.api.excepciones.ReglaNegocioException;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +20,7 @@ public class ReglasNegocioServiceTest {
 
     @Test
     public void rn01_positivo_tecnicoCompatible() {
-        OrdenDTO orden = crearOrden(1, 1, 1, EstadoOrden.PROGRAMADA);
+        OrdenDTO orden = crearOrdenConFecha(101, 1, 1, LocalDate.of(2026, 5, 21));
 
         OrdenDTO resultado = assertDoesNotThrow(() -> ordenService.registrarOrden(orden));
 
@@ -29,7 +31,7 @@ public class ReglasNegocioServiceTest {
 
     @Test
     public void rn01_negativo_tecnicoIncompatible() {
-        OrdenDTO orden = crearOrden(2, 1, 2, EstadoOrden.PROGRAMADA);
+        OrdenDTO orden = crearOrdenConFecha(102, 1, 2, LocalDate.of(2026, 5, 21));
 
         ReglaNegocioException error = assertThrows(
                 ReglaNegocioException.class,
@@ -41,7 +43,7 @@ public class ReglasNegocioServiceTest {
 
     @Test
     public void rn02_positivo_sinOrdenDuplicada() {
-        OrdenDTO orden = crearOrdenConFecha(3, 1, 1, LocalDate.of(2026, 5, 21));
+        OrdenDTO orden = crearOrdenConFecha(103, 1, 1, LocalDate.of(2026, 5, 21));
 
         OrdenDTO resultado = assertDoesNotThrow(() -> ordenService.registrarOrden(orden));
 
@@ -52,7 +54,7 @@ public class ReglasNegocioServiceTest {
 
     @Test
     public void rn02_negativo_ordenDuplicada() {
-        OrdenDTO orden = crearOrdenConFecha(4, 1, 1, LocalDate.of(2026, 5, 20));
+        OrdenDTO orden = crearOrdenConFecha(104, 1, 1, LocalDate.of(2026, 5, 20));
 
         ReglaNegocioException error = assertThrows(
                 ReglaNegocioException.class,
@@ -61,6 +63,16 @@ public class ReglasNegocioServiceTest {
 
         assertTrue(error.getMessage().toLowerCase().contains("duplicada")
                 || error.getMessage().toLowerCase().contains("activa"));
+    }
+
+    @Test
+    public void rn02_positivo_permiteNuevaOrdenCuandoLaPreviaEstaFinalizada() {
+        OrdenDTO orden = crearOrdenConFecha(105, 1, 1, LocalDate.of(2026, 5, 24));
+
+        OrdenDTO resultado = assertDoesNotThrow(() -> ordenService.registrarOrden(orden));
+
+        assertNotNull(resultado);
+        assertEquals(105, resultado.getIdOrden());
     }
 
     @Test
@@ -83,8 +95,32 @@ public class ReglasNegocioServiceTest {
     }
 
     @Test
+    public void rn03_positivo_cambiarEstadoEquipoSinOrdenesRelacionadas() {
+        int idEquipoSinOrdenes = 10;
+
+        EquipoDTO resultado = assertDoesNotThrow(() ->
+                equipoService.cambiarEstadoEquipo(idEquipoSinOrdenes, EstadoOperativo.INACTIVO)
+        );
+
+        assertNotNull(resultado);
+        assertEquals(EstadoOperativo.INACTIVO, resultado.getEstadoOperativo());
+    }
+
+    @Test
+    public void rn03_negativo_cambiarEstadoEquipoConOrdenesRelacionadas() {
+        int idEquipoConOrdenes = 1;
+
+        ReglaNegocioException error = assertThrows(
+                ReglaNegocioException.class,
+                () -> equipoService.cambiarEstadoEquipo(idEquipoConOrdenes, EstadoOperativo.INACTIVO)
+        );
+
+        assertTrue(error.getMessage().toLowerCase().contains("orden"));
+    }
+
+    @Test
     public void rn04_positivo_tecnicoActivo() {
-        OrdenDTO orden = crearOrden(5, 1, 1, EstadoOrden.PROGRAMADA);
+        OrdenDTO orden = crearOrdenConFecha(106, 1, 1, LocalDate.of(2026, 5, 22));
 
         OrdenDTO resultado = assertDoesNotThrow(() -> ordenService.registrarOrden(orden));
 
@@ -94,7 +130,7 @@ public class ReglasNegocioServiceTest {
 
     @Test
     public void rn04_negativo_tecnicoInactivo() {
-        OrdenDTO orden = crearOrden(6, 1, 3, EstadoOrden.PROGRAMADA);
+        OrdenDTO orden = crearOrdenConFecha(107, 1, 3, LocalDate.of(2026, 5, 22));
 
         ReglaNegocioException error = assertThrows(
                 ReglaNegocioException.class,
@@ -107,10 +143,10 @@ public class ReglasNegocioServiceTest {
     @Test
     public void rn05_positivo_fechasCorrectas() {
         OrdenDTO orden = crearOrdenConFechas(
-                7,
-                LocalDate.of(2026, 5, 20),
-                LocalDate.of(2026, 5, 21),
-                LocalDate.of(2026, 5, 22)
+                108,
+                LocalDate.of(2026, 5, 26),
+                LocalDate.of(2026, 5, 27),
+                LocalDate.of(2026, 5, 28)
         );
 
         OrdenDTO resultado = assertDoesNotThrow(() -> ordenService.registrarOrden(orden));
@@ -121,9 +157,9 @@ public class ReglasNegocioServiceTest {
     }
 
     @Test
-    public void rn05_negativo_fechasIncorrectas() {
+    public void rn05_negativo_fechaInicioAntesDeProgramada() {
         OrdenDTO orden = crearOrdenConFechas(
-                8,
+                109,
                 LocalDate.of(2026, 5, 20),
                 LocalDate.of(2026, 5, 19),
                 LocalDate.of(2026, 5, 21)
@@ -138,10 +174,27 @@ public class ReglasNegocioServiceTest {
     }
 
     @Test
+    public void rn05_negativo_fechaCierreAntesDeInicio() {
+        OrdenDTO orden = crearOrdenConFechas(
+                110,
+                LocalDate.of(2026, 5, 20),
+                LocalDate.of(2026, 5, 21),
+                LocalDate.of(2026, 5, 20)
+        );
+
+        ReglaNegocioException error = assertThrows(
+                ReglaNegocioException.class,
+                () -> ordenService.registrarOrden(orden)
+        );
+
+        assertTrue(error.getMessage().toLowerCase().contains("cierre"));
+    }
+
+    @Test
     public void rn06_positivo_finalizarConDatosCompletos() {
         OrdenDTO resultado = assertDoesNotThrow(() ->
                 ordenService.cambiarEstadoOrden(
-                        1,
+                        2,
                         EstadoOrden.FINALIZADA,
                         LocalDate.of(2026, 5, 25),
                         new BigDecimal("2500.00")
@@ -159,7 +212,7 @@ public class ReglasNegocioServiceTest {
         ReglaNegocioException error = assertThrows(
                 ReglaNegocioException.class,
                 () -> ordenService.cambiarEstadoOrden(
-                        1,
+                        2,
                         EstadoOrden.FINALIZADA,
                         null,
                         null
@@ -170,10 +223,24 @@ public class ReglasNegocioServiceTest {
                 || error.getMessage().toLowerCase().contains("costo"));
     }
 
+    @Test
+    public void rn06_negativo_finalizarSinCostoReal() {
+        ReglaNegocioException error = assertThrows(
+                ReglaNegocioException.class,
+                () -> ordenService.cambiarEstadoOrden(
+                        2,
+                        EstadoOrden.FINALIZADA,
+                        LocalDate.of(2026, 5, 25),
+                        null
+                )
+        );
+
+        assertTrue(error.getMessage().toLowerCase().contains("costo"));
+    }
 
     @Test
     public void rn07_positivo_criticidadAltaConNivelII() {
-        OrdenDTO orden = crearOrden(9, 1, 1, EstadoOrden.PROGRAMADA);
+        OrdenDTO orden = crearOrdenConFecha(111, 1, 1, LocalDate.of(2026, 5, 23));
 
         OrdenDTO resultado = assertDoesNotThrow(() -> ordenService.registrarOrden(orden));
 
@@ -184,15 +251,14 @@ public class ReglasNegocioServiceTest {
 
     @Test
     public void rn07_negativo_criticidadAltaConNivelI() {
-        OrdenDTO orden = crearOrden(10, 1, 4, EstadoOrden.PROGRAMADA);
+        OrdenDTO orden = crearOrdenConFecha(112, 1, 4, LocalDate.of(2026, 5, 23));
 
         ReglaNegocioException error = assertThrows(
                 ReglaNegocioException.class,
                 () -> ordenService.registrarOrden(orden)
         );
 
-        assertTrue(error.getMessage().toLowerCase().contains("certificación")
-                || error.getMessage().toLowerCase().contains("certificacion"));
+        assertTrue(error.getMessage().toLowerCase().contains("certificacion"));
     }
 
     @Test
@@ -211,6 +277,20 @@ public class ReglasNegocioServiceTest {
     }
 
     @Test
+    public void rn08_positivo_transicionEnEjecucionAFinalizada() {
+        OrdenDTO resultado = assertDoesNotThrow(() ->
+                ordenService.cambiarEstadoOrden(
+                        2,
+                        EstadoOrden.FINALIZADA,
+                        LocalDate.of(2026, 5, 25),
+                        new BigDecimal("2500.00")
+                )
+        );
+
+        assertEquals(EstadoOrden.FINALIZADA, resultado.getEstadoOrden());
+    }
+
+    @Test
     public void rn08_negativo_transicionInvalida() {
         ReglaNegocioException error = assertThrows(
                 ReglaNegocioException.class,
@@ -222,20 +302,83 @@ public class ReglasNegocioServiceTest {
                 )
         );
 
-        assertTrue(error.getMessage().toLowerCase().contains("transición")
-                || error.getMessage().toLowerCase().contains("transicion"));
+        assertTrue(error.getMessage().toLowerCase().contains("transicion"));
     }
 
-    private OrdenDTO crearOrden(int idOrden, int idEquipo, int idTecnico, EstadoOrden estado) {
-        return crearOrdenConFecha(idOrden, idEquipo, idTecnico, LocalDate.of(2026, 5, 20), estado);
+    @Test
+    public void rn09_positivo_cancelarOrdenProgramada() {
+        OrdenDTO resultado = assertDoesNotThrow(() ->
+                ordenService.cambiarEstadoOrden(
+                        1,
+                        EstadoOrden.CANCELADA,
+                        null,
+                        null
+                )
+        );
+
+        assertEquals(EstadoOrden.CANCELADA, resultado.getEstadoOrden());
+    }
+
+    @Test
+    public void rn09_positivo_cancelarOrdenEnEjecucion() {
+        OrdenDTO resultado = assertDoesNotThrow(() ->
+                ordenService.cambiarEstadoOrden(
+                        2,
+                        EstadoOrden.CANCELADA,
+                        null,
+                        null
+                )
+        );
+
+        assertEquals(EstadoOrden.CANCELADA, resultado.getEstadoOrden());
+    }
+
+    @Test
+    public void rn09_negativo_cancelarOrdenFinalizada() {
+        ReglaNegocioException error = assertThrows(
+                ReglaNegocioException.class,
+                () -> ordenService.cambiarEstadoOrden(
+                        3,
+                        EstadoOrden.CANCELADA,
+                        null,
+                        null
+                )
+        );
+
+        assertTrue(error.getMessage().toLowerCase().contains("cancelar")
+                || error.getMessage().toLowerCase().contains("estado"));
+    }
+
+    @Test
+    public void rn10_positivo_registrarOrdenNoAlteraTecnicoNiEquipo() {
+        TecnicoDTO tecnicoAntes = assertDoesNotThrow(() -> tecnicoService.consultarTecnicos().stream()
+                .filter(tecnico -> tecnico.getIdTecnico() == 1)
+                .findFirst()
+                .orElseThrow());
+        EquipoDTO equipoAntes = assertDoesNotThrow(() -> equipoService.consultarEquipos().stream()
+                .filter(equipo -> equipo.getIdEquipo() == 1)
+                .findFirst()
+                .orElseThrow());
+        OrdenDTO orden = crearOrdenConFecha(113, 1, 1, LocalDate.of(2026, 5, 29));
+
+        assertDoesNotThrow(() -> ordenService.registrarOrden(orden));
+
+        TecnicoDTO tecnicoDespues = assertDoesNotThrow(() -> tecnicoService.consultarTecnicos().stream()
+                .filter(tecnico -> tecnico.getIdTecnico() == 1)
+                .findFirst()
+                .orElseThrow());
+        EquipoDTO equipoDespues = assertDoesNotThrow(() -> equipoService.consultarEquipos().stream()
+                .filter(equipo -> equipo.getIdEquipo() == 1)
+                .findFirst()
+                .orElseThrow());
+
+        assertEquals(tecnicoAntes.getNombreCompleto(), tecnicoDespues.getNombreCompleto());
+        assertEquals(tecnicoAntes.getEstatus(), tecnicoDespues.getEstatus());
+        assertEquals(equipoAntes.getNombre(), equipoDespues.getNombre());
+        assertEquals(equipoAntes.getEstadoOperativo(), equipoDespues.getEstadoOperativo());
     }
 
     private OrdenDTO crearOrdenConFecha(int idOrden, int idEquipo, int idTecnico, LocalDate fechaProgramada) {
-        return crearOrdenConFecha(idOrden, idEquipo, idTecnico, fechaProgramada, EstadoOrden.PROGRAMADA);
-    }
-
-    private OrdenDTO crearOrdenConFecha(int idOrden, int idEquipo, int idTecnico,
-                                        LocalDate fechaProgramada, EstadoOrden estado) {
         return new OrdenDTO(
                 idOrden,
                 idEquipo,
@@ -247,7 +390,7 @@ public class ReglasNegocioServiceTest {
                 "Mantenimiento preventivo",
                 new BigDecimal("1500.00"),
                 null,
-                estado
+                EstadoOrden.PROGRAMADA
         );
     }
 
@@ -267,4 +410,5 @@ public class ReglasNegocioServiceTest {
                 EstadoOrden.FINALIZADA
         );
     }
+
 }

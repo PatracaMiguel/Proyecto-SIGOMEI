@@ -5,11 +5,11 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConexionBD {
-    private static final String URL = "jdbc:mysql://localhost:3306/sigomei_db";
-    private static final String USUARIO = "root";
-    private static final String CONTRASENA = "contrasena";
 
     public static Connection obtenerConexion() throws SQLException {
-        return DriverManager.getConnection(URL, USUARIO, CONTRASENA);
+        String url = AppConfig.get("db.url", "jdbc:mysql://localhost:3306/sigomei_db");
+        String usuario = AppConfig.get("db.user", "");
+        String contrasena = AppConfig.get("db.password", "");
+        return DriverManager.getConnection(url, usuario, contrasena);
     }
 }
