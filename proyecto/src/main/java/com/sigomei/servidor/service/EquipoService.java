@@ -96,6 +96,22 @@ public class EquipoService {
         return copiar(equipo);
     }
 
+    public void eliminarEquipo(int idEquipo)
+            throws ReglaNegocioException, RegistroNoEncontradoException {
+
+        if (!InMemorySigomeiStore.EQUIPOS.containsKey(idEquipo)) {
+            throw new RegistroNoEncontradoException("Equipo no encontrado");
+        }
+
+        if (tieneOrdenesRelacionadas(idEquipo)) {
+            ServerLog.warning("Equipo rechazado RN-03: equipo relacionado a orden id=" + idEquipo);
+            throw new ReglaNegocioException("No se puede eliminar un equipo con ordenes relacionadas");
+        }
+
+        InMemorySigomeiStore.EQUIPOS.remove(idEquipo);
+        ServerLog.info("Equipo eliminado id=" + idEquipo);
+    }
+
     private void validarEquipo(EquipoDTO equipo) throws ValidacionException {
         if (equipo == null) {
             throw new ValidacionException("El equipo tiene datos obligatorios incompletos");

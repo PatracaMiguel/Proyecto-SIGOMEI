@@ -1,6 +1,6 @@
 db.url=jdbc:mysql://localhost:3306/sigomei_db
-db.user=TU_USUARIO
-db.password=TU_PASSWORD
+db.user=root
+db.password=Miguelito19
 rmi.registry.port=1099
 rmi.object.port=1100
 server.log.path=logs/server.log

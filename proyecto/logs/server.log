@@ -1,0 +1,23 @@
+2026-05-22 19:52:52 [INFO] Servidor SIGOMEI iniciado en puerto RMI 1099
+2026-05-22 19:52:58 [INFO] Equipo registrado id=900
+2026-05-22 19:52:58 [INFO] Consulta de equipos
+2026-05-22 19:52:58 [INFO] Equipo actualizado id=900
+2026-05-22 19:52:58 [INFO] Estado equipo actualizado id=900 estado=INACTIVO
+2026-05-22 19:52:58 [INFO] Equipo eliminado id=900
+2026-05-22 19:52:58 [INFO] Tecnico registrado id=900
+2026-05-22 19:52:58 [INFO] Consulta de tecnicos
+2026-05-22 19:52:58 [INFO] Tecnico actualizado id=900
+2026-05-22 19:52:58 [INFO] Estatus tecnico actualizado id=900 estatus=INACTIVO
+2026-05-22 19:52:58 [INFO] Tecnico eliminado id=900
+2026-05-22 19:52:58 [INFO] Orden registrada id=900
+2026-05-22 19:52:58 [INFO] Consulta de ordenes
+2026-05-22 19:52:58 [INFO] Orden actualizada id=900
+2026-05-22 19:52:58 [INFO] Estado de orden actualizado id=900 estado=EN_EJECUCION
+2026-05-22 19:52:58 [INFO] Estado de orden actualizado id=900 estado=FINALIZADA
+2026-05-22 19:52:58 [INFO] Orden eliminada id=900
+2026-05-22 19:52:58 [INFO] Orden registrada id=910
+2026-05-22 19:52:58 [WARNING] Orden rechazada RN-01: tecnico incompatible con equipo
+2026-05-22 19:52:58 [WARNING] Orden rechazada RN-04: tecnico inactivo id=3
+2026-05-22 19:52:58 [WARNING] Orden rechazada RN-06: finalizacion sin fecha de cierre o costo real
+2026-05-22 19:52:58 [WARNING] Orden rechazada RN-07: certificacion insuficiente para criticidad alta
+2026-05-22 19:52:58 [WARNING] Transicion rechazada idOrden=3 nuevoEstado=PROGRAMADA

@@ -46,6 +46,9 @@ public interface SigomeiRemote extends Remote {
     EquipoDTO cambiarEstadoEquipo(int idEquipo, EstadoOperativo nuevoEstado)
             throws RemoteException, ReglaNegocioException, RegistroNoEncontradoException;
 
+    void eliminarEquipo(int idEquipo)
+            throws RemoteException, ReglaNegocioException, RegistroNoEncontradoException;
+
     TecnicoDTO registrarTecnico(TecnicoDTO tecnico)
             throws RemoteException, ValidacionException, ReglaNegocioException;
 
@@ -82,4 +85,7 @@ public interface SigomeiRemote extends Remote {
 
     List<OrdenDTO> consultarHistorialOrdenes(Integer idEquipo, Integer idTecnico, EstadoOrden estadoOrden)
             throws RemoteException;
+
+    void eliminarOrden(int idOrden)
+            throws RemoteException, RegistroNoEncontradoException;
 }

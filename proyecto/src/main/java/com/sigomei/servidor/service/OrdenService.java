@@ -137,6 +137,15 @@ public class OrdenService {
         return resultado;
     }
 
+    public void eliminarOrden(int idOrden) throws RegistroNoEncontradoException {
+        if (!InMemorySigomeiStore.ORDENES.containsKey(idOrden)) {
+            throw new RegistroNoEncontradoException("Orden no encontrada");
+        }
+
+        InMemorySigomeiStore.ORDENES.remove(idOrden);
+        ServerLog.info("Orden eliminada id=" + idOrden);
+    }
+
     private void validarOrdenBasica(OrdenDTO orden) throws ValidacionException {
         if (orden == null) {
             throw new ValidacionException("La orden tiene datos obligatorios incompletos");

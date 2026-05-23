@@ -87,6 +87,12 @@ public class SigomeiRemoteImpl extends UnicastRemoteObject implements SigomeiRem
     }
 
     @Override
+    public void eliminarEquipo(int idEquipo)
+            throws RemoteException, ReglaNegocioException, RegistroNoEncontradoException {
+        equipoService.eliminarEquipo(idEquipo);
+    }
+
+    @Override
     public TecnicoDTO registrarTecnico(TecnicoDTO tecnico)
             throws RemoteException, ValidacionException, ReglaNegocioException {
         return tecnicoService.registrarTecnico(tecnico);
@@ -156,5 +162,11 @@ public class SigomeiRemoteImpl extends UnicastRemoteObject implements SigomeiRem
     public List<OrdenDTO> consultarHistorialOrdenes(Integer idEquipo, Integer idTecnico, EstadoOrden estadoOrden)
             throws RemoteException {
         return ordenService.consultarHistorialOrdenes(idEquipo, idTecnico, estadoOrden);
+    }
+
+    @Override
+    public void eliminarOrden(int idOrden)
+            throws RemoteException, RegistroNoEncontradoException {
+        ordenService.eliminarOrden(idOrden);
     }
 }

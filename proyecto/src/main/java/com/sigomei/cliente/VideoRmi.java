@@ -51,7 +51,10 @@ public class VideoRmi {
         System.out.println("actuaizar equipo id=900");
 
         sigomei.cambiarEstadoEquipo(900, EstadoOperativo.INACTIVO);
-        System.out.println("camio de estado el equipo id=900 a estado inativo");
+        System.out.println("cambio de estado el equipo id=900 a estado inactivo");
+
+        sigomei.eliminarEquipo(900);
+        System.out.println("borrar equipo id=900");
     }
 
     private static void demoCrudTecnico(SigomeiRemote sigomei) throws Exception {
@@ -74,13 +77,8 @@ public class VideoRmi {
         sigomei.cambiarEstatusTecnico(900, EstadoTecnico.INACTIVO);
         System.out.println("cambio de estatus el tecnico id=900 estatus= inactivo");
 
-        TecnicoDTO tecnicoParaEliminar = new TecnicoDTO(901, "Tecnico Para Eliminar",
-                "DEMO900101BB1", "5559002222", "eliminar@example.com",
-                TipoEquipo.HIDRAULICO, NivelCertificacion.III,
-                LocalDate.of(2024, 2, 10), EstadoTecnico.ACTIVO);
-        sigomei.registrarTecnico(tecnicoParaEliminar);
-        sigomei.eliminarTecnico(901);
-        System.out.println("borrar tecnico id=901");
+        sigomei.eliminarTecnico(900);
+        System.out.println("borrar tecnico id=900");
     }
 
     private static void demoCrudOrden(SigomeiRemote sigomei) throws Exception {
@@ -106,6 +104,9 @@ public class VideoRmi {
         sigomei.cambiarEstadoOrden(900, EstadoOrden.FINALIZADA,
                 LocalDate.of(2026, 8, 2), new BigDecimal("950.00"));
         System.out.println("cambio de estado en la orden id=900 estado=FINALIZADA");
+
+        sigomei.eliminarOrden(900);
+        System.out.println("borrar orden id=900");
     }
 
     private static void demoReglasNegocio(SigomeiRemote sigomei) throws Exception {
@@ -151,7 +152,7 @@ public class VideoRmi {
     private static void ejecutarAceptado(String nombre, Operacion operacion) {
         try {
             operacion.ejecutar();
-            System.out.println(nombre + " -> acpetado");
+            System.out.println(nombre + " -> aceptado");
         } catch (Exception ex) {
             System.out.println(nombre + " -> ERROR: " + ex.getMessage());
         }
@@ -162,7 +163,7 @@ public class VideoRmi {
             operacion.ejecutar();
             System.out.println(nombre + " -> ERROR: debio rechazarse");
         } catch (Exception ex) {
-            System.out.println(nombre + " -> RECHAZADO: " + ex.getMessage());
+            System.out.println(nombre + " -> rechazado: " + ex.getMessage());
         }
     }
 
