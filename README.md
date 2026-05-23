@@ -1,11 +1,10 @@
 # Proyecto-SIGOMEI
-
 Servidor RMI para la gestion de equipos, tecnicos y ordenes de mantenimiento.
 La capa de servicio aplica las reglas de negocio RN-01 a RN-08 y expone el contrato remoto definido para E2.
 
 ## Tecnologias
 
-- Java 17+
+- Java 17
 - Maven
 - JUnit 5
 - RMI
@@ -13,77 +12,54 @@ La capa de servicio aplica las reglas de negocio RN-01 a RN-08 y expone el contr
 
 ## Configuracion
 
-El servidor lee configuracion externa desde `config/app.properties`.
-No hay credenciales de base de datos embebidas en el codigo.
+El servidor lee configuracion externa desde `config/app.properties`. , edite este archivo con las credenciales locales de MySQL.
 
-1. Copiar el archivo de ejemplo:
+## Correr pruebas
 
-```powershell
-Copy-Item config\app.properties.example config\app.properties
-```
-
-2. Editar `config/app.properties` con las credenciales locales de MySQL.
-
-## Base de datos
-
-El script de creacion y datos iniciales esta en:
-
-```text
-proyecto/src/main/resources/sql/sigomei_db.sql
-```
-
-## Compilar y probar
-
-Desde `proyecto`:
-
-```powershell
-mvn clean test
-```
+Desde `proyecto` y en la powershell escriba mvn clean test
 
 Resultado esperado:
-
-```text
 Tests run: 61, Failures: 0, Errors: 0, Skipped: 0
 BUILD SUCCESS
-```
 
 ## Ejecutar servidor RMI
 
-Desde `proyecto`:
-
-```powershell
-mvn clean test
-java -cp target\classes com.sigomei.servidor.rmi.SigomeiServer
-```
-
+Desde `proyecto` y en powershell java -cp target\classes com.sigomei.servidor.rmi.SigomeiServer
 El servidor publica el servicio remoto con el nombre `SIGOMEI`.
 
 ## Ejecutar cliente demo
 
-En otra terminal, desde `proyecto`:
-
-```powershell
-java -cp target\classes com.sigomei.cliente.DemoClienteRmi
-```
-
+En otra terminal, desde `proyecto` ejecute java -cp target\classes com.sigomei.cliente.DemoClienteRmi
 El cliente demo solo usa RMI. No importa `ConexionBD`, no contiene credenciales y no se conecta directamente a MySQL.
 
 ## Logs
-
 La bitacora del servidor se genera en:
-
-```text
 proyecto/logs/server.log
-```
-
 La ruta puede cambiarse con `server.log.path` en `config/app.properties`.
 
 ## Evidencias
 
-El paquete documental esta en:
+## Pruebas de las reglas de negocio de la E3 en verde 
+en la ruta  Proyecto-SIGOMEI\proyecto ejecute 
+ mvn -Dtest=ReglasNegocioServiceTest test
 
-```text
-EVIDENCIAS_ENTREGA.md
-```
+Saida esperad
+ReglasNegocioServiceTest
+Tests run: 26, Failures: 0, Errors: 0, Skipped: 0
 
-Incluye salida de pruebas unitarias, seguimiento de casos de sistema, bitacora de defectos, auditoria de suite y trazabilidad.
+## Casos de prueba de la E2 en verde
+en la ruta  Proyecto-SIGOMEI\proyecto ejecute 
+ mvn -Dtest=SistemaE2Test test
+
+ Saida esperada
+ Running com.sigomei.servidor.service.SistemaE2Test
+Tests run: 32, Failures: 0, Errors: 0, Skipped: 0
+
+## pruebas de CRUD
+en la ruta  Proyecto-SIGOMEI\proyecto ejecute 
+ mvn -Dtest=CrudServiceTest test
+
+Saida esperada
+Running com.sigomei.servidor.service.CrudServiceTest
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0
+

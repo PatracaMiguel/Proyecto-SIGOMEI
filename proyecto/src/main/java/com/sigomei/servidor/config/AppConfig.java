@@ -36,7 +36,6 @@ public final class AppConfig {
                     properties.load(input);
                 }
             } catch (IOException ignoredAgain) {
-                // Defaults are supplied by callers when the external file is absent.
             }
         }
         return properties;
