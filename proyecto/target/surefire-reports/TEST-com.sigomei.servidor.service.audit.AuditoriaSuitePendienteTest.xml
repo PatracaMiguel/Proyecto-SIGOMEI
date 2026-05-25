@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.sigomei.servidor.service.unit.ReglasNegocioServiceTest" time="0.091" tests="26" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.sigomei.servidor.service.audit.AuditoriaSuitePendienteTest" time="0.035" tests="3" errors="0" skipped="3" failures="0">
   <properties>
     <property name="java.specification.version" value="23"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -58,30 +58,13 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="67.0"/>
   </properties>
-  <testcase name="rn05_negativo_fechaCierreAntesDeInicio" classname="com.sigomei.servidor.service.unit.ReglasNegocioServiceTest" time="0.002"/>
-  <testcase name="rn02_positivo_permiteNuevaOrdenCuandoLaPreviaEstaFinalizada" classname="com.sigomei.servidor.service.unit.ReglasNegocioServiceTest" time="0.001"/>
-  <testcase name="rn10_positivo_registrarOrdenNoAlteraTecnicoNiEquipo" classname="com.sigomei.servidor.service.unit.ReglasNegocioServiceTest" time="0.004"/>
-  <testcase name="rn09_negativo_cancelarOrdenFinalizada" classname="com.sigomei.servidor.service.unit.ReglasNegocioServiceTest" time="0.001"/>
-  <testcase name="rn06_negativo_finalizarSinCostoReal" classname="com.sigomei.servidor.service.unit.ReglasNegocioServiceTest" time="0.001"/>
-  <testcase name="rn03_negativo_eliminarTecnicoConOrdenes" classname="com.sigomei.servidor.service.unit.ReglasNegocioServiceTest" time="0.002"/>
-  <testcase name="rn08_negativo_transicionInvalida" classname="com.sigomei.servidor.service.unit.ReglasNegocioServiceTest" time="0.002"/>
-  <testcase name="rn03_positivo_cambiarEstadoEquipoSinOrdenesRelacionadas" classname="com.sigomei.servidor.service.unit.ReglasNegocioServiceTest" time="0.001"/>
-  <testcase name="rn03_positivo_eliminarTecnicoSinOrdenes" classname="com.sigomei.servidor.service.unit.ReglasNegocioServiceTest" time="0.001"/>
-  <testcase name="rn06_positivo_finalizarConDatosCompletos" classname="com.sigomei.servidor.service.unit.ReglasNegocioServiceTest" time="0.001"/>
-  <testcase name="rn08_positivo_transicionEnEjecucionAFinalizada" classname="com.sigomei.servidor.service.unit.ReglasNegocioServiceTest" time="0.001"/>
-  <testcase name="rn02_negativo_ordenDuplicada" classname="com.sigomei.servidor.service.unit.ReglasNegocioServiceTest" time="0.002"/>
-  <testcase name="rn07_positivo_criticidadAltaConNivelII" classname="com.sigomei.servidor.service.unit.ReglasNegocioServiceTest" time="0.006"/>
-  <testcase name="rn02_positivo_sinOrdenDuplicada" classname="com.sigomei.servidor.service.unit.ReglasNegocioServiceTest" time="0.001"/>
-  <testcase name="rn05_negativo_fechaInicioAntesDeProgramada" classname="com.sigomei.servidor.service.unit.ReglasNegocioServiceTest" time="0.002"/>
-  <testcase name="rn06_negativo_finalizarSinDatos" classname="com.sigomei.servidor.service.unit.ReglasNegocioServiceTest" time="0.001"/>
-  <testcase name="rn08_positivo_transicionValida" classname="com.sigomei.servidor.service.unit.ReglasNegocioServiceTest" time="0.001"/>
-  <testcase name="rn09_positivo_cancelarOrdenProgramada" classname="com.sigomei.servidor.service.unit.ReglasNegocioServiceTest" time="0.001"/>
-  <testcase name="rn05_positivo_fechasCorrectas" classname="com.sigomei.servidor.service.unit.ReglasNegocioServiceTest" time="0.001"/>
-  <testcase name="rn04_negativo_tecnicoInactivo" classname="com.sigomei.servidor.service.unit.ReglasNegocioServiceTest" time="0.001"/>
-  <testcase name="rn07_negativo_criticidadAltaConNivelI" classname="com.sigomei.servidor.service.unit.ReglasNegocioServiceTest" time="0.001"/>
-  <testcase name="rn01_negativo_tecnicoIncompatible" classname="com.sigomei.servidor.service.unit.ReglasNegocioServiceTest" time="0.002"/>
-  <testcase name="rn09_positivo_cancelarOrdenEnEjecucion" classname="com.sigomei.servidor.service.unit.ReglasNegocioServiceTest" time="0.001"/>
-  <testcase name="rn01_positivo_tecnicoCompatible" classname="com.sigomei.servidor.service.unit.ReglasNegocioServiceTest" time="0.001"/>
-  <testcase name="rn03_negativo_cambiarEstadoEquipoConOrdenesRelacionadas" classname="com.sigomei.servidor.service.unit.ReglasNegocioServiceTest" time="0.002"/>
-  <testcase name="rn04_positivo_tecnicoActivo" classname="com.sigomei.servidor.service.unit.ReglasNegocioServiceTest" time="0.002"/>
+  <testcase name="cp34_rechazarFinalizarOrdenCancelada" classname="com.sigomei.servidor.service.audit.AuditoriaSuitePendienteTest" time="0.0">
+    <skipped message="CP-34 pendiente: prueba propuesta para reforzar RN-08"/>
+  </testcase>
+  <testcase name="cp33_rechazarTecnicoConCorreoDuplicado" classname="com.sigomei.servidor.service.audit.AuditoriaSuitePendienteTest" time="0.0">
+    <skipped message="CP-33 pendiente: falta implementar validacion de correo duplicado"/>
+  </testcase>
+  <testcase name="cp35_mostrarErrorSiServidorSeDesconectaDuranteCrud" classname="com.sigomei.servidor.service.audit.AuditoriaSuitePendienteTest" time="0.0">
+    <skipped message="CP-35 pendiente: requiere prueba manual apagando el servidor RMI durante una operacion CRUD"/>
+  </testcase>
 </testsuite>

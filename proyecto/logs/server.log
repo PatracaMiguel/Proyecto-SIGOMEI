@@ -21,3 +21,850 @@
 2026-05-22 19:52:58 [WARNING] Orden rechazada RN-06: finalizacion sin fecha de cierre o costo real
 2026-05-22 19:52:58 [WARNING] Orden rechazada RN-07: certificacion insuficiente para criticidad alta
 2026-05-22 19:52:58 [WARNING] Transicion rechazada idOrden=3 nuevoEstado=PROGRAMADA
+2026-05-25 10:12:03 [INFO] Orden registrada id=220
+2026-05-25 10:12:03 [INFO] Orden actualizada id=220
+2026-05-25 10:12:03 [INFO] Estado de orden actualizado id=220 estado=EN_EJECUCION
+2026-05-25 10:12:03 [INFO] Consulta de ordenes
+2026-05-25 10:12:03 [INFO] Tecnico registrado id=20
+2026-05-25 10:12:03 [INFO] Tecnico actualizado id=20
+2026-05-25 10:12:03 [INFO] Tecnico eliminado id=20
+2026-05-25 10:12:03 [INFO] Consulta de tecnicos
+2026-05-25 10:12:03 [INFO] Equipo registrado id=20
+2026-05-25 10:12:03 [INFO] Equipo actualizado id=20
+2026-05-25 10:12:03 [INFO] Estado equipo actualizado id=20 estado=EN_MANTENIMIENTO
+2026-05-25 10:12:03 [INFO] Consulta de equipos
+2026-05-25 10:12:03 [INFO] Filtro de tecnicos especialidad=MECANICO
+2026-05-25 10:12:03 [INFO] Sesion iniciada usuario=admin
+2026-05-25 10:12:03 [INFO] Consulta de equipos
+2026-05-25 10:12:03 [INFO] Consulta de tecnicos
+2026-05-25 10:12:03 [INFO] Consulta de ordenes
+2026-05-25 10:12:03 [INFO] Estado de orden actualizado id=1 estado=EN_EJECUCION
+2026-05-25 10:12:03 [INFO] Estado de orden actualizado id=2 estado=FINALIZADA
+2026-05-25 10:12:03 [INFO] Tecnico eliminado id=10
+2026-05-25 10:12:03 [INFO] Consulta de tecnicos
+2026-05-25 10:12:03 [INFO] Estatus tecnico actualizado id=10 estatus=INACTIVO
+2026-05-25 10:12:03 [INFO] Filtro de ordenes estado=PROGRAMADA
+2026-05-25 10:12:03 [WARNING] Orden rechazada RN-06: finalizacion sin fecha de cierre o costo real
+2026-05-25 10:12:03 [WARNING] Transicion rechazada idOrden=3 nuevoEstado=CANCELADA
+2026-05-25 10:12:03 [WARNING] Transicion rechazada idOrden=3 nuevoEstado=PROGRAMADA
+2026-05-25 10:12:03 [WARNING] Tecnico rechazado RN-03: tiene ordenes activas id=1
+2026-05-25 10:12:03 [WARNING] Equipo rechazado RN-03: equipo relacionado a orden id=1
+2026-05-25 10:12:03 [INFO] Consulta historial ordenes
+2026-05-25 10:12:03 [INFO] Consulta de ordenes
+2026-05-25 10:12:03 [INFO] Orden actualizada id=1
+2026-05-25 10:12:03 [WARNING] Orden rechazada RN-01: tecnico incompatible con equipo
+2026-05-25 10:12:03 [INFO] Orden registrada id=200
+2026-05-25 10:12:03 [INFO] Equipo registrado id=20
+2026-05-25 10:12:03 [INFO] Consulta de equipos
+2026-05-25 10:12:03 [WARNING] Orden rechazada RN-04: tecnico inactivo id=3
+2026-05-25 10:12:03 [INFO] Estado de orden actualizado id=1 estado=CANCELADA
+2026-05-25 10:12:03 [INFO] Tecnico registrado id=20
+2026-05-25 10:12:03 [INFO] Consulta de tecnicos
+2026-05-25 10:12:03 [WARNING] Orden rechazada RN-05: fecha de inicio anterior a programada
+2026-05-25 10:12:03 [INFO] Consulta de tecnicos
+2026-05-25 10:12:03 [INFO] Tecnico actualizado id=10
+2026-05-25 10:12:03 [WARNING] Orden rechazada RN-02: duplicada para equipo=1 fecha=2026-05-20
+2026-05-25 10:12:03 [INFO] Filtro de equipos tipo=MECANICO
+2026-05-25 10:12:03 [WARNING] Orden rechazada RN-07: certificacion insuficiente para criticidad alta
+2026-05-25 10:12:03 [INFO] Estatus tecnico actualizado id=10 estatus=INACTIVO
+2026-05-25 10:12:03 [INFO] Consulta de equipos
+2026-05-25 10:12:03 [INFO] Equipo actualizado id=10
+2026-05-25 10:12:03 [INFO] Estado equipo actualizado id=10 estado=INACTIVO
+2026-05-25 10:12:03 [WARNING] Orden rechazada RN-05: fecha de cierre anterior a inicio
+2026-05-25 10:12:03 [INFO] Orden registrada id=105
+2026-05-25 10:12:03 [INFO] Consulta de tecnicos
+2026-05-25 10:12:03 [INFO] Consulta de equipos
+2026-05-25 10:12:03 [INFO] Orden registrada id=113
+2026-05-25 10:12:03 [INFO] Consulta de tecnicos
+2026-05-25 10:12:03 [INFO] Consulta de equipos
+2026-05-25 10:12:03 [WARNING] Transicion rechazada idOrden=3 nuevoEstado=CANCELADA
+2026-05-25 10:12:03 [WARNING] Orden rechazada RN-06: finalizacion sin fecha de cierre o costo real
+2026-05-25 10:12:03 [WARNING] Tecnico rechazado RN-03: tiene ordenes relacionadas id=1
+2026-05-25 10:12:03 [WARNING] Transicion rechazada idOrden=2 nuevoEstado=PROGRAMADA
+2026-05-25 10:12:03 [INFO] Estado equipo actualizado id=10 estado=INACTIVO
+2026-05-25 10:12:03 [INFO] Tecnico eliminado id=10
+2026-05-25 10:12:03 [INFO] Estado de orden actualizado id=2 estado=FINALIZADA
+2026-05-25 10:12:03 [INFO] Estado de orden actualizado id=2 estado=FINALIZADA
+2026-05-25 10:12:03 [WARNING] Orden rechazada RN-02: duplicada para equipo=1 fecha=2026-05-20
+2026-05-25 10:12:03 [INFO] Orden registrada id=111
+2026-05-25 10:12:03 [INFO] Orden registrada id=103
+2026-05-25 10:12:03 [WARNING] Orden rechazada RN-05: fecha de inicio anterior a programada
+2026-05-25 10:12:03 [WARNING] Orden rechazada RN-06: finalizacion sin fecha de cierre o costo real
+2026-05-25 10:12:03 [INFO] Estado de orden actualizado id=1 estado=EN_EJECUCION
+2026-05-25 10:12:03 [INFO] Estado de orden actualizado id=1 estado=CANCELADA
+2026-05-25 10:12:03 [INFO] Orden registrada id=108
+2026-05-25 10:12:03 [WARNING] Orden rechazada RN-04: tecnico inactivo id=3
+2026-05-25 10:12:03 [WARNING] Orden rechazada RN-07: certificacion insuficiente para criticidad alta
+2026-05-25 10:12:03 [WARNING] Orden rechazada RN-01: tecnico incompatible con equipo
+2026-05-25 10:12:03 [INFO] Estado de orden actualizado id=2 estado=CANCELADA
+2026-05-25 10:12:03 [INFO] Orden registrada id=101
+2026-05-25 10:12:03 [WARNING] Equipo rechazado RN-03: equipo relacionado a orden id=1
+2026-05-25 10:12:03 [INFO] Orden registrada id=106
+2026-05-25 10:22:07 [INFO] Orden registrada id=220
+2026-05-25 10:22:07 [INFO] Orden actualizada id=220
+2026-05-25 10:22:07 [INFO] Estado de orden actualizado id=220 estado=EN_EJECUCION
+2026-05-25 10:22:07 [INFO] Consulta de ordenes
+2026-05-25 10:22:07 [INFO] Tecnico registrado id=20
+2026-05-25 10:22:07 [INFO] Tecnico actualizado id=20
+2026-05-25 10:22:07 [INFO] Tecnico eliminado id=20
+2026-05-25 10:22:07 [INFO] Consulta de tecnicos
+2026-05-25 10:22:07 [INFO] Equipo registrado id=20
+2026-05-25 10:22:07 [INFO] Equipo actualizado id=20
+2026-05-25 10:22:07 [INFO] Estado equipo actualizado id=20 estado=EN_MANTENIMIENTO
+2026-05-25 10:22:07 [INFO] Consulta de equipos
+2026-05-25 10:22:07 [INFO] Filtro de tecnicos especialidad=MECANICO
+2026-05-25 10:22:07 [INFO] Sesion iniciada usuario=admin
+2026-05-25 10:22:07 [INFO] Consulta de equipos
+2026-05-25 10:22:07 [INFO] Consulta de tecnicos
+2026-05-25 10:22:07 [INFO] Consulta de ordenes
+2026-05-25 10:22:07 [INFO] Estado de orden actualizado id=1 estado=EN_EJECUCION
+2026-05-25 10:22:07 [INFO] Estado de orden actualizado id=2 estado=FINALIZADA
+2026-05-25 10:22:07 [INFO] Tecnico eliminado id=10
+2026-05-25 10:22:07 [INFO] Consulta de tecnicos
+2026-05-25 10:22:07 [INFO] Estatus tecnico actualizado id=10 estatus=INACTIVO
+2026-05-25 10:22:07 [INFO] Filtro de ordenes estado=PROGRAMADA
+2026-05-25 10:22:07 [WARNING] Orden rechazada RN-06: finalizacion sin fecha de cierre o costo real
+2026-05-25 10:22:07 [WARNING] Transicion rechazada idOrden=3 nuevoEstado=CANCELADA
+2026-05-25 10:22:07 [WARNING] Transicion rechazada idOrden=3 nuevoEstado=PROGRAMADA
+2026-05-25 10:22:07 [WARNING] Tecnico rechazado RN-03: tiene ordenes activas id=1
+2026-05-25 10:22:07 [WARNING] Equipo rechazado RN-03: equipo relacionado a orden id=1
+2026-05-25 10:22:07 [INFO] Consulta historial ordenes
+2026-05-25 10:22:07 [INFO] Consulta de ordenes
+2026-05-25 10:22:07 [INFO] Orden actualizada id=1
+2026-05-25 10:22:07 [WARNING] Orden rechazada RN-01: tecnico incompatible con equipo
+2026-05-25 10:22:07 [INFO] Orden registrada id=200
+2026-05-25 10:22:07 [INFO] Equipo registrado id=20
+2026-05-25 10:22:07 [INFO] Consulta de equipos
+2026-05-25 10:22:07 [WARNING] Orden rechazada RN-04: tecnico inactivo id=3
+2026-05-25 10:22:07 [INFO] Estado de orden actualizado id=1 estado=CANCELADA
+2026-05-25 10:22:07 [INFO] Tecnico registrado id=20
+2026-05-25 10:22:07 [INFO] Consulta de tecnicos
+2026-05-25 10:22:07 [WARNING] Orden rechazada RN-05: fecha de inicio anterior a programada
+2026-05-25 10:22:07 [INFO] Consulta de tecnicos
+2026-05-25 10:22:07 [INFO] Tecnico actualizado id=10
+2026-05-25 10:22:07 [WARNING] Orden rechazada RN-02: duplicada para equipo=1 fecha=2026-05-20
+2026-05-25 10:22:07 [INFO] Filtro de equipos tipo=MECANICO
+2026-05-25 10:22:07 [WARNING] Orden rechazada RN-07: certificacion insuficiente para criticidad alta
+2026-05-25 10:22:07 [INFO] Estatus tecnico actualizado id=10 estatus=INACTIVO
+2026-05-25 10:22:07 [INFO] Consulta de equipos
+2026-05-25 10:22:07 [INFO] Equipo actualizado id=10
+2026-05-25 10:22:07 [INFO] Estado equipo actualizado id=10 estado=INACTIVO
+2026-05-25 10:22:07 [WARNING] Orden rechazada RN-05: fecha de cierre anterior a inicio
+2026-05-25 10:22:07 [INFO] Orden registrada id=105
+2026-05-25 10:22:07 [INFO] Consulta de tecnicos
+2026-05-25 10:22:07 [INFO] Consulta de equipos
+2026-05-25 10:22:07 [INFO] Orden registrada id=113
+2026-05-25 10:22:07 [INFO] Consulta de tecnicos
+2026-05-25 10:22:07 [INFO] Consulta de equipos
+2026-05-25 10:22:07 [WARNING] Transicion rechazada idOrden=3 nuevoEstado=CANCELADA
+2026-05-25 10:22:07 [WARNING] Orden rechazada RN-06: finalizacion sin fecha de cierre o costo real
+2026-05-25 10:22:07 [WARNING] Tecnico rechazado RN-03: tiene ordenes relacionadas id=1
+2026-05-25 10:22:07 [WARNING] Transicion rechazada idOrden=2 nuevoEstado=PROGRAMADA
+2026-05-25 10:22:07 [INFO] Estado equipo actualizado id=10 estado=INACTIVO
+2026-05-25 10:22:07 [INFO] Tecnico eliminado id=10
+2026-05-25 10:22:07 [INFO] Estado de orden actualizado id=2 estado=FINALIZADA
+2026-05-25 10:22:07 [INFO] Estado de orden actualizado id=2 estado=FINALIZADA
+2026-05-25 10:22:07 [WARNING] Orden rechazada RN-02: duplicada para equipo=1 fecha=2026-05-20
+2026-05-25 10:22:07 [INFO] Orden registrada id=111
+2026-05-25 10:22:07 [INFO] Orden registrada id=103
+2026-05-25 10:22:07 [WARNING] Orden rechazada RN-05: fecha de inicio anterior a programada
+2026-05-25 10:22:07 [WARNING] Orden rechazada RN-06: finalizacion sin fecha de cierre o costo real
+2026-05-25 10:22:07 [INFO] Estado de orden actualizado id=1 estado=EN_EJECUCION
+2026-05-25 10:22:07 [INFO] Estado de orden actualizado id=1 estado=CANCELADA
+2026-05-25 10:22:07 [INFO] Orden registrada id=108
+2026-05-25 10:22:07 [WARNING] Orden rechazada RN-04: tecnico inactivo id=3
+2026-05-25 10:22:07 [WARNING] Orden rechazada RN-07: certificacion insuficiente para criticidad alta
+2026-05-25 10:22:07 [WARNING] Orden rechazada RN-01: tecnico incompatible con equipo
+2026-05-25 10:22:07 [INFO] Estado de orden actualizado id=2 estado=CANCELADA
+2026-05-25 10:22:07 [INFO] Orden registrada id=101
+2026-05-25 10:22:07 [WARNING] Equipo rechazado RN-03: equipo relacionado a orden id=1
+2026-05-25 10:22:07 [INFO] Orden registrada id=106
+2026-05-25 10:31:44 [INFO] Orden registrada id=220
+2026-05-25 10:31:44 [INFO] Orden actualizada id=220
+2026-05-25 10:31:44 [INFO] Estado de orden actualizado id=220 estado=EN_EJECUCION
+2026-05-25 10:31:44 [INFO] Consulta de ordenes
+2026-05-25 10:31:44 [INFO] Tecnico registrado id=20
+2026-05-25 10:31:44 [INFO] Tecnico actualizado id=20
+2026-05-25 10:31:44 [INFO] Tecnico eliminado id=20
+2026-05-25 10:31:44 [INFO] Consulta de tecnicos
+2026-05-25 10:31:44 [INFO] Equipo registrado id=20
+2026-05-25 10:31:44 [INFO] Equipo actualizado id=20
+2026-05-25 10:31:44 [INFO] Estado equipo actualizado id=20 estado=EN_MANTENIMIENTO
+2026-05-25 10:31:44 [INFO] Consulta de equipos
+2026-05-25 10:31:44 [INFO] Filtro de tecnicos especialidad=MECANICO
+2026-05-25 10:31:44 [INFO] Sesion iniciada usuario=admin
+2026-05-25 10:31:44 [INFO] Consulta de equipos
+2026-05-25 10:31:44 [INFO] Consulta de tecnicos
+2026-05-25 10:31:44 [INFO] Consulta de ordenes
+2026-05-25 10:31:44 [INFO] Estado de orden actualizado id=1 estado=EN_EJECUCION
+2026-05-25 10:31:44 [INFO] Estado de orden actualizado id=2 estado=FINALIZADA
+2026-05-25 10:31:44 [INFO] Tecnico eliminado id=10
+2026-05-25 10:31:44 [INFO] Consulta de tecnicos
+2026-05-25 10:31:44 [INFO] Estatus tecnico actualizado id=10 estatus=INACTIVO
+2026-05-25 10:31:44 [INFO] Filtro de ordenes estado=PROGRAMADA
+2026-05-25 10:31:44 [WARNING] Orden rechazada RN-06: finalizacion sin fecha de cierre o costo real
+2026-05-25 10:31:44 [WARNING] Transicion rechazada idOrden=3 nuevoEstado=CANCELADA
+2026-05-25 10:31:44 [WARNING] Transicion rechazada idOrden=3 nuevoEstado=PROGRAMADA
+2026-05-25 10:31:44 [WARNING] Tecnico rechazado RN-03: tiene ordenes activas id=1
+2026-05-25 10:31:44 [WARNING] Equipo rechazado RN-03: equipo relacionado a orden id=1
+2026-05-25 10:31:44 [INFO] Consulta historial ordenes
+2026-05-25 10:31:44 [INFO] Consulta de ordenes
+2026-05-25 10:31:44 [INFO] Orden actualizada id=1
+2026-05-25 10:31:44 [WARNING] Orden rechazada RN-01: tecnico incompatible con equipo
+2026-05-25 10:31:44 [INFO] Orden registrada id=200
+2026-05-25 10:31:44 [INFO] Equipo registrado id=20
+2026-05-25 10:31:44 [INFO] Consulta de equipos
+2026-05-25 10:31:44 [WARNING] Orden rechazada RN-04: tecnico inactivo id=3
+2026-05-25 10:31:44 [INFO] Estado de orden actualizado id=1 estado=CANCELADA
+2026-05-25 10:31:44 [INFO] Tecnico registrado id=20
+2026-05-25 10:31:44 [INFO] Consulta de tecnicos
+2026-05-25 10:31:44 [WARNING] Orden rechazada RN-05: fecha de inicio anterior a programada
+2026-05-25 10:31:44 [INFO] Consulta de tecnicos
+2026-05-25 10:31:44 [INFO] Tecnico actualizado id=10
+2026-05-25 10:31:44 [WARNING] Orden rechazada RN-02: duplicada para equipo=1 fecha=2026-05-20
+2026-05-25 10:31:44 [INFO] Filtro de equipos tipo=MECANICO
+2026-05-25 10:31:44 [WARNING] Orden rechazada RN-07: certificacion insuficiente para criticidad alta
+2026-05-25 10:31:44 [INFO] Estatus tecnico actualizado id=10 estatus=INACTIVO
+2026-05-25 10:31:44 [INFO] Consulta de equipos
+2026-05-25 10:31:44 [INFO] Equipo actualizado id=10
+2026-05-25 10:31:44 [INFO] Estado equipo actualizado id=10 estado=INACTIVO
+2026-05-25 10:31:44 [WARNING] Orden rechazada RN-05: fecha de cierre anterior a inicio
+2026-05-25 10:31:44 [INFO] Orden registrada id=105
+2026-05-25 10:31:44 [INFO] Consulta de tecnicos
+2026-05-25 10:31:44 [INFO] Consulta de equipos
+2026-05-25 10:31:44 [INFO] Orden registrada id=113
+2026-05-25 10:31:44 [INFO] Consulta de tecnicos
+2026-05-25 10:31:44 [INFO] Consulta de equipos
+2026-05-25 10:31:44 [WARNING] Transicion rechazada idOrden=3 nuevoEstado=CANCELADA
+2026-05-25 10:31:44 [WARNING] Orden rechazada RN-06: finalizacion sin fecha de cierre o costo real
+2026-05-25 10:31:44 [WARNING] Tecnico rechazado RN-03: tiene ordenes relacionadas id=1
+2026-05-25 10:31:44 [WARNING] Transicion rechazada idOrden=2 nuevoEstado=PROGRAMADA
+2026-05-25 10:31:44 [INFO] Estado equipo actualizado id=10 estado=INACTIVO
+2026-05-25 10:31:44 [INFO] Tecnico eliminado id=10
+2026-05-25 10:31:44 [INFO] Estado de orden actualizado id=2 estado=FINALIZADA
+2026-05-25 10:31:44 [INFO] Estado de orden actualizado id=2 estado=FINALIZADA
+2026-05-25 10:31:44 [WARNING] Orden rechazada RN-02: duplicada para equipo=1 fecha=2026-05-20
+2026-05-25 10:31:44 [INFO] Orden registrada id=111
+2026-05-25 10:31:44 [INFO] Orden registrada id=103
+2026-05-25 10:31:44 [WARNING] Orden rechazada RN-05: fecha de inicio anterior a programada
+2026-05-25 10:31:44 [WARNING] Orden rechazada RN-06: finalizacion sin fecha de cierre o costo real
+2026-05-25 10:31:44 [INFO] Estado de orden actualizado id=1 estado=EN_EJECUCION
+2026-05-25 10:31:44 [INFO] Estado de orden actualizado id=1 estado=CANCELADA
+2026-05-25 10:31:44 [INFO] Orden registrada id=108
+2026-05-25 10:31:44 [WARNING] Orden rechazada RN-04: tecnico inactivo id=3
+2026-05-25 10:31:44 [WARNING] Orden rechazada RN-07: certificacion insuficiente para criticidad alta
+2026-05-25 10:31:44 [WARNING] Orden rechazada RN-01: tecnico incompatible con equipo
+2026-05-25 10:31:44 [INFO] Estado de orden actualizado id=2 estado=CANCELADA
+2026-05-25 10:31:44 [INFO] Orden registrada id=101
+2026-05-25 10:31:44 [WARNING] Equipo rechazado RN-03: equipo relacionado a orden id=1
+2026-05-25 10:31:44 [INFO] Orden registrada id=106
+2026-05-25 10:57:51 [INFO] Orden registrada id=220
+2026-05-25 10:57:51 [INFO] Orden actualizada id=220
+2026-05-25 10:57:52 [INFO] Estado de orden actualizado id=220 estado=EN_EJECUCION
+2026-05-25 10:57:52 [INFO] Consulta de ordenes
+2026-05-25 10:57:52 [INFO] Tecnico registrado id=20
+2026-05-25 10:57:52 [INFO] Tecnico actualizado id=20
+2026-05-25 10:57:52 [INFO] Tecnico eliminado id=20
+2026-05-25 10:57:52 [INFO] Consulta de tecnicos
+2026-05-25 10:57:52 [INFO] Equipo registrado id=20
+2026-05-25 10:57:52 [INFO] Equipo actualizado id=20
+2026-05-25 10:57:52 [INFO] Estado equipo actualizado id=20 estado=EN_MANTENIMIENTO
+2026-05-25 10:57:52 [INFO] Consulta de equipos
+2026-05-25 10:57:52 [INFO] Filtro de tecnicos especialidad=MECANICO
+2026-05-25 10:57:52 [INFO] Sesion iniciada usuario=admin
+2026-05-25 10:57:52 [INFO] Consulta de equipos
+2026-05-25 10:57:52 [INFO] Consulta de tecnicos
+2026-05-25 10:57:52 [INFO] Consulta de ordenes
+2026-05-25 10:57:52 [INFO] Estado de orden actualizado id=1 estado=EN_EJECUCION
+2026-05-25 10:57:52 [INFO] Estado de orden actualizado id=2 estado=FINALIZADA
+2026-05-25 10:57:52 [INFO] Tecnico eliminado id=10
+2026-05-25 10:57:52 [INFO] Consulta de tecnicos
+2026-05-25 10:57:52 [INFO] Estatus tecnico actualizado id=10 estatus=INACTIVO
+2026-05-25 10:57:52 [INFO] Filtro de ordenes estado=PROGRAMADA
+2026-05-25 10:57:52 [WARNING] Orden rechazada RN-06: finalizacion sin fecha de cierre o costo real
+2026-05-25 10:57:52 [WARNING] Transicion rechazada idOrden=3 nuevoEstado=CANCELADA
+2026-05-25 10:57:52 [WARNING] Transicion rechazada idOrden=3 nuevoEstado=PROGRAMADA
+2026-05-25 10:57:52 [WARNING] Tecnico rechazado RN-03: tiene ordenes activas id=1
+2026-05-25 10:57:52 [WARNING] Equipo rechazado RN-03: equipo relacionado a orden id=1
+2026-05-25 10:57:52 [INFO] Consulta historial ordenes
+2026-05-25 10:57:52 [INFO] Consulta de ordenes
+2026-05-25 10:57:52 [INFO] Orden actualizada id=1
+2026-05-25 10:57:52 [WARNING] Orden rechazada RN-01: tecnico incompatible con equipo
+2026-05-25 10:57:52 [INFO] Orden registrada id=200
+2026-05-25 10:57:52 [INFO] Equipo registrado id=20
+2026-05-25 10:57:52 [INFO] Consulta de equipos
+2026-05-25 10:57:52 [WARNING] Orden rechazada RN-04: tecnico inactivo id=3
+2026-05-25 10:57:52 [INFO] Estado de orden actualizado id=1 estado=CANCELADA
+2026-05-25 10:57:52 [INFO] Tecnico registrado id=20
+2026-05-25 10:57:52 [INFO] Consulta de tecnicos
+2026-05-25 10:57:52 [WARNING] Orden rechazada RN-05: fecha de inicio anterior a programada
+2026-05-25 10:57:52 [INFO] Consulta de tecnicos
+2026-05-25 10:57:52 [INFO] Tecnico actualizado id=10
+2026-05-25 10:57:52 [WARNING] Orden rechazada RN-02: duplicada para equipo=1 fecha=2026-05-20
+2026-05-25 10:57:52 [INFO] Filtro de equipos tipo=MECANICO
+2026-05-25 10:57:52 [WARNING] Orden rechazada RN-07: certificacion insuficiente para criticidad alta
+2026-05-25 10:57:52 [INFO] Estatus tecnico actualizado id=10 estatus=INACTIVO
+2026-05-25 10:57:52 [INFO] Consulta de equipos
+2026-05-25 10:57:52 [INFO] Equipo actualizado id=10
+2026-05-25 10:57:52 [INFO] Estado equipo actualizado id=10 estado=INACTIVO
+2026-05-25 10:57:52 [WARNING] Orden rechazada RN-05: fecha de cierre anterior a inicio
+2026-05-25 10:57:52 [INFO] Orden registrada id=105
+2026-05-25 10:57:52 [INFO] Consulta de tecnicos
+2026-05-25 10:57:52 [INFO] Consulta de equipos
+2026-05-25 10:57:52 [INFO] Orden registrada id=113
+2026-05-25 10:57:52 [INFO] Consulta de tecnicos
+2026-05-25 10:57:52 [INFO] Consulta de equipos
+2026-05-25 10:57:52 [WARNING] Transicion rechazada idOrden=3 nuevoEstado=CANCELADA
+2026-05-25 10:57:52 [WARNING] Orden rechazada RN-06: finalizacion sin fecha de cierre o costo real
+2026-05-25 10:57:52 [WARNING] Tecnico rechazado RN-03: tiene ordenes relacionadas id=1
+2026-05-25 10:57:52 [WARNING] Transicion rechazada idOrden=2 nuevoEstado=PROGRAMADA
+2026-05-25 10:57:52 [INFO] Estado equipo actualizado id=10 estado=INACTIVO
+2026-05-25 10:57:52 [INFO] Tecnico eliminado id=10
+2026-05-25 10:57:52 [INFO] Estado de orden actualizado id=2 estado=FINALIZADA
+2026-05-25 10:57:52 [INFO] Estado de orden actualizado id=2 estado=FINALIZADA
+2026-05-25 10:57:52 [WARNING] Orden rechazada RN-02: duplicada para equipo=1 fecha=2026-05-20
+2026-05-25 10:57:52 [INFO] Orden registrada id=111
+2026-05-25 10:57:52 [INFO] Orden registrada id=103
+2026-05-25 10:57:52 [WARNING] Orden rechazada RN-05: fecha de inicio anterior a programada
+2026-05-25 10:57:52 [WARNING] Orden rechazada RN-06: finalizacion sin fecha de cierre o costo real
+2026-05-25 10:57:52 [INFO] Estado de orden actualizado id=1 estado=EN_EJECUCION
+2026-05-25 10:57:52 [INFO] Estado de orden actualizado id=1 estado=CANCELADA
+2026-05-25 10:57:52 [INFO] Orden registrada id=108
+2026-05-25 10:57:52 [WARNING] Orden rechazada RN-04: tecnico inactivo id=3
+2026-05-25 10:57:52 [WARNING] Orden rechazada RN-07: certificacion insuficiente para criticidad alta
+2026-05-25 10:57:52 [WARNING] Orden rechazada RN-01: tecnico incompatible con equipo
+2026-05-25 10:57:52 [INFO] Estado de orden actualizado id=2 estado=CANCELADA
+2026-05-25 10:57:52 [INFO] Orden registrada id=101
+2026-05-25 10:57:52 [WARNING] Equipo rechazado RN-03: equipo relacionado a orden id=1
+2026-05-25 10:57:52 [INFO] Orden registrada id=106
+2026-05-25 11:00:45 [INFO] Orden registrada id=220
+2026-05-25 11:00:45 [INFO] Orden actualizada id=220
+2026-05-25 11:00:45 [INFO] Estado de orden actualizado id=220 estado=EN_EJECUCION
+2026-05-25 11:00:45 [INFO] Consulta de ordenes
+2026-05-25 11:00:45 [INFO] Tecnico registrado id=20
+2026-05-25 11:00:45 [INFO] Tecnico actualizado id=20
+2026-05-25 11:00:45 [INFO] Tecnico eliminado id=20
+2026-05-25 11:00:45 [INFO] Consulta de tecnicos
+2026-05-25 11:00:45 [INFO] Equipo registrado id=20
+2026-05-25 11:00:45 [INFO] Equipo actualizado id=20
+2026-05-25 11:00:45 [INFO] Estado equipo actualizado id=20 estado=EN_MANTENIMIENTO
+2026-05-25 11:00:45 [INFO] Consulta de equipos
+2026-05-25 11:00:45 [INFO] Filtro de tecnicos especialidad=MECANICO
+2026-05-25 11:00:45 [INFO] Sesion iniciada usuario=admin
+2026-05-25 11:00:45 [INFO] Consulta de equipos
+2026-05-25 11:00:45 [INFO] Consulta de tecnicos
+2026-05-25 11:00:45 [INFO] Consulta de ordenes
+2026-05-25 11:00:45 [INFO] Estado de orden actualizado id=1 estado=EN_EJECUCION
+2026-05-25 11:00:45 [INFO] Estado de orden actualizado id=2 estado=FINALIZADA
+2026-05-25 11:00:45 [INFO] Tecnico eliminado id=10
+2026-05-25 11:00:45 [INFO] Consulta de tecnicos
+2026-05-25 11:00:45 [INFO] Estatus tecnico actualizado id=10 estatus=INACTIVO
+2026-05-25 11:00:45 [INFO] Filtro de ordenes estado=PROGRAMADA
+2026-05-25 11:00:45 [WARNING] Orden rechazada RN-06: finalizacion sin fecha de cierre o costo real
+2026-05-25 11:00:45 [WARNING] Transicion rechazada idOrden=3 nuevoEstado=CANCELADA
+2026-05-25 11:00:45 [WARNING] Transicion rechazada idOrden=3 nuevoEstado=PROGRAMADA
+2026-05-25 11:00:45 [WARNING] Tecnico rechazado RN-03: tiene ordenes activas id=1
+2026-05-25 11:00:45 [WARNING] Equipo rechazado RN-03: equipo relacionado a orden id=1
+2026-05-25 11:00:45 [INFO] Consulta historial ordenes
+2026-05-25 11:00:45 [INFO] Consulta de ordenes
+2026-05-25 11:00:45 [INFO] Orden actualizada id=1
+2026-05-25 11:00:45 [WARNING] Orden rechazada RN-01: tecnico incompatible con equipo
+2026-05-25 11:00:45 [INFO] Orden registrada id=200
+2026-05-25 11:00:45 [INFO] Equipo registrado id=20
+2026-05-25 11:00:45 [INFO] Consulta de equipos
+2026-05-25 11:00:45 [WARNING] Orden rechazada RN-04: tecnico inactivo id=3
+2026-05-25 11:00:45 [INFO] Estado de orden actualizado id=1 estado=CANCELADA
+2026-05-25 11:00:45 [INFO] Tecnico registrado id=20
+2026-05-25 11:00:45 [INFO] Consulta de tecnicos
+2026-05-25 11:00:45 [WARNING] Orden rechazada RN-05: fecha de inicio anterior a programada
+2026-05-25 11:00:45 [INFO] Consulta de tecnicos
+2026-05-25 11:00:45 [INFO] Tecnico actualizado id=10
+2026-05-25 11:00:45 [WARNING] Orden rechazada RN-02: duplicada para equipo=1 fecha=2026-05-20
+2026-05-25 11:00:45 [INFO] Filtro de equipos tipo=MECANICO
+2026-05-25 11:00:45 [WARNING] Orden rechazada RN-07: certificacion insuficiente para criticidad alta
+2026-05-25 11:00:45 [INFO] Estatus tecnico actualizado id=10 estatus=INACTIVO
+2026-05-25 11:00:45 [INFO] Consulta de equipos
+2026-05-25 11:00:45 [INFO] Equipo actualizado id=10
+2026-05-25 11:00:45 [INFO] Estado equipo actualizado id=10 estado=INACTIVO
+2026-05-25 11:00:45 [WARNING] Orden rechazada RN-05: fecha de cierre anterior a inicio
+2026-05-25 11:00:45 [INFO] Orden registrada id=105
+2026-05-25 11:00:45 [INFO] Consulta de tecnicos
+2026-05-25 11:00:45 [INFO] Consulta de equipos
+2026-05-25 11:00:45 [INFO] Orden registrada id=113
+2026-05-25 11:00:45 [INFO] Consulta de tecnicos
+2026-05-25 11:00:45 [INFO] Consulta de equipos
+2026-05-25 11:00:45 [WARNING] Transicion rechazada idOrden=3 nuevoEstado=CANCELADA
+2026-05-25 11:00:45 [WARNING] Orden rechazada RN-06: finalizacion sin fecha de cierre o costo real
+2026-05-25 11:00:45 [WARNING] Tecnico rechazado RN-03: tiene ordenes relacionadas id=1
+2026-05-25 11:00:45 [WARNING] Transicion rechazada idOrden=2 nuevoEstado=PROGRAMADA
+2026-05-25 11:00:45 [INFO] Estado equipo actualizado id=10 estado=INACTIVO
+2026-05-25 11:00:45 [INFO] Tecnico eliminado id=10
+2026-05-25 11:00:45 [INFO] Estado de orden actualizado id=2 estado=FINALIZADA
+2026-05-25 11:00:45 [INFO] Estado de orden actualizado id=2 estado=FINALIZADA
+2026-05-25 11:00:45 [WARNING] Orden rechazada RN-02: duplicada para equipo=1 fecha=2026-05-20
+2026-05-25 11:00:45 [INFO] Orden registrada id=111
+2026-05-25 11:00:45 [INFO] Orden registrada id=103
+2026-05-25 11:00:45 [WARNING] Orden rechazada RN-05: fecha de inicio anterior a programada
+2026-05-25 11:00:45 [WARNING] Orden rechazada RN-06: finalizacion sin fecha de cierre o costo real
+2026-05-25 11:00:45 [INFO] Estado de orden actualizado id=1 estado=EN_EJECUCION
+2026-05-25 11:00:45 [INFO] Estado de orden actualizado id=1 estado=CANCELADA
+2026-05-25 11:00:45 [INFO] Orden registrada id=108
+2026-05-25 11:00:45 [WARNING] Orden rechazada RN-04: tecnico inactivo id=3
+2026-05-25 11:00:45 [WARNING] Orden rechazada RN-07: certificacion insuficiente para criticidad alta
+2026-05-25 11:00:45 [WARNING] Orden rechazada RN-01: tecnico incompatible con equipo
+2026-05-25 11:00:45 [INFO] Estado de orden actualizado id=2 estado=CANCELADA
+2026-05-25 11:00:45 [INFO] Orden registrada id=101
+2026-05-25 11:00:45 [WARNING] Equipo rechazado RN-03: equipo relacionado a orden id=1
+2026-05-25 11:00:45 [INFO] Orden registrada id=106
+2026-05-25 11:03:55 [INFO] Orden registrada id=220
+2026-05-25 11:03:55 [INFO] Orden actualizada id=220
+2026-05-25 11:03:55 [INFO] Estado de orden actualizado id=220 estado=EN_EJECUCION
+2026-05-25 11:03:55 [INFO] Consulta de ordenes
+2026-05-25 11:03:55 [INFO] Tecnico registrado id=20
+2026-05-25 11:03:55 [INFO] Tecnico actualizado id=20
+2026-05-25 11:03:55 [INFO] Tecnico eliminado id=20
+2026-05-25 11:03:55 [INFO] Consulta de tecnicos
+2026-05-25 11:03:55 [INFO] Equipo registrado id=20
+2026-05-25 11:03:55 [INFO] Equipo actualizado id=20
+2026-05-25 11:03:55 [INFO] Estado equipo actualizado id=20 estado=EN_MANTENIMIENTO
+2026-05-25 11:03:55 [INFO] Consulta de equipos
+2026-05-25 11:03:55 [INFO] Filtro de tecnicos especialidad=MECANICO
+2026-05-25 11:03:55 [INFO] Sesion iniciada usuario=admin
+2026-05-25 11:03:55 [INFO] Consulta de equipos
+2026-05-25 11:03:55 [INFO] Consulta de tecnicos
+2026-05-25 11:03:55 [INFO] Consulta de ordenes
+2026-05-25 11:03:55 [INFO] Estado de orden actualizado id=1 estado=EN_EJECUCION
+2026-05-25 11:03:55 [INFO] Estado de orden actualizado id=2 estado=FINALIZADA
+2026-05-25 11:03:55 [INFO] Tecnico eliminado id=10
+2026-05-25 11:03:55 [INFO] Consulta de tecnicos
+2026-05-25 11:03:55 [INFO] Estatus tecnico actualizado id=10 estatus=INACTIVO
+2026-05-25 11:03:55 [INFO] Filtro de ordenes estado=PROGRAMADA
+2026-05-25 11:03:55 [WARNING] Orden rechazada RN-06: finalizacion sin fecha de cierre o costo real
+2026-05-25 11:03:55 [WARNING] Transicion rechazada idOrden=3 nuevoEstado=CANCELADA
+2026-05-25 11:03:55 [WARNING] Transicion rechazada idOrden=3 nuevoEstado=PROGRAMADA
+2026-05-25 11:03:55 [WARNING] Tecnico rechazado RN-03: tiene ordenes activas id=1
+2026-05-25 11:03:55 [WARNING] Equipo rechazado RN-03: equipo relacionado a orden id=1
+2026-05-25 11:03:55 [INFO] Consulta historial ordenes
+2026-05-25 11:03:55 [INFO] Consulta de ordenes
+2026-05-25 11:03:55 [INFO] Orden actualizada id=1
+2026-05-25 11:03:55 [WARNING] Orden rechazada RN-01: tecnico incompatible con equipo
+2026-05-25 11:03:55 [INFO] Orden registrada id=200
+2026-05-25 11:03:55 [INFO] Equipo registrado id=20
+2026-05-25 11:03:55 [INFO] Consulta de equipos
+2026-05-25 11:03:55 [WARNING] Orden rechazada RN-04: tecnico inactivo id=3
+2026-05-25 11:03:55 [INFO] Estado de orden actualizado id=1 estado=CANCELADA
+2026-05-25 11:03:55 [INFO] Tecnico registrado id=20
+2026-05-25 11:03:55 [INFO] Consulta de tecnicos
+2026-05-25 11:03:55 [WARNING] Orden rechazada RN-05: fecha de inicio anterior a programada
+2026-05-25 11:03:55 [INFO] Consulta de tecnicos
+2026-05-25 11:03:55 [INFO] Tecnico actualizado id=10
+2026-05-25 11:03:55 [WARNING] Orden rechazada RN-02: duplicada para equipo=1 fecha=2026-05-20
+2026-05-25 11:03:55 [INFO] Filtro de equipos tipo=MECANICO
+2026-05-25 11:03:55 [WARNING] Orden rechazada RN-07: certificacion insuficiente para criticidad alta
+2026-05-25 11:03:55 [INFO] Estatus tecnico actualizado id=10 estatus=INACTIVO
+2026-05-25 11:03:55 [INFO] Consulta de equipos
+2026-05-25 11:03:55 [INFO] Equipo actualizado id=10
+2026-05-25 11:03:55 [INFO] Estado equipo actualizado id=10 estado=INACTIVO
+2026-05-25 11:03:55 [WARNING] Orden rechazada RN-05: fecha de cierre anterior a inicio
+2026-05-25 11:03:55 [INFO] Orden registrada id=105
+2026-05-25 11:03:55 [INFO] Consulta de tecnicos
+2026-05-25 11:03:55 [INFO] Consulta de equipos
+2026-05-25 11:03:55 [INFO] Orden registrada id=113
+2026-05-25 11:03:55 [INFO] Consulta de tecnicos
+2026-05-25 11:03:55 [INFO] Consulta de equipos
+2026-05-25 11:03:55 [WARNING] Transicion rechazada idOrden=3 nuevoEstado=CANCELADA
+2026-05-25 11:03:55 [WARNING] Orden rechazada RN-06: finalizacion sin fecha de cierre o costo real
+2026-05-25 11:03:55 [WARNING] Tecnico rechazado RN-03: tiene ordenes relacionadas id=1
+2026-05-25 11:03:55 [WARNING] Transicion rechazada idOrden=2 nuevoEstado=PROGRAMADA
+2026-05-25 11:03:55 [INFO] Estado equipo actualizado id=10 estado=INACTIVO
+2026-05-25 11:03:55 [INFO] Tecnico eliminado id=10
+2026-05-25 11:03:55 [INFO] Estado de orden actualizado id=2 estado=FINALIZADA
+2026-05-25 11:03:55 [INFO] Estado de orden actualizado id=2 estado=FINALIZADA
+2026-05-25 11:03:55 [WARNING] Orden rechazada RN-02: duplicada para equipo=1 fecha=2026-05-20
+2026-05-25 11:03:55 [INFO] Orden registrada id=111
+2026-05-25 11:03:55 [INFO] Orden registrada id=103
+2026-05-25 11:03:55 [WARNING] Orden rechazada RN-05: fecha de inicio anterior a programada
+2026-05-25 11:03:55 [WARNING] Orden rechazada RN-06: finalizacion sin fecha de cierre o costo real
+2026-05-25 11:03:55 [INFO] Estado de orden actualizado id=1 estado=EN_EJECUCION
+2026-05-25 11:03:55 [INFO] Estado de orden actualizado id=1 estado=CANCELADA
+2026-05-25 11:03:55 [INFO] Orden registrada id=108
+2026-05-25 11:03:55 [WARNING] Orden rechazada RN-04: tecnico inactivo id=3
+2026-05-25 11:03:55 [WARNING] Orden rechazada RN-07: certificacion insuficiente para criticidad alta
+2026-05-25 11:03:55 [WARNING] Orden rechazada RN-01: tecnico incompatible con equipo
+2026-05-25 11:03:55 [INFO] Estado de orden actualizado id=2 estado=CANCELADA
+2026-05-25 11:03:55 [INFO] Orden registrada id=101
+2026-05-25 11:03:55 [WARNING] Equipo rechazado RN-03: equipo relacionado a orden id=1
+2026-05-25 11:03:55 [INFO] Orden registrada id=106
+2026-05-25 11:06:06 [INFO] Orden registrada id=220
+2026-05-25 11:06:06 [INFO] Orden actualizada id=220
+2026-05-25 11:06:06 [INFO] Estado de orden actualizado id=220 estado=EN_EJECUCION
+2026-05-25 11:06:06 [INFO] Consulta de ordenes
+2026-05-25 11:06:06 [INFO] Tecnico registrado id=20
+2026-05-25 11:06:06 [INFO] Tecnico actualizado id=20
+2026-05-25 11:06:06 [INFO] Tecnico eliminado id=20
+2026-05-25 11:06:06 [INFO] Consulta de tecnicos
+2026-05-25 11:06:06 [INFO] Equipo registrado id=20
+2026-05-25 11:06:06 [INFO] Equipo actualizado id=20
+2026-05-25 11:06:06 [INFO] Estado equipo actualizado id=20 estado=EN_MANTENIMIENTO
+2026-05-25 11:06:06 [INFO] Consulta de equipos
+2026-05-25 11:06:06 [INFO] Filtro de tecnicos especialidad=MECANICO
+2026-05-25 11:06:06 [INFO] Sesion iniciada usuario=admin
+2026-05-25 11:06:06 [INFO] Consulta de equipos
+2026-05-25 11:06:06 [INFO] Consulta de tecnicos
+2026-05-25 11:06:06 [INFO] Consulta de ordenes
+2026-05-25 11:06:06 [INFO] Estado de orden actualizado id=1 estado=EN_EJECUCION
+2026-05-25 11:06:06 [INFO] Estado de orden actualizado id=2 estado=FINALIZADA
+2026-05-25 11:06:06 [INFO] Tecnico eliminado id=10
+2026-05-25 11:06:06 [INFO] Consulta de tecnicos
+2026-05-25 11:06:06 [INFO] Estatus tecnico actualizado id=10 estatus=INACTIVO
+2026-05-25 11:06:06 [INFO] Filtro de ordenes estado=PROGRAMADA
+2026-05-25 11:06:06 [WARNING] Orden rechazada RN-06: finalizacion sin fecha de cierre o costo real
+2026-05-25 11:06:06 [WARNING] Transicion rechazada idOrden=3 nuevoEstado=CANCELADA
+2026-05-25 11:06:06 [WARNING] Transicion rechazada idOrden=3 nuevoEstado=PROGRAMADA
+2026-05-25 11:06:06 [WARNING] Tecnico rechazado RN-03: tiene ordenes activas id=1
+2026-05-25 11:06:06 [WARNING] Equipo rechazado RN-03: equipo relacionado a orden id=1
+2026-05-25 11:06:06 [INFO] Consulta historial ordenes
+2026-05-25 11:06:06 [INFO] Consulta de ordenes
+2026-05-25 11:06:06 [INFO] Orden actualizada id=1
+2026-05-25 11:06:06 [WARNING] Orden rechazada RN-01: tecnico incompatible con equipo
+2026-05-25 11:06:06 [INFO] Orden registrada id=200
+2026-05-25 11:06:06 [INFO] Equipo registrado id=20
+2026-05-25 11:06:06 [INFO] Consulta de equipos
+2026-05-25 11:06:06 [WARNING] Orden rechazada RN-04: tecnico inactivo id=3
+2026-05-25 11:06:06 [INFO] Estado de orden actualizado id=1 estado=CANCELADA
+2026-05-25 11:06:06 [INFO] Tecnico registrado id=20
+2026-05-25 11:06:06 [INFO] Consulta de tecnicos
+2026-05-25 11:06:06 [WARNING] Orden rechazada RN-05: fecha de inicio anterior a programada
+2026-05-25 11:06:06 [INFO] Consulta de tecnicos
+2026-05-25 11:06:06 [INFO] Tecnico actualizado id=10
+2026-05-25 11:06:06 [WARNING] Orden rechazada RN-02: duplicada para equipo=1 fecha=2026-05-20
+2026-05-25 11:06:06 [INFO] Filtro de equipos tipo=MECANICO
+2026-05-25 11:06:06 [WARNING] Orden rechazada RN-07: certificacion insuficiente para criticidad alta
+2026-05-25 11:06:06 [INFO] Estatus tecnico actualizado id=10 estatus=INACTIVO
+2026-05-25 11:06:06 [INFO] Consulta de equipos
+2026-05-25 11:06:06 [INFO] Equipo actualizado id=10
+2026-05-25 11:06:06 [INFO] Estado equipo actualizado id=10 estado=INACTIVO
+2026-05-25 11:06:06 [WARNING] Orden rechazada RN-05: fecha de cierre anterior a inicio
+2026-05-25 11:06:06 [INFO] Orden registrada id=105
+2026-05-25 11:06:06 [INFO] Consulta de tecnicos
+2026-05-25 11:06:06 [INFO] Consulta de equipos
+2026-05-25 11:06:06 [INFO] Orden registrada id=113
+2026-05-25 11:06:06 [INFO] Consulta de tecnicos
+2026-05-25 11:06:06 [INFO] Consulta de equipos
+2026-05-25 11:06:06 [WARNING] Transicion rechazada idOrden=3 nuevoEstado=CANCELADA
+2026-05-25 11:06:06 [WARNING] Orden rechazada RN-06: finalizacion sin fecha de cierre o costo real
+2026-05-25 11:06:06 [WARNING] Tecnico rechazado RN-03: tiene ordenes relacionadas id=1
+2026-05-25 11:06:06 [WARNING] Transicion rechazada idOrden=2 nuevoEstado=PROGRAMADA
+2026-05-25 11:06:06 [INFO] Estado equipo actualizado id=10 estado=INACTIVO
+2026-05-25 11:06:06 [INFO] Tecnico eliminado id=10
+2026-05-25 11:06:06 [INFO] Estado de orden actualizado id=2 estado=FINALIZADA
+2026-05-25 11:06:06 [INFO] Estado de orden actualizado id=2 estado=FINALIZADA
+2026-05-25 11:06:06 [WARNING] Orden rechazada RN-02: duplicada para equipo=1 fecha=2026-05-20
+2026-05-25 11:06:06 [INFO] Orden registrada id=111
+2026-05-25 11:06:06 [INFO] Orden registrada id=103
+2026-05-25 11:06:06 [WARNING] Orden rechazada RN-05: fecha de inicio anterior a programada
+2026-05-25 11:06:06 [WARNING] Orden rechazada RN-06: finalizacion sin fecha de cierre o costo real
+2026-05-25 11:06:06 [INFO] Estado de orden actualizado id=1 estado=EN_EJECUCION
+2026-05-25 11:06:06 [INFO] Estado de orden actualizado id=1 estado=CANCELADA
+2026-05-25 11:06:06 [INFO] Orden registrada id=108
+2026-05-25 11:06:06 [WARNING] Orden rechazada RN-04: tecnico inactivo id=3
+2026-05-25 11:06:06 [WARNING] Orden rechazada RN-07: certificacion insuficiente para criticidad alta
+2026-05-25 11:06:06 [WARNING] Orden rechazada RN-01: tecnico incompatible con equipo
+2026-05-25 11:06:06 [INFO] Estado de orden actualizado id=2 estado=CANCELADA
+2026-05-25 11:06:06 [INFO] Orden registrada id=101
+2026-05-25 11:06:06 [WARNING] Equipo rechazado RN-03: equipo relacionado a orden id=1
+2026-05-25 11:06:06 [INFO] Orden registrada id=106
+2026-05-25 11:13:28 [INFO] Servidor SIGOMEI iniciado en puerto RMI 1099
+2026-05-25 11:13:48 [INFO] Sesion iniciada usuario=admin
+2026-05-25 11:13:48 [INFO] Consulta de equipos
+2026-05-25 11:13:48 [INFO] Consulta de tecnicos
+2026-05-25 11:13:48 [INFO] Consulta de ordenes
+2026-05-25 11:13:53 [INFO] Consulta de tecnicos
+2026-05-25 11:14:17 [INFO] Consulta de ordenes
+2026-05-25 11:14:17 [INFO] Consulta de ordenes
+2026-05-25 11:14:17 [INFO] Consulta de ordenes
+2026-05-25 11:14:17 [INFO] Consulta de ordenes
+2026-05-25 11:14:17 [INFO] Consulta de ordenes
+2026-05-25 11:14:18 [INFO] Consulta de ordenes
+2026-05-25 11:14:18 [INFO] Consulta de ordenes
+2026-05-25 11:14:18 [INFO] Consulta de ordenes
+2026-05-25 11:14:18 [INFO] Consulta de ordenes
+2026-05-25 11:14:18 [INFO] Consulta de ordenes
+2026-05-25 11:14:19 [INFO] Consulta de tecnicos
+2026-05-25 11:14:24 [INFO] Consulta de equipos
+2026-05-25 11:14:24 [INFO] Consulta de equipos
+2026-05-25 11:14:24 [INFO] Consulta de equipos
+2026-05-25 11:14:24 [INFO] Consulta de ordenes
+2026-05-25 11:14:24 [INFO] Consulta de equipos
+2026-05-25 11:14:27 [INFO] Consulta de ordenes
+2026-05-25 11:14:27 [INFO] Consulta de ordenes
+2026-05-25 11:14:27 [INFO] Consulta de ordenes
+2026-05-25 11:14:27 [INFO] Consulta de ordenes
+2026-05-25 11:14:27 [INFO] Consulta de ordenes
+2026-05-25 11:14:33 [INFO] Consulta de equipos
+2026-05-25 11:14:33 [INFO] Consulta de tecnicos
+2026-05-25 11:14:33 [INFO] Consulta de ordenes
+2026-05-25 11:14:35 [INFO] Consulta de ordenes
+2026-05-25 11:14:35 [INFO] Consulta de ordenes
+2026-05-25 11:14:35 [INFO] Consulta de ordenes
+2026-05-25 11:14:35 [INFO] Consulta de ordenes
+2026-05-25 11:14:35 [INFO] Consulta de ordenes
+2026-05-25 11:14:39 [INFO] Consulta de equipos
+2026-05-25 11:14:39 [INFO] Consulta de equipos
+2026-05-25 11:14:39 [INFO] Consulta de equipos
+2026-05-25 11:14:39 [INFO] Consulta de ordenes
+2026-05-25 11:14:39 [INFO] Consulta de equipos
+2026-05-25 11:17:15 [INFO] Consulta de ordenes
+2026-05-25 11:17:15 [INFO] Consulta de ordenes
+2026-05-25 11:17:15 [INFO] Consulta de ordenes
+2026-05-25 11:17:15 [INFO] Consulta de ordenes
+2026-05-25 11:17:15 [INFO] Consulta de ordenes
+2026-05-25 11:19:49 [INFO] Sesion iniciada usuario=admin
+2026-05-25 11:19:49 [INFO] Consulta de equipos
+2026-05-25 11:19:49 [INFO] Consulta de tecnicos
+2026-05-25 11:19:49 [INFO] Consulta de ordenes
+2026-05-25 11:19:51 [INFO] Consulta de equipos
+2026-05-25 11:19:51 [INFO] Consulta de equipos
+2026-05-25 11:19:51 [INFO] Consulta de equipos
+2026-05-25 11:19:51 [INFO] Consulta de ordenes
+2026-05-25 11:19:51 [INFO] Consulta de equipos
+2026-05-25 11:20:09 [INFO] Equipo registrado id=700
+2026-05-25 11:20:09 [INFO] Consulta de equipos
+2026-05-25 11:20:09 [INFO] Consulta de equipos
+2026-05-25 11:20:09 [INFO] Consulta de equipos
+2026-05-25 11:20:09 [INFO] Consulta de ordenes
+2026-05-25 11:20:09 [INFO] Consulta de equipos
+2026-05-25 11:20:35 [INFO] Equipo registrado id=700
+2026-05-25 11:20:35 [INFO] Consulta de equipos
+2026-05-25 11:20:35 [INFO] Consulta de equipos
+2026-05-25 11:20:35 [INFO] Consulta de equipos
+2026-05-25 11:20:35 [INFO] Consulta de ordenes
+2026-05-25 11:20:35 [INFO] Consulta de equipos
+2026-05-25 11:20:49 [INFO] Equipo registrado id=700
+2026-05-25 11:20:49 [INFO] Consulta de equipos
+2026-05-25 11:20:49 [INFO] Consulta de equipos
+2026-05-25 11:20:49 [INFO] Consulta de equipos
+2026-05-25 11:20:49 [INFO] Consulta de ordenes
+2026-05-25 11:20:49 [INFO] Consulta de equipos
+2026-05-25 11:20:56 [INFO] Consulta de equipos
+2026-05-25 11:20:56 [INFO] Consulta de tecnicos
+2026-05-25 11:20:56 [INFO] Consulta de ordenes
+2026-05-25 11:20:58 [INFO] Consulta de tecnicos
+2026-05-25 11:21:00 [INFO] Consulta de equipos
+2026-05-25 11:21:01 [INFO] Consulta de equipos
+2026-05-25 11:21:01 [INFO] Consulta de equipos
+2026-05-25 11:21:01 [INFO] Consulta de ordenes
+2026-05-25 11:21:01 [INFO] Consulta de equipos
+2026-05-25 11:21:02 [WARNING] Equipo rechazado RN-03: equipo relacionado a orden id=1
+2026-05-25 11:21:05 [WARNING] Equipo rechazado RN-03: equipo relacionado a orden id=2
+2026-05-25 11:21:06 [INFO] Equipo eliminado id=10
+2026-05-25 11:21:11 [INFO] Equipo registrado id=700
+2026-05-25 11:21:11 [INFO] Consulta de equipos
+2026-05-25 11:21:11 [INFO] Consulta de equipos
+2026-05-25 11:21:11 [INFO] Consulta de equipos
+2026-05-25 11:21:11 [INFO] Consulta de ordenes
+2026-05-25 11:21:11 [INFO] Consulta de equipos
+2026-05-25 11:24:28 [INFO] Sesion iniciada usuario=admin
+2026-05-25 11:24:28 [INFO] Consulta de equipos
+2026-05-25 11:24:28 [INFO] Consulta de tecnicos
+2026-05-25 11:24:28 [INFO] Consulta de ordenes
+2026-05-25 11:24:31 [INFO] Consulta de equipos
+2026-05-25 11:24:31 [INFO] Consulta de equipos
+2026-05-25 11:24:31 [INFO] Consulta de equipos
+2026-05-25 11:24:31 [INFO] Consulta de ordenes
+2026-05-25 11:24:31 [INFO] Consulta de equipos
+2026-05-25 11:24:34 [WARNING] Equipo rechazado RN-03: equipo relacionado a orden id=1
+2026-05-25 11:24:47 [WARNING] Equipo rechazado RN-03: equipo relacionado a orden id=1
+2026-05-25 11:24:59 [INFO] Equipo registrado id=700
+2026-05-25 11:24:59 [INFO] Consulta de equipos
+2026-05-25 11:24:59 [INFO] Consulta de equipos
+2026-05-25 11:24:59 [INFO] Consulta de equipos
+2026-05-25 11:24:59 [INFO] Consulta de ordenes
+2026-05-25 11:24:59 [INFO] Consulta de equipos
+2026-05-25 11:25:05 [INFO] Equipo registrado id=700
+2026-05-25 11:25:05 [INFO] Consulta de equipos
+2026-05-25 11:25:05 [INFO] Consulta de equipos
+2026-05-25 11:25:05 [INFO] Consulta de equipos
+2026-05-25 11:25:05 [INFO] Consulta de ordenes
+2026-05-25 11:25:05 [INFO] Consulta de equipos
+2026-05-25 11:28:10 [INFO] Orden registrada id=220
+2026-05-25 11:28:10 [INFO] Orden actualizada id=220
+2026-05-25 11:28:10 [INFO] Estado de orden actualizado id=220 estado=EN_EJECUCION
+2026-05-25 11:28:10 [INFO] Consulta de ordenes
+2026-05-25 11:28:10 [INFO] Tecnico registrado id=20
+2026-05-25 11:28:10 [INFO] Tecnico actualizado id=20
+2026-05-25 11:28:10 [INFO] Tecnico eliminado id=20
+2026-05-25 11:28:10 [INFO] Consulta de tecnicos
+2026-05-25 11:28:10 [INFO] Equipo registrado id=20
+2026-05-25 11:28:10 [INFO] Equipo actualizado id=20
+2026-05-25 11:28:10 [INFO] Estado equipo actualizado id=20 estado=EN_MANTENIMIENTO
+2026-05-25 11:28:10 [INFO] Consulta de equipos
+2026-05-25 11:28:10 [INFO] Filtro de tecnicos especialidad=MECANICO
+2026-05-25 11:28:10 [INFO] Sesion iniciada usuario=admin
+2026-05-25 11:28:10 [INFO] Consulta de equipos
+2026-05-25 11:28:10 [INFO] Consulta de tecnicos
+2026-05-25 11:28:10 [INFO] Consulta de ordenes
+2026-05-25 11:28:10 [INFO] Estado de orden actualizado id=1 estado=EN_EJECUCION
+2026-05-25 11:28:10 [INFO] Estado de orden actualizado id=2 estado=FINALIZADA
+2026-05-25 11:28:10 [INFO] Tecnico eliminado id=10
+2026-05-25 11:28:10 [INFO] Consulta de tecnicos
+2026-05-25 11:28:10 [INFO] Estatus tecnico actualizado id=10 estatus=INACTIVO
+2026-05-25 11:28:10 [INFO] Filtro de ordenes estado=PROGRAMADA
+2026-05-25 11:28:10 [WARNING] Orden rechazada RN-06: finalizacion sin fecha de cierre o costo real
+2026-05-25 11:28:10 [WARNING] Transicion rechazada idOrden=3 nuevoEstado=CANCELADA
+2026-05-25 11:28:10 [WARNING] Transicion rechazada idOrden=3 nuevoEstado=PROGRAMADA
+2026-05-25 11:28:10 [WARNING] Tecnico rechazado RN-03: tiene ordenes activas id=1
+2026-05-25 11:28:10 [WARNING] Equipo rechazado RN-03: equipo relacionado a orden id=1
+2026-05-25 11:28:10 [INFO] Consulta historial ordenes
+2026-05-25 11:28:10 [INFO] Consulta de ordenes
+2026-05-25 11:28:10 [INFO] Orden actualizada id=1
+2026-05-25 11:28:10 [WARNING] Orden rechazada RN-01: tecnico incompatible con equipo
+2026-05-25 11:28:10 [INFO] Orden registrada id=200
+2026-05-25 11:28:10 [INFO] Equipo registrado id=20
+2026-05-25 11:28:10 [INFO] Consulta de equipos
+2026-05-25 11:28:10 [WARNING] Orden rechazada RN-04: tecnico inactivo id=3
+2026-05-25 11:28:10 [INFO] Estado de orden actualizado id=1 estado=CANCELADA
+2026-05-25 11:28:10 [INFO] Tecnico registrado id=20
+2026-05-25 11:28:10 [INFO] Consulta de tecnicos
+2026-05-25 11:28:10 [WARNING] Orden rechazada RN-05: fecha de inicio anterior a programada
+2026-05-25 11:28:10 [INFO] Consulta de tecnicos
+2026-05-25 11:28:10 [INFO] Tecnico actualizado id=10
+2026-05-25 11:28:10 [WARNING] Orden rechazada RN-02: duplicada para equipo=1 fecha=2026-05-20
+2026-05-25 11:28:10 [INFO] Filtro de equipos tipo=MECANICO
+2026-05-25 11:28:10 [WARNING] Orden rechazada RN-07: certificacion insuficiente para criticidad alta
+2026-05-25 11:28:10 [INFO] Estatus tecnico actualizado id=10 estatus=INACTIVO
+2026-05-25 11:28:10 [INFO] Consulta de equipos
+2026-05-25 11:28:10 [INFO] Equipo actualizado id=10
+2026-05-25 11:28:10 [INFO] Estado equipo actualizado id=10 estado=INACTIVO
+2026-05-25 11:28:10 [WARNING] Orden rechazada RN-05: fecha de cierre anterior a inicio
+2026-05-25 11:28:10 [INFO] Orden registrada id=105
+2026-05-25 11:28:10 [INFO] Consulta de tecnicos
+2026-05-25 11:28:10 [INFO] Consulta de equipos
+2026-05-25 11:28:10 [INFO] Orden registrada id=113
+2026-05-25 11:28:10 [INFO] Consulta de tecnicos
+2026-05-25 11:28:10 [INFO] Consulta de equipos
+2026-05-25 11:28:10 [WARNING] Transicion rechazada idOrden=3 nuevoEstado=CANCELADA
+2026-05-25 11:28:10 [WARNING] Orden rechazada RN-06: finalizacion sin fecha de cierre o costo real
+2026-05-25 11:28:10 [WARNING] Tecnico rechazado RN-03: tiene ordenes relacionadas id=1
+2026-05-25 11:28:10 [WARNING] Transicion rechazada idOrden=2 nuevoEstado=PROGRAMADA
+2026-05-25 11:28:10 [INFO] Estado equipo actualizado id=10 estado=INACTIVO
+2026-05-25 11:28:10 [INFO] Tecnico eliminado id=10
+2026-05-25 11:28:10 [INFO] Estado de orden actualizado id=2 estado=FINALIZADA
+2026-05-25 11:28:10 [INFO] Estado de orden actualizado id=2 estado=FINALIZADA
+2026-05-25 11:28:10 [WARNING] Orden rechazada RN-02: duplicada para equipo=1 fecha=2026-05-20
+2026-05-25 11:28:10 [INFO] Orden registrada id=111
+2026-05-25 11:28:10 [INFO] Orden registrada id=103
+2026-05-25 11:28:10 [WARNING] Orden rechazada RN-05: fecha de inicio anterior a programada
+2026-05-25 11:28:10 [WARNING] Orden rechazada RN-06: finalizacion sin fecha de cierre o costo real
+2026-05-25 11:28:10 [INFO] Estado de orden actualizado id=1 estado=EN_EJECUCION
+2026-05-25 11:28:10 [INFO] Estado de orden actualizado id=1 estado=CANCELADA
+2026-05-25 11:28:10 [INFO] Orden registrada id=108
+2026-05-25 11:28:10 [WARNING] Orden rechazada RN-04: tecnico inactivo id=3
+2026-05-25 11:28:10 [WARNING] Orden rechazada RN-07: certificacion insuficiente para criticidad alta
+2026-05-25 11:28:10 [WARNING] Orden rechazada RN-01: tecnico incompatible con equipo
+2026-05-25 11:28:10 [INFO] Estado de orden actualizado id=2 estado=CANCELADA
+2026-05-25 11:28:10 [INFO] Orden registrada id=101
+2026-05-25 11:28:10 [WARNING] Equipo rechazado RN-03: equipo relacionado a orden id=1
+2026-05-25 11:28:10 [INFO] Orden registrada id=106
+2026-05-25 11:28:32 [INFO] Servidor SIGOMEI iniciado en puerto RMI 1099
+2026-05-25 11:29:57 [INFO] Sesion iniciada usuario=admin
+2026-05-25 11:29:57 [INFO] Consulta de equipos
+2026-05-25 11:29:57 [INFO] Consulta de tecnicos
+2026-05-25 11:29:57 [INFO] Consulta de ordenes
+2026-05-25 11:29:59 [INFO] Consulta de ordenes
+2026-05-25 11:29:59 [INFO] Consulta de ordenes
+2026-05-25 11:29:59 [INFO] Consulta de ordenes
+2026-05-25 11:29:59 [INFO] Consulta de ordenes
+2026-05-25 11:29:59 [INFO] Consulta de ordenes
+2026-05-25 11:30:01 [INFO] Orden eliminada id=3
+2026-05-25 11:30:02 [INFO] Orden eliminada id=2
+2026-05-25 11:30:03 [INFO] Consulta de tecnicos
+2026-05-25 11:30:07 [INFO] Consulta de equipos
+2026-05-25 11:30:07 [INFO] Consulta de equipos
+2026-05-25 11:30:07 [INFO] Consulta de equipos
+2026-05-25 11:30:07 [INFO] Consulta de ordenes
+2026-05-25 11:30:07 [INFO] Consulta de equipos
+2026-05-25 11:30:08 [INFO] Consulta de ordenes
+2026-05-25 11:30:08 [INFO] Consulta de ordenes
+2026-05-25 11:30:08 [INFO] Consulta de ordenes
+2026-05-25 11:30:08 [INFO] Consulta de ordenes
+2026-05-25 11:30:08 [INFO] Consulta de ordenes
+2026-05-25 11:30:23 [INFO] Consulta de equipos
+2026-05-25 11:30:23 [INFO] Consulta de equipos
+2026-05-25 11:30:23 [INFO] Consulta de equipos
+2026-05-25 11:30:23 [INFO] Consulta de ordenes
+2026-05-25 11:30:23 [INFO] Consulta de equipos
+2026-05-25 11:30:25 [INFO] Consulta de tecnicos
+2026-05-25 11:30:25 [INFO] Consulta de ordenes
+2026-05-25 11:30:25 [INFO] Consulta de ordenes
+2026-05-25 11:30:25 [INFO] Consulta de ordenes
+2026-05-25 11:30:25 [INFO] Consulta de ordenes
+2026-05-25 11:30:25 [INFO] Consulta de ordenes
+2026-05-25 11:30:27 [INFO] Consulta de equipos
+2026-05-25 11:30:27 [INFO] Consulta de equipos
+2026-05-25 11:30:27 [INFO] Consulta de equipos
+2026-05-25 11:30:27 [INFO] Consulta de ordenes
+2026-05-25 11:30:27 [INFO] Consulta de equipos
+2026-05-25 11:30:30 [INFO] Consulta de tecnicos
+2026-05-25 11:30:34 [INFO] Consulta de ordenes
+2026-05-25 11:30:34 [INFO] Consulta de ordenes
+2026-05-25 11:30:34 [INFO] Consulta de ordenes
+2026-05-25 11:30:34 [INFO] Consulta de ordenes
+2026-05-25 11:30:34 [INFO] Consulta de ordenes
+2026-05-25 11:31:22 [INFO] Consulta de ordenes
+2026-05-25 11:31:29 [INFO] Consulta de ordenes
+2026-05-25 11:31:42 [INFO] Consulta de ordenes
+2026-05-25 11:31:53 [INFO] Consulta de ordenes
+2026-05-25 11:31:55 [INFO] Consulta de ordenes
+2026-05-25 11:31:55 [INFO] Consulta de ordenes
+2026-05-25 11:31:55 [INFO] Consulta de ordenes
+2026-05-25 11:31:55 [INFO] Consulta de ordenes
+2026-05-25 11:31:55 [INFO] Consulta de ordenes
+2026-05-25 11:31:59 [INFO] Consulta de ordenes
+2026-05-25 11:31:59 [INFO] Consulta de ordenes
+2026-05-25 11:31:59 [INFO] Consulta de ordenes
+2026-05-25 11:31:59 [INFO] Consulta de ordenes
+2026-05-25 11:31:59 [INFO] Consulta de ordenes
+2026-05-25 11:32:10 [WARNING] Orden rechazada RN-06: datos de cierre en orden no finalizada
+2026-05-25 11:32:17 [WARNING] Orden rechazada RN-06: finalizacion sin fecha de cierre o costo real
+2026-05-25 11:32:31 [INFO] Orden actualizada id=1
+2026-05-25 11:32:31 [INFO] Consulta de ordenes
+2026-05-25 11:32:31 [INFO] Consulta de ordenes
+2026-05-25 11:32:31 [INFO] Consulta de ordenes
+2026-05-25 11:32:31 [INFO] Consulta de ordenes
+2026-05-25 11:32:31 [INFO] Consulta de ordenes
+2026-05-25 11:32:44 [INFO] Consulta de ordenes
+2026-05-25 11:32:44 [INFO] Consulta de ordenes
+2026-05-25 11:32:44 [INFO] Consulta de ordenes
+2026-05-25 11:32:44 [INFO] Consulta de ordenes
+2026-05-25 11:32:44 [INFO] Consulta de ordenes
+2026-05-25 11:32:45 [INFO] Consulta de tecnicos
+2026-05-25 11:32:58 [INFO] Tecnico actualizado id=3
+2026-05-25 11:32:58 [INFO] Consulta de tecnicos
+2026-05-25 11:33:03 [INFO] Tecnico eliminado id=3
+2026-05-25 11:33:07 [INFO] Consulta de equipos
+2026-05-25 11:33:07 [INFO] Consulta de equipos
+2026-05-25 11:33:07 [INFO] Consulta de equipos
+2026-05-25 11:33:07 [INFO] Consulta de ordenes
+2026-05-25 11:33:07 [INFO] Consulta de equipos
+2026-05-25 11:33:08 [INFO] Consulta de tecnicos
+2026-05-25 11:33:38 [INFO] Consulta de tecnicos
+2026-05-25 11:33:45 [INFO] Consulta de tecnicos
+2026-05-25 11:33:45 [INFO] Tecnico registrado id=100
+2026-05-25 11:33:45 [INFO] Consulta de tecnicos
+2026-05-25 11:33:55 [INFO] Tecnico actualizado id=100
+2026-05-25 11:33:55 [INFO] Consulta de tecnicos
+2026-05-25 11:37:36 [INFO] Consulta de equipos
+2026-05-25 11:37:36 [INFO] Consulta de tecnicos
+2026-05-25 11:37:36 [INFO] Consulta de ordenes
+2026-05-25 11:40:02 [INFO] Sesion iniciada usuario=admin
+2026-05-25 11:40:02 [INFO] Consulta de equipos
+2026-05-25 11:40:02 [INFO] Consulta de tecnicos
+2026-05-25 11:40:02 [INFO] Consulta de ordenes
+2026-05-25 11:40:04 [INFO] Consulta de tecnicos
+2026-05-25 11:40:17 [INFO] Tecnico eliminado id=2
+2026-05-25 11:40:20 [INFO] Consulta de ordenes
+2026-05-25 11:40:20 [INFO] Consulta de ordenes
+2026-05-25 11:40:20 [INFO] Consulta de ordenes
+2026-05-25 11:40:20 [INFO] Consulta de ordenes
+2026-05-25 11:40:20 [INFO] Consulta de ordenes
