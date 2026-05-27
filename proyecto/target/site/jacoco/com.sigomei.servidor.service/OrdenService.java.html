@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>OrdenService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">proyecto</a> &gt; <a href="index.source.html" class="el_package">com.sigomei.servidor.service</a> &gt; <span class="el_source">OrdenService.java</span></div><h1>OrdenService.java</h1><pre class="source lang-java linenums">package com.sigomei.servidor.service;
+
+import com.sigomei.api.catalogos.Criticidad;
+import com.sigomei.api.catalogos.EstadoOrden;
+import com.sigomei.api.catalogos.EstadoTecnico;
+import com.sigomei.api.catalogos.NivelCertificacion;
+import com.sigomei.api.dto.EquipoDTO;
+import com.sigomei.api.dto.OrdenDTO;
+import com.sigomei.api.dto.TecnicoDTO;
+import com.sigomei.api.excepciones.ReglaNegocioException;
+import com.sigomei.api.excepciones.RegistroNoEncontradoException;
+import com.sigomei.api.excepciones.ValidacionException;
+import com.sigomei.servidor.config.ServerLog;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+public class OrdenService {
+
+<span class="fc" id="L22">    public OrdenService() {</span>
+<span class="fc" id="L23">        InMemorySigomeiStore.reset();</span>
+<span class="fc" id="L24">    }</span>
+
+    public OrdenDTO registrarOrden(OrdenDTO orden)
+            throws ValidacionException, ReglaNegocioException, RegistroNoEncontradoException {
+
+<span class="fc" id="L29">        validarOrdenBasica(orden);</span>
+
+<span class="fc" id="L31">        EquipoDTO equipo = buscarEquipo(orden.getIdEquipo());</span>
+<span class="fc" id="L32">        TecnicoDTO tecnico = buscarTecnico(orden.getIdTecnico());</span>
+
+<span class="fc" id="L34">        validarTecnicoCompatible(equipo, tecnico);</span>
+<span class="fc" id="L35">        validarTecnicoActivo(tecnico);</span>
+<span class="fc" id="L36">        validarCertificacionParaCriticidad(equipo, tecnico);</span>
+<span class="fc" id="L37">        validarFechas(orden);</span>
+<span class="fc" id="L38">        validarFinalizacion(orden.getEstadoOrden(), orden.getFechaCierre(), orden.getCostoReal());</span>
+<span class="fc" id="L39">        validarOrdenActivaDuplicada(orden);</span>
+
+<span class="fc" id="L41">        InMemorySigomeiStore.ORDENES.put(orden.getIdOrden(), copiar(orden));</span>
+<span class="fc" id="L42">        ServerLog.info(&quot;Orden registrada id=&quot; + orden.getIdOrden());</span>
+<span class="fc" id="L43">        return copiar(orden);</span>
+    }
+
+    public List&lt;OrdenDTO&gt; consultarOrdenes() {
+<span class="fc" id="L47">        List&lt;OrdenDTO&gt; ordenes = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L48" title="All 2 branches covered.">        for (OrdenDTO orden : InMemorySigomeiStore.ORDENES.values()) {</span>
+<span class="fc" id="L49">            ordenes.add(copiar(orden));</span>
+<span class="fc" id="L50">        }</span>
+<span class="fc" id="L51">        ServerLog.info(&quot;Consulta de ordenes&quot;);</span>
+<span class="fc" id="L52">        return ordenes;</span>
+    }
+
+    public List&lt;OrdenDTO&gt; filtrarOrdenes(EstadoOrden estado, LocalDate fechaInicio, LocalDate fechaCierre) {
+<span class="fc" id="L56">        List&lt;OrdenDTO&gt; resultado = new ArrayList&lt;&gt;();</span>
+
+<span class="fc bfc" id="L58" title="All 2 branches covered.">        for (OrdenDTO orden : InMemorySigomeiStore.ORDENES.values()) {</span>
+<span class="fc bfc" id="L59" title="All 4 branches covered.">            boolean coincideEstado = estado == null || orden.getEstadoOrden() == estado;</span>
+<span class="fc bfc" id="L60" title="All 4 branches covered.">            boolean despuesDeInicio = fechaInicio == null || !orden.getFechaProgramada().isBefore(fechaInicio);</span>
+<span class="pc bpc" id="L61" title="1 of 4 branches missed.">            boolean antesDeCierre = fechaCierre == null || !orden.getFechaProgramada().isAfter(fechaCierre);</span>
+
+<span class="pc bpc" id="L63" title="2 of 6 branches missed.">            if (coincideEstado &amp;&amp; despuesDeInicio &amp;&amp; antesDeCierre) {</span>
+<span class="fc" id="L64">                resultado.add(copiar(orden));</span>
+            }
+<span class="fc" id="L66">        }</span>
+
+<span class="fc" id="L68">        ServerLog.info(&quot;Filtro de ordenes estado=&quot; + estado);</span>
+<span class="fc" id="L69">        return resultado;</span>
+    }
+
+    public OrdenDTO actualizarOrden(OrdenDTO orden)
+            throws ValidacionException, ReglaNegocioException, RegistroNoEncontradoException {
+
+<span class="fc bfc" id="L75" title="All 4 branches covered.">        if (orden == null || !InMemorySigomeiStore.ORDENES.containsKey(orden.getIdOrden())) {</span>
+<span class="fc" id="L76">            throw new RegistroNoEncontradoException(&quot;Orden no encontrada&quot;);</span>
+        }
+
+<span class="fc" id="L79">        validarOrdenBasica(orden);</span>
+<span class="fc" id="L80">        buscarEquipo(orden.getIdEquipo());</span>
+<span class="fc" id="L81">        buscarTecnico(orden.getIdTecnico());</span>
+<span class="fc" id="L82">        validarFechas(orden);</span>
+<span class="fc" id="L83">        validarFinalizacion(orden.getEstadoOrden(), orden.getFechaCierre(), orden.getCostoReal());</span>
+<span class="fc" id="L84">        validarOrdenActivaDuplicada(orden);</span>
+
+<span class="fc" id="L86">        InMemorySigomeiStore.ORDENES.put(orden.getIdOrden(), copiar(orden));</span>
+<span class="fc" id="L87">        ServerLog.info(&quot;Orden actualizada id=&quot; + orden.getIdOrden());</span>
+<span class="fc" id="L88">        return copiar(orden);</span>
+    }
+
+    public OrdenDTO cambiarEstadoOrden(int idOrden, EstadoOrden nuevoEstado, LocalDate fechaCierre, BigDecimal costoReal)
+            throws ReglaNegocioException, RegistroNoEncontradoException {
+
+<span class="fc" id="L94">        OrdenDTO orden = InMemorySigomeiStore.ORDENES.get(idOrden);</span>
+<span class="fc bfc" id="L95" title="All 2 branches covered.">        if (orden == null) {</span>
+<span class="fc" id="L96">            throw new RegistroNoEncontradoException(&quot;Orden no encontrada&quot;);</span>
+        }
+
+<span class="fc bfc" id="L99" title="All 2 branches covered.">        if (!esTransicionValida(orden.getEstadoOrden(), nuevoEstado)) {</span>
+<span class="fc" id="L100">            ServerLog.warning(&quot;Transicion rechazada idOrden=&quot; + idOrden + &quot; nuevoEstado=&quot; + nuevoEstado);</span>
+<span class="fc" id="L101">            throw new ReglaNegocioException(&quot;Transicion de estado no permitida&quot;);</span>
+        }
+
+<span class="fc" id="L104">        validarFinalizacion(nuevoEstado, fechaCierre, costoReal);</span>
+
+<span class="fc" id="L106">        OrdenDTO actualizada = copiar(orden);</span>
+<span class="fc" id="L107">        actualizada.setEstadoOrden(nuevoEstado);</span>
+
+<span class="pc bpc" id="L109" title="1 of 4 branches missed.">        if (nuevoEstado == EstadoOrden.EN_EJECUCION &amp;&amp; actualizada.getFechaInicio() == null) {</span>
+<span class="fc" id="L110">            actualizada.setFechaInicio(LocalDate.now());</span>
+        }
+
+<span class="fc bfc" id="L113" title="All 2 branches covered.">        if (nuevoEstado == EstadoOrden.FINALIZADA) {</span>
+<span class="fc" id="L114">            actualizada.setFechaCierre(fechaCierre);</span>
+<span class="fc" id="L115">            actualizada.setCostoReal(costoReal);</span>
+        }
+
+<span class="fc" id="L118">        InMemorySigomeiStore.ORDENES.put(idOrden, actualizada);</span>
+<span class="fc" id="L119">        ServerLog.info(&quot;Estado de orden actualizado id=&quot; + idOrden + &quot; estado=&quot; + nuevoEstado);</span>
+<span class="fc" id="L120">        return copiar(actualizada);</span>
+    }
+
+    public List&lt;OrdenDTO&gt; consultarHistorialOrdenes(Integer idEquipo, Integer idTecnico, EstadoOrden estadoOrden) {
+<span class="fc" id="L124">        List&lt;OrdenDTO&gt; resultado = new ArrayList&lt;&gt;();</span>
+
+<span class="fc bfc" id="L126" title="All 2 branches covered.">        for (OrdenDTO orden : InMemorySigomeiStore.ORDENES.values()) {</span>
+<span class="fc bfc" id="L127" title="All 4 branches covered.">            boolean coincideEquipo = idEquipo == null || orden.getIdEquipo() == idEquipo;</span>
+<span class="fc bfc" id="L128" title="All 4 branches covered.">            boolean coincideTecnico = idTecnico == null || orden.getIdTecnico() == idTecnico;</span>
+<span class="fc bfc" id="L129" title="All 4 branches covered.">            boolean coincideEstado = estadoOrden == null || orden.getEstadoOrden() == estadoOrden;</span>
+
+<span class="pc bpc" id="L131" title="1 of 6 branches missed.">            if (coincideEquipo &amp;&amp; coincideTecnico &amp;&amp; coincideEstado) {</span>
+<span class="fc" id="L132">                resultado.add(copiar(orden));</span>
+            }
+<span class="fc" id="L134">        }</span>
+
+<span class="fc" id="L136">        ServerLog.info(&quot;Consulta historial ordenes&quot;);</span>
+<span class="fc" id="L137">        return resultado;</span>
+    }
+
+    public void eliminarOrden(int idOrden) throws RegistroNoEncontradoException {
+<span class="fc bfc" id="L141" title="All 2 branches covered.">        if (!InMemorySigomeiStore.ORDENES.containsKey(idOrden)) {</span>
+<span class="fc" id="L142">            throw new RegistroNoEncontradoException(&quot;Orden no encontrada&quot;);</span>
+        }
+
+<span class="fc" id="L145">        InMemorySigomeiStore.ORDENES.remove(idOrden);</span>
+<span class="fc" id="L146">        ServerLog.info(&quot;Orden eliminada id=&quot; + idOrden);</span>
+<span class="fc" id="L147">    }</span>
+
+    private void validarOrdenBasica(OrdenDTO orden) throws ValidacionException {
+<span class="fc bfc" id="L150" title="All 2 branches covered.">        if (orden == null) {</span>
+<span class="fc" id="L151">            throw new ValidacionException(&quot;La orden tiene datos obligatorios incompletos&quot;);</span>
+        }
+<span class="fc bfc" id="L153" title="All 6 branches covered.">        if (orden.getIdOrden() &lt;= 0 || orden.getIdEquipo() &lt;= 0 || orden.getIdTecnico() &lt;= 0</span>
+<span class="fc bfc" id="L154" title="All 4 branches covered.">                || orden.getTipoMantenimiento() == null || orden.getFechaProgramada() == null</span>
+<span class="fc bfc" id="L155" title="All 4 branches covered.">                || orden.getEstadoOrden() == null || orden.getCostoEstimado() == null</span>
+<span class="fc bfc" id="L156" title="All 2 branches covered.">                || esBlanco(orden.getDescripcionTrabajo())) {</span>
+<span class="fc" id="L157">            throw new ValidacionException(&quot;La orden tiene datos obligatorios incompletos&quot;);</span>
+        }
+<span class="fc" id="L159">    }</span>
+
+    private EquipoDTO buscarEquipo(int idEquipo) throws RegistroNoEncontradoException {
+<span class="fc" id="L162">        EquipoDTO equipo = InMemorySigomeiStore.EQUIPOS.get(idEquipo);</span>
+<span class="fc bfc" id="L163" title="All 2 branches covered.">        if (equipo == null) {</span>
+<span class="fc" id="L164">            throw new RegistroNoEncontradoException(&quot;Equipo no encontrado&quot;);</span>
+        }
+<span class="fc" id="L166">        return equipo;</span>
+    }
+
+    private TecnicoDTO buscarTecnico(int idTecnico) throws RegistroNoEncontradoException {
+<span class="fc" id="L170">        TecnicoDTO tecnico = InMemorySigomeiStore.TECNICOS.get(idTecnico);</span>
+<span class="fc bfc" id="L171" title="All 2 branches covered.">        if (tecnico == null) {</span>
+<span class="fc" id="L172">            throw new RegistroNoEncontradoException(&quot;Tecnico no encontrado&quot;);</span>
+        }
+<span class="fc" id="L174">        return tecnico;</span>
+    }
+
+    private void validarTecnicoCompatible(EquipoDTO equipo, TecnicoDTO tecnico) throws ReglaNegocioException {
+<span class="fc bfc" id="L178" title="All 2 branches covered.">        if (equipo.getTipo() != tecnico.getEspecialidad()) {</span>
+<span class="fc" id="L179">            ServerLog.warning(&quot;Orden rechazada RN-01: tecnico incompatible con equipo&quot;);</span>
+<span class="fc" id="L180">            throw new ReglaNegocioException(&quot;La especialidad del tecnico no coincide con el equipo&quot;);</span>
+        }
+<span class="fc" id="L182">    }</span>
+
+    private void validarTecnicoActivo(TecnicoDTO tecnico) throws ReglaNegocioException {
+<span class="fc bfc" id="L185" title="All 2 branches covered.">        if (tecnico.getEstatus() != EstadoTecnico.ACTIVO) {</span>
+<span class="fc" id="L186">            ServerLog.warning(&quot;Orden rechazada RN-04: tecnico inactivo id=&quot; + tecnico.getIdTecnico());</span>
+<span class="fc" id="L187">            throw new ReglaNegocioException(&quot;El tecnico esta inactivo&quot;);</span>
+        }
+<span class="fc" id="L189">    }</span>
+
+    private void validarCertificacionParaCriticidad(EquipoDTO equipo, TecnicoDTO tecnico) throws ReglaNegocioException {
+<span class="fc bfc" id="L192" title="All 2 branches covered.">        boolean equipoAltaCriticidad = equipo.getCriticidad() == Criticidad.ALTA;</span>
+<span class="fc bfc" id="L193" title="All 2 branches covered.">        boolean tecnicoNivelUno = tecnico.getNivelCertificacion() == NivelCertificacion.I;</span>
+
+<span class="fc bfc" id="L195" title="All 4 branches covered.">        if (equipoAltaCriticidad &amp;&amp; tecnicoNivelUno) {</span>
+<span class="fc" id="L196">            ServerLog.warning(&quot;Orden rechazada RN-07: certificacion insuficiente para criticidad alta&quot;);</span>
+<span class="fc" id="L197">            throw new ReglaNegocioException(&quot;La criticidad alta requiere certificacion nivel II o III&quot;);</span>
+        }
+<span class="fc" id="L199">    }</span>
+
+    private void validarFechas(OrdenDTO orden) throws ReglaNegocioException {
+<span class="fc bfc" id="L202" title="All 4 branches covered.">        if (orden.getFechaInicio() != null &amp;&amp; orden.getFechaInicio().isBefore(orden.getFechaProgramada())) {</span>
+<span class="fc" id="L203">            ServerLog.warning(&quot;Orden rechazada RN-05: fecha de inicio anterior a programada&quot;);</span>
+<span class="fc" id="L204">            throw new ReglaNegocioException(&quot;La fecha de inicio no respeta el orden cronologico&quot;);</span>
+        }
+
+<span class="fc bfc" id="L207" title="All 4 branches covered.">        if (orden.getFechaCierre() != null &amp;&amp; orden.getFechaInicio() != null</span>
+<span class="fc bfc" id="L208" title="All 2 branches covered.">                &amp;&amp; orden.getFechaCierre().isBefore(orden.getFechaInicio())) {</span>
+<span class="fc" id="L209">            ServerLog.warning(&quot;Orden rechazada RN-05: fecha de cierre anterior a inicio&quot;);</span>
+<span class="fc" id="L210">            throw new ReglaNegocioException(&quot;La fecha de cierre no respeta el orden cronologico&quot;);</span>
+        }
+<span class="fc" id="L212">    }</span>
+
+    private void validarFinalizacion(EstadoOrden estado, LocalDate fechaCierre, BigDecimal costoReal)
+            throws ReglaNegocioException {
+
+<span class="fc bfc" id="L217" title="All 6 branches covered.">        if (estado == EstadoOrden.FINALIZADA &amp;&amp; (fechaCierre == null || costoReal == null)) {</span>
+<span class="fc" id="L218">            ServerLog.warning(&quot;Orden rechazada RN-06: finalizacion sin fecha de cierre o costo real&quot;);</span>
+<span class="fc" id="L219">            throw new ReglaNegocioException(&quot;La fecha de cierre y el costo real son obligatorios para finalizar&quot;);</span>
+        }
+
+<span class="fc bfc" id="L222" title="All 6 branches covered.">        if (estado != EstadoOrden.FINALIZADA &amp;&amp; (fechaCierre != null || costoReal != null)) {</span>
+<span class="fc" id="L223">            ServerLog.warning(&quot;Orden rechazada RN-06: datos de cierre en orden no finalizada&quot;);</span>
+<span class="fc" id="L224">            throw new ReglaNegocioException(&quot;Solo una orden finalizada puede tener fecha de cierre y costo real&quot;);</span>
+        }
+<span class="fc" id="L226">    }</span>
+
+    private void validarOrdenActivaDuplicada(OrdenDTO nuevaOrden) throws ReglaNegocioException {
+<span class="fc bfc" id="L229" title="All 2 branches covered.">        for (OrdenDTO orden : InMemorySigomeiStore.ORDENES.values()) {</span>
+<span class="fc bfc" id="L230" title="All 2 branches covered.">            boolean distintaOrden = orden.getIdOrden() != nuevaOrden.getIdOrden();</span>
+<span class="fc bfc" id="L231" title="All 2 branches covered.">            boolean mismoEquipo = orden.getIdEquipo() == nuevaOrden.getIdEquipo();</span>
+<span class="fc" id="L232">            boolean mismaFecha = orden.getFechaProgramada().equals(nuevaOrden.getFechaProgramada());</span>
+
+<span class="fc bfc" id="L234" title="All 6 branches covered.">            if (distintaOrden &amp;&amp; mismoEquipo &amp;&amp; mismaFecha</span>
+<span class="pc bpc" id="L235" title="2 of 4 branches missed.">                    &amp;&amp; esActiva(orden.getEstadoOrden()) &amp;&amp; esActiva(nuevaOrden.getEstadoOrden())) {</span>
+<span class="fc" id="L236">                ServerLog.warning(&quot;Orden rechazada RN-02: duplicada para equipo=&quot; + nuevaOrden.getIdEquipo()</span>
+<span class="fc" id="L237">                        + &quot; fecha=&quot; + nuevaOrden.getFechaProgramada());</span>
+<span class="fc" id="L238">                throw new ReglaNegocioException(&quot;Ya existe una orden activa duplicada para el equipo y fecha&quot;);</span>
+            }
+<span class="fc" id="L240">        }</span>
+<span class="fc" id="L241">    }</span>
+
+    private boolean esTransicionValida(EstadoOrden actual, EstadoOrden nuevo) {
+<span class="fc bfc" id="L244" title="All 2 branches covered.">        if (actual == EstadoOrden.PROGRAMADA) {</span>
+<span class="pc bpc" id="L245" title="1 of 4 branches missed.">            return nuevo == EstadoOrden.EN_EJECUCION || nuevo == EstadoOrden.CANCELADA;</span>
+        }
+<span class="fc bfc" id="L247" title="All 2 branches covered.">        if (actual == EstadoOrden.EN_EJECUCION) {</span>
+<span class="fc bfc" id="L248" title="All 4 branches covered.">            return nuevo == EstadoOrden.FINALIZADA || nuevo == EstadoOrden.CANCELADA;</span>
+        }
+<span class="fc" id="L250">        return false;</span>
+    }
+
+    private boolean esActiva(EstadoOrden estado) {
+<span class="pc bpc" id="L254" title="3 of 4 branches missed.">        return estado == EstadoOrden.PROGRAMADA || estado == EstadoOrden.EN_EJECUCION;</span>
+    }
+
+    private boolean esBlanco(String valor) {
+<span class="pc bpc" id="L258" title="1 of 4 branches missed.">        return valor == null || valor.isBlank();</span>
+    }
+
+    private OrdenDTO copiar(OrdenDTO orden) {
+<span class="fc" id="L262">        return new OrdenDTO(orden.getIdOrden(), orden.getIdEquipo(), orden.getIdTecnico(),</span>
+<span class="fc" id="L263">                orden.getTipoMantenimiento(), orden.getFechaProgramada(), orden.getFechaInicio(),</span>
+<span class="fc" id="L264">                orden.getFechaCierre(), orden.getDescripcionTrabajo(), orden.getCostoEstimado(),</span>
+<span class="fc" id="L265">                orden.getCostoReal(), orden.getEstadoOrden());</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

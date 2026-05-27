@@ -28,9 +28,14 @@ public class TecnicoService {
         for (TecnicoDTO actual : InMemorySigomeiStore.TECNICOS.values()) {
             boolean mismoId = actual.getIdTecnico() == tecnico.getIdTecnico();
             boolean mismoRfc = actual.getRfc().equalsIgnoreCase(tecnico.getRfc());
+            boolean mismoCorreo = actual.getCorreo().equalsIgnoreCase(tecnico.getCorreo());
             if (!mismoId && mismoRfc) {
                 ServerLog.warning("Tecnico rechazado: RFC duplicado " + tecnico.getRfc());
                 throw new ReglaNegocioException("Ya existe un tecnico con el RFC indicado");
+            }
+            if (!mismoId && mismoCorreo) {
+                ServerLog.warning("Tecnico rechazado: correo duplicado " + tecnico.getCorreo());
+                throw new ReglaNegocioException("Ya existe un tecnico con el correo indicado");
             }
         }
 

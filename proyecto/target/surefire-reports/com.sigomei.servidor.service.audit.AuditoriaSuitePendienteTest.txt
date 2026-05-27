@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.sigomei.servidor.service.audit.AuditoriaSuitePendienteTest
--------------------------------------------------------------------------------
-Tests run: 3, Failures: 0, Errors: 0, Skipped: 3, Time elapsed: 0.035 s -- in com.sigomei.servidor.service.audit.AuditoriaSuitePendienteTest

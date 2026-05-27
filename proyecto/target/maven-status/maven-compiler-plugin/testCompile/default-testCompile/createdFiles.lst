@@ -1,1 +1,4 @@
+com\sigomei\servidor\service\system\SistemaE2Test.class
 com\sigomei\servidor\service\unit\ReglasNegocioServiceTest.class
+com\sigomei\servidor\service\integration\CrudServiceTest.class
+com\sigomei\servidor\service\unit\ValidacionesServiceTest.class

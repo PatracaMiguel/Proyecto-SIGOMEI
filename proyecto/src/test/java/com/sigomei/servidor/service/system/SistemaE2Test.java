@@ -12,6 +12,7 @@ import com.sigomei.servidor.service.EquipoService;
 import com.sigomei.servidor.service.OrdenService;
 import com.sigomei.servidor.service.TecnicoService;
 import com.sigomei.servidor.service.UsuarioService;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -310,6 +311,39 @@ public class SistemaE2Test {
 
     @Test
     public void cp32_mostrarErrorCuandoServidorRmiNoDisponible() {
+        Exception error = assertThrows(Exception.class, () ->
+                LocateRegistry.getRegistry("localhost", 65000).lookup("SIGOMEI"));
+
+        assertNotNull(error.getMessage());
+    }
+
+    @Test
+    public void cp33_rechazarTecnicoConCorreoDuplicado() {
+        TecnicoDTO tecnico = crearTecnico(33);
+        tecnico.setRfc("NUEV900101AA1");
+        tecnico.setCorreo("ana@example.com");
+
+        ReglaNegocioException error = assertThrows(ReglaNegocioException.class,
+                () -> tecnicoService.registrarTecnico(tecnico));
+
+        assertTrue(error.getMessage().toLowerCase().contains("correo")
+                || error.getMessage().toLowerCase().contains("duplic"));
+    }
+
+    @Test
+    public void cp34_rechazarFinalizarOrdenCancelada() {
+        assertDoesNotThrow(() -> ordenService.cambiarEstadoOrden(1, EstadoOrden.CANCELADA, null, null));
+
+        ReglaNegocioException error = assertThrows(ReglaNegocioException.class,
+                () -> ordenService.cambiarEstadoOrden(1, EstadoOrden.FINALIZADA,
+                        LocalDate.of(2026, 5, 25), new BigDecimal("2500.00")));
+
+        assertTrue(error.getMessage().toLowerCase().contains("transicion"));
+    }
+
+    @Disabled("CP-35 requiere ejecucion manual: apagar el servidor durante una operacion con el cliente activo")
+    @Test
+    public void cp35_mostrarErrorSiServidorSeDesconectaDuranteOperacion() {
         Exception error = assertThrows(Exception.class, () ->
                 LocateRegistry.getRegistry("localhost", 65000).lookup("SIGOMEI"));
 

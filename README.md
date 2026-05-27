@@ -1,4 +1,4 @@
-# Proyecto-SIGOMEI
+# Proyecto-SIGOMEI v1.0
 Servidor RMI para la gestion de equipos, tecnicos y ordenes de mantenimiento.
 La capa de servicio aplica las reglas de negocio RN-01 a RN-08 y expone el contrato remoto definido para E2.
 
@@ -19,7 +19,7 @@ El servidor lee configuracion externa desde `config/app.properties`. , edite est
 Desde `proyecto` y en la powershell escriba mvn clean test
 
 Resultado esperado:
-Tests run: 61, Failures: 0, Errors: 0, Skipped: 0
+Tests run: 71, Failures: 0, Errors: 0, Skipped: 1
 BUILD SUCCESS
 
 ## Ejecutar servidor RMI

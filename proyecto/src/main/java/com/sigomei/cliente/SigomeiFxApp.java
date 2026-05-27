@@ -17,7 +17,6 @@ import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -34,7 +33,9 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.math.BigDecimal;
 import java.rmi.registry.LocateRegistry;
@@ -49,6 +50,7 @@ public class SigomeiFxApp extends Application {
     private SigomeiRemote sigomei;
     private UsuarioDTO usuarioActual;
     private String estadoServidor = "Servidor desconectado";
+    private String rolSeleccionado = "coordinador";
     private final List<EquipoDTO> equiposDemo = new ArrayList<>();
     private final List<TecnicoDTO> tecnicosDemo = new ArrayList<>();
     private final List<OrdenDTO> ordenesDemo = new ArrayList<>();
@@ -126,7 +128,22 @@ public class SigomeiFxApp extends Application {
         Label error = new Label();
         error.getStyleClass().add("error-label");
 
-        HBox roles = new HBox(28, botonRol("coordinador", true), botonRol("supervisor", false));
+        Button rolCoordinador = botonRol("coordinador", true);
+        Button rolSupervisor = botonRol("supervisor", false);
+        rolCoordinador.setOnAction(event -> {
+            rolSeleccionado = "coordinador";
+            usuario.setText("admin");
+            contrasena.setText("admin123");
+            actualizarRolActivo(rolCoordinador, rolSupervisor);
+        });
+        rolSupervisor.setOnAction(event -> {
+            rolSeleccionado = "supervisor";
+            usuario.setText("consulta");
+            contrasena.setText("consulta123");
+            actualizarRolActivo(rolSupervisor, rolCoordinador);
+        });
+
+        HBox roles = new HBox(28, rolCoordinador, rolSupervisor);
         roles.setAlignment(Pos.CENTER);
 
         Button entrar = new Button("Iniciar sesion");
@@ -175,6 +192,13 @@ public class SigomeiFxApp extends Application {
         return boton;
     }
 
+    private void actualizarRolActivo(Button activo, Button inactivo) {
+        activo.getStyleClass().removeAll("role-button", "role-button-active");
+        activo.getStyleClass().add("role-button-active");
+        inactivo.getStyleClass().removeAll("role-button", "role-button-active");
+        inactivo.getStyleClass().add("role-button");
+    }
+
     private Label etiqueta(String texto) {
         Label label = new Label(texto);
         label.getStyleClass().add("form-label");
@@ -189,9 +213,9 @@ public class SigomeiFxApp extends Application {
 
         HBox tarjetas = new HBox(28);
         tarjetas.getChildren().addAll(
-                tarjetaModulo("EQ", "Equipos industriales", "Registrar, consultar y modificar equipos", contarEquipos(), () -> mostrarEquipos()),
-                tarjetaModulo("TE", "Tecnicos", "Gestionar tecnicos y especialidades", contarTecnicos(), () -> mostrarTecnicos()),
-                tarjetaModulo("OR", "Ordenes de mantenimiento", "Crear y dar seguimiento a las ordenes", contarOrdenes(), () -> mostrarOrdenes())
+                tarjetaModulo("EQ", "Equipos industriales", descripcionEquipoPorRol(), contarEquipos(), () -> mostrarEquipos()),
+                tarjetaModulo("TE", "Tecnicos", descripcionTecnicoPorRol(), contarTecnicos(), () -> mostrarTecnicos()),
+                tarjetaModulo("OR", "Ordenes de mantenimiento", descripcionOrdenPorRol(), contarOrdenes(), () -> mostrarOrdenes())
         );
 
         Region linea = new Region();
@@ -215,7 +239,7 @@ public class SigomeiFxApp extends Application {
 
         VBox textos = new VBox(10, labelClase(titulo, "page-title"), labelClase(subtitulo, "page-subtitle"));
         VBox estado = new VBox(10,
-                labelClase("coordinador: " + nombreUsuario(), "pill"),
+                labelClase(rolSeleccionado + ": " + nombreUsuario(), "pill"),
                 labelClase(estadoServidor, "pill")
         );
         estado.setAlignment(Pos.CENTER_RIGHT);
@@ -276,7 +300,7 @@ public class SigomeiFxApp extends Application {
         VBox contenido = new VBox(18);
         contenido.setPadding(new Insets(24));
         contenido.getChildren().addAll(
-                encabezadoModulo("EQ", "Equipos Industriales", "+ Agregar equipo", () -> mostrarFormularioEquipo(null)),
+                encabezadoModulo("EQ", "Equipos Industriales", esCoordinador() ? "+ Agregar equipo" : "", () -> mostrarFormularioEquipo(null)),
                 resumenEquipos(),
                 filtrosEquipos(tabla),
                 tabla
@@ -295,7 +319,7 @@ public class SigomeiFxApp extends Application {
         VBox contenido = new VBox(18);
         contenido.setPadding(new Insets(24));
         contenido.getChildren().addAll(
-                encabezadoModulo("TE", "Tecnicos", "+ Agregar tecnico", () -> mostrarFormularioTecnico(null)),
+                encabezadoModulo("TE", "Tecnicos", esCoordinador() ? "+ Agregar tecnico" : "", () -> mostrarFormularioTecnico(null)),
                 filtrosTecnicos(tabla),
                 tabla
         );
@@ -313,7 +337,7 @@ public class SigomeiFxApp extends Application {
         VBox contenido = new VBox(18);
         contenido.setPadding(new Insets(24));
         contenido.getChildren().addAll(
-                encabezadoModulo("OR", "Ordenes de mantenimiento", "+ Agregar orden", () -> mostrarFormularioOrden(null)),
+                encabezadoModulo("OR", "Ordenes de mantenimiento", esCoordinador() ? "+ Agregar orden" : "", () -> mostrarFormularioOrden(null)),
                 resumenOrdenes(),
                 filtrosOrdenes(tabla),
                 tabla
@@ -582,15 +606,24 @@ public class SigomeiFxApp extends Application {
     private TableColumn<EquipoDTO, Void> accionesEquipo() {
         TableColumn<EquipoDTO, Void> columna = new TableColumn<>("Acciones");
         columna.setCellFactory(param -> new TableCell<>() {
-            private final Button editar = botonAccion("Editar");
+            private final Button editar = botonAccion(esCoordinador() ? "Editar" : "Baja");
             private final Button eliminar = botonAccion("Eliminar");
-            private final HBox botones = new HBox(8, editar, eliminar);
+            private final HBox botones = new HBox(8);
 
             {
+                if (esCoordinador()) {
+                    botones.getChildren().addAll(editar, eliminar);
+                } else {
+                    botones.getChildren().add(editar);
+                }
                 botones.setAlignment(Pos.CENTER_LEFT);
                 editar.setOnAction(event -> {
                     EquipoDTO equipo = getTableView().getItems().get(getIndex());
-                    mostrarFormularioEquipo(equipo);
+                    if (esCoordinador()) {
+                        mostrarFormularioEquipo(equipo);
+                    } else if (bajaLogicaEquipo(equipo)) {
+                        mostrarEquipos();
+                    }
                 });
                 eliminar.setOnAction(event -> {
                     EquipoDTO equipo = getTableView().getItems().get(getIndex());
@@ -612,15 +645,24 @@ public class SigomeiFxApp extends Application {
     private TableColumn<TecnicoDTO, Void> accionesTecnico() {
         TableColumn<TecnicoDTO, Void> columna = new TableColumn<>("Acciones");
         columna.setCellFactory(param -> new TableCell<>() {
-            private final Button editar = botonAccion("Editar");
+            private final Button editar = botonAccion(esCoordinador() ? "Editar" : "Baja");
             private final Button eliminar = botonAccion("Eliminar");
-            private final HBox botones = new HBox(8, editar, eliminar);
+            private final HBox botones = new HBox(8);
 
             {
+                if (esCoordinador()) {
+                    botones.getChildren().addAll(editar, eliminar);
+                } else {
+                    botones.getChildren().add(editar);
+                }
                 botones.setAlignment(Pos.CENTER_LEFT);
                 editar.setOnAction(event -> {
                     TecnicoDTO tecnico = getTableView().getItems().get(getIndex());
-                    mostrarFormularioTecnico(tecnico);
+                    if (esCoordinador()) {
+                        mostrarFormularioTecnico(tecnico);
+                    } else if (bajaLogicaTecnico(tecnico)) {
+                        mostrarTecnicos();
+                    }
                 });
                 eliminar.setOnAction(event -> {
                     TecnicoDTO tecnico = getTableView().getItems().get(getIndex());
@@ -642,11 +684,16 @@ public class SigomeiFxApp extends Application {
     private TableColumn<OrdenDTO, Void> accionesOrden() {
         TableColumn<OrdenDTO, Void> columna = new TableColumn<>("Acciones");
         columna.setCellFactory(param -> new TableCell<>() {
-            private final Button editar = botonAccion("Editar");
+            private final Button editar = botonAccion(esCoordinador() ? "Editar" : "Estado");
             private final Button eliminar = botonAccion("Eliminar");
-            private final HBox botones = new HBox(8, editar, eliminar);
+            private final HBox botones = new HBox(8);
 
             {
+                if (esCoordinador()) {
+                    botones.getChildren().addAll(editar, eliminar);
+                } else {
+                    botones.getChildren().add(editar);
+                }
                 botones.setAlignment(Pos.CENTER_LEFT);
                 editar.setOnAction(event -> {
                     OrdenDTO orden = getTableView().getItems().get(getIndex());
@@ -713,6 +760,36 @@ public class SigomeiFxApp extends Application {
             return true;
         } catch (Exception ex) {
             mostrarError("No se pudo eliminar la orden", ex.getMessage());
+            return false;
+        }
+    }
+
+    private boolean bajaLogicaEquipo(EquipoDTO equipo) {
+        try {
+            if (sigomei != null) {
+                sigomei.cambiarEstadoEquipo(equipo.getIdEquipo(), EstadoOperativo.INACTIVO);
+            } else {
+                equipo.setEstadoOperativo(EstadoOperativo.INACTIVO);
+                reemplazarEquipoDemo(equipo);
+            }
+            return true;
+        } catch (Exception ex) {
+            mostrarError("No se pudo dar de baja el equipo", ex.getMessage());
+            return false;
+        }
+    }
+
+    private boolean bajaLogicaTecnico(TecnicoDTO tecnico) {
+        try {
+            if (sigomei != null) {
+                sigomei.cambiarEstatusTecnico(tecnico.getIdTecnico(), EstadoTecnico.INACTIVO);
+            } else {
+                tecnico.setEstatus(EstadoTecnico.INACTIVO);
+                reemplazarTecnicoDemo(tecnico);
+            }
+            return true;
+        } catch (Exception ex) {
+            mostrarError("No se pudo dar de baja el tecnico", ex.getMessage());
             return false;
         }
     }
@@ -835,10 +912,12 @@ public class SigomeiFxApp extends Application {
         root.setLeft(menuLateral("ordenes"));
 
         boolean editando = ordenEditar != null;
+        boolean soloEstado = esSupervisor();
         VBox contenido = new VBox(18);
         contenido.setPadding(new Insets(24));
         contenido.getChildren().add(encabezadoModulo("OR",
-                editando ? "Editar orden de mantenimiento" : "Registrar orden de mantenimiento", "", () -> mensajeDemo()));
+                soloEstado ? "Actualizar estado de orden"
+                        : editando ? "Editar orden de mantenimiento" : "Registrar orden de mantenimiento", "", () -> mensajeDemo()));
 
         GridPane form = new GridPane();
         form.getStyleClass().add("form-card");
@@ -857,6 +936,16 @@ public class SigomeiFxApp extends Application {
         ComboBox<String> tipo = combo(editando ? textoTipoMantenimiento(ordenEditar.getTipoMantenimiento()) : "Preventivo", "Preventivo", "Correctivo");
         ComboBox<String> estado = combo(editando ? textoEstadoOrden(ordenEditar.getEstadoOrden()) : "Programada",
                 "Programada", "En ejecucion", "Finalizada", "Cancelada");
+
+        if (soloEstado) {
+            equipo.setDisable(true);
+            tecnico.setDisable(true);
+            tipo.setDisable(true);
+            fechaProgramada.setDisable(true);
+            fechaInicio.setDisable(true);
+            descripcion.setDisable(true);
+            costoEstimado.setDisable(true);
+        }
 
         agregarCampo(form, 0, 0, "ID equipo", equipo);
         agregarCampo(form, 0, 1, "ID tecnico", tecnico);
@@ -969,7 +1058,9 @@ public class SigomeiFxApp extends Application {
                     estadoOrden(estado)
             );
             if (sigomei != null) {
-                if (ordenEditar == null) {
+                if (esSupervisor() && ordenEditar != null) {
+                    sigomei.cambiarEstadoOrden(ordenEditar.getIdOrden(), estadoOrden(estado), fecha(fechaCierre), decimal(costoReal));
+                } else if (ordenEditar == null) {
                     sigomei.registrarOrden(orden);
                 } else {
                     sigomei.actualizarOrden(orden);
@@ -977,7 +1068,15 @@ public class SigomeiFxApp extends Application {
             } else if (ordenEditar == null) {
                 ordenesDemo.add(orden);
             } else {
-                reemplazarOrdenDemo(orden);
+                if (esSupervisor()) {
+                    OrdenDTO actualizada = ordenEditar;
+                    actualizada.setEstadoOrden(estadoOrden(estado));
+                    actualizada.setFechaCierre(fecha(fechaCierre));
+                    actualizada.setCostoReal(decimal(costoReal));
+                    reemplazarOrdenDemo(actualizada);
+                } else {
+                    reemplazarOrdenDemo(orden);
+                }
             }
             mostrarOrdenes();
         } catch (Exception ex) {
@@ -1060,11 +1159,37 @@ public class SigomeiFxApp extends Application {
     }
 
     private void mostrarError(String titulo, String mensaje) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("SIGOMEI");
-        alert.setHeaderText(titulo);
-        alert.setContentText(mensaje == null ? "Operacion rechazada" : mensaje);
-        alert.showAndWait();
+        Stage dialogo = new Stage();
+        dialogo.initOwner(stage);
+        dialogo.initModality(Modality.APPLICATION_MODAL);
+        dialogo.initStyle(StageStyle.UNDECORATED);
+
+        Label tituloLabel = labelClase(titulo, "dialog-title");
+        Label mensajeLabel = labelClase(mensaje == null ? "Operacion rechazada" : mensaje, "dialog-message");
+        mensajeLabel.setWrapText(true);
+        mensajeLabel.setAlignment(Pos.CENTER);
+
+        Button aceptar = new Button("Aceptar");
+        aceptar.getStyleClass().add("dialog-button");
+        aceptar.setOnAction(event -> dialogo.close());
+
+        VBox contenido = new VBox(20, tituloLabel, mensajeLabel, aceptar);
+        contenido.getStyleClass().add("dialog-card");
+        contenido.setAlignment(Pos.CENTER);
+        contenido.setPadding(new Insets(24));
+
+        StackPane root = new StackPane(contenido);
+        root.getStyleClass().add("dialog-root");
+        Scene scene = new Scene(root, 430, 210);
+        scene.getStylesheets().add(getClass().getResource("/styles/sigomei.css").toExternalForm());
+        dialogo.setScene(scene);
+        dialogo.setOnShown(event -> {
+            double x = stage.getX() + (stage.getWidth() - dialogo.getWidth()) / 2;
+            double y = stage.getY() + (stage.getHeight() - dialogo.getHeight()) / 2;
+            dialogo.setX(x);
+            dialogo.setY(y);
+        });
+        dialogo.showAndWait();
     }
 
     private TipoEquipo tipoEquipo(String texto) {
@@ -1282,6 +1407,35 @@ public class SigomeiFxApp extends Application {
             return "coordinador01";
         }
         return usuarioActual.getNombreUsuario();
+    }
+
+    private boolean esCoordinador() {
+        return "coordinador".equals(rolSeleccionado);
+    }
+
+    private boolean esSupervisor() {
+        return "supervisor".equals(rolSeleccionado);
+    }
+
+    private String descripcionEquipoPorRol() {
+        if (esSupervisor()) {
+            return "Consultar equipos y realizar bajas logicas";
+        }
+        return "Registrar, consultar, filtrar y modificar equipos";
+    }
+
+    private String descripcionTecnicoPorRol() {
+        if (esSupervisor()) {
+            return "Consultar tecnicos y realizar bajas logicas";
+        }
+        return "Registrar, consultar, filtrar y modificar tecnicos";
+    }
+
+    private String descripcionOrdenPorRol() {
+        if (esSupervisor()) {
+            return "Consultar, actualizar, finalizar y cancelar ordenes";
+        }
+        return "Registrar, consultar, filtrar y modificar ordenes";
     }
 
     private Label labelClase(String texto, String clase) {
