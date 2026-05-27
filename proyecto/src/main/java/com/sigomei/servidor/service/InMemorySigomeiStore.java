@@ -37,7 +37,7 @@ final class InMemorySigomeiStore {
         EQUIPOS.put(2, new EquipoDTO(2, "Bomba mecanica", TipoEquipo.MECANICO, "Flow",
                 "BM-22", "EQ-002", "Planta Sur", LocalDate.of(2024, 2, 12),
                 EstadoOperativo.OPERATIVO, Criticidad.MEDIA));
-        EQUIPOS.put(10, new EquipoDTO(10, "Prensa hidraulica", TipoEquipo.HIDRAULICO, "Hydra",
+        EQUIPOS.put(3, new EquipoDTO(3, "Prensa hidraulica", TipoEquipo.HIDRAULICO, "Hydra",
                 "PH-10", "EQ-010", "Planta Oeste", LocalDate.of(2024, 3, 1),
                 EstadoOperativo.OPERATIVO, Criticidad.BAJA));
 
@@ -53,7 +53,7 @@ final class InMemorySigomeiStore {
         TECNICOS.put(4, new TecnicoDTO(4, "Diego Mora", "MODD900101DD1", "5551000004",
                 "diego@example.com", TipoEquipo.ELECTRICO, NivelCertificacion.I,
                 LocalDate.of(2022, 4, 10), EstadoTecnico.ACTIVO));
-        TECNICOS.put(10, new TecnicoDTO(10, "Elena Vera", "VEEE900101EE1", "5551000010",
+        TECNICOS.put(5, new TecnicoDTO(5, "Elena Vera", "VEEE900101EE1", "5551000010",
                 "elena@example.com", TipoEquipo.HIDRAULICO, NivelCertificacion.III,
                 LocalDate.of(2022, 5, 10), EstadoTecnico.ACTIVO));
 
