@@ -58,7 +58,7 @@ public class SistemaE2Test {
     @Test
     public void cp04_actualizarEquipoRegistrado() {
         EquipoDTO equipo = equipoService.consultarEquipos().stream()
-                .filter(actual -> actual.getIdEquipo() == 10)
+            .filter(actual -> actual.getIdEquipo() == 3)
                 .findFirst()
                 .orElseThrow();
         equipo.setUbicacionPlanta("Planta Actualizada");
@@ -87,7 +87,7 @@ public class SistemaE2Test {
     @Test
     public void cp07_actualizarTecnicoRegistrado() {
         TecnicoDTO tecnico = tecnicoService.consultarTecnicos().stream()
-                .filter(actual -> actual.getIdTecnico() == 10)
+            .filter(actual -> actual.getIdTecnico() == 5)
                 .findFirst()
                 .orElseThrow();
         tecnico.setTelefono("5559999999");
@@ -100,16 +100,16 @@ public class SistemaE2Test {
     @Test
     public void cp08_cambiarEstatusTecnicoActivoAInactivo() {
         TecnicoDTO resultado = assertDoesNotThrow(() ->
-                tecnicoService.cambiarEstatusTecnico(10, EstadoTecnico.INACTIVO));
+                tecnicoService.cambiarEstatusTecnico(4, EstadoTecnico.INACTIVO));
 
         assertEquals(EstadoTecnico.INACTIVO, resultado.getEstatus());
     }
 
     @Test
     public void cp09_eliminarTecnicoSinOrdenes() {
-        assertDoesNotThrow(() -> tecnicoService.eliminarTecnico(10));
+        assertDoesNotThrow(() -> tecnicoService.eliminarTecnico(4));
 
-        assertTrue(tecnicoService.consultarTecnicos().stream().noneMatch(tecnico -> tecnico.getIdTecnico() == 10));
+        assertTrue(tecnicoService.consultarTecnicos().stream().noneMatch(tecnico -> tecnico.getIdTecnico() == 4));
     }
 
     @Test
@@ -180,7 +180,7 @@ public class SistemaE2Test {
     @Test
     public void cp17_cambiarTecnicoSinOrdenesAInactivo() {
         TecnicoDTO resultado = assertDoesNotThrow(() ->
-                tecnicoService.cambiarEstatusTecnico(10, EstadoTecnico.INACTIVO));
+                tecnicoService.cambiarEstatusTecnico(5, EstadoTecnico.INACTIVO));
 
         assertEquals(EstadoTecnico.INACTIVO, resultado.getEstatus());
     }
@@ -188,7 +188,7 @@ public class SistemaE2Test {
     @Test
     public void cp18_cambiarEquipoSinOrdenesAInactivo() {
         EquipoDTO resultado = assertDoesNotThrow(() ->
-                equipoService.cambiarEstadoEquipo(10, EstadoOperativo.INACTIVO));
+                equipoService.cambiarEstadoEquipo(3, EstadoOperativo.INACTIVO));
 
         assertEquals(EstadoOperativo.INACTIVO, resultado.getEstadoOperativo());
     }

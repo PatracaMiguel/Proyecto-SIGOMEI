@@ -40,7 +40,7 @@ La ruta puede cambiarse con `server.log.path` en `config/app.properties`.
 ## Evidencias
 
 ## Pruebas de las reglas de negocio de la E3 en verde 
-en la ruta  Proyecto-SIGOMEI\proyecto ejecute 
+en la ruta  Proyecto-SIGOMEI_v1.0\proyecto ejecute
  mvn -Dtest=ReglasNegocioServiceTest test
 
 Saida esperad
@@ -48,7 +48,7 @@ ReglasNegocioServiceTest
 Tests run: 26, Failures: 0, Errors: 0, Skipped: 0
 
 ## Casos de prueba de la E2 en verde
-en la ruta  Proyecto-SIGOMEI\proyecto ejecute 
+en la ruta  Proyecto-SIGOMEI_v1.0\proyecto ejecute 
  mvn -Dtest=SistemaE2Test test
 
  Saida esperada
@@ -56,10 +56,17 @@ en la ruta  Proyecto-SIGOMEI\proyecto ejecute
 Tests run: 32, Failures: 0, Errors: 0, Skipped: 0
 
 ## pruebas de CRUD
-en la ruta  Proyecto-SIGOMEI\proyecto ejecute 
+en la ruta  Proyecto-SIGOMEI_v1.0\proyecto ejecute 
  mvn -Dtest=CrudServiceTest test
 
 Saida esperada
 Running com.sigomei.servidor.service.CrudServiceTest
 Tests run: 3, Failures: 0, Errors: 0, Skipped: 0
 
+## Preubas de validacion de Service
+en la ruta  Proyecto-SIGOMEI_v1.0\proyecto ejecute 
+ mvn -Dtest=ValidacionServiceTest test
+
+Saida esperada
+Running com.sigomei.servidor.service.ValidacionServiceTest
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0

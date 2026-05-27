@@ -29,15 +29,15 @@ public class TecnicoService {
 <span class="pc bpc" id="L29" title="1 of 2 branches missed.">            boolean mismoId = actual.getIdTecnico() == tecnico.getIdTecnico();</span>
 <span class="fc" id="L30">            boolean mismoRfc = actual.getRfc().equalsIgnoreCase(tecnico.getRfc());</span>
 <span class="fc" id="L31">            boolean mismoCorreo = actual.getCorreo().equalsIgnoreCase(tecnico.getCorreo());</span>
-<span class="pc bpc" id="L32" title="1 of 4 branches missed.">            if (!mismoId &amp;&amp; mismoRfc) {</span>
-<span class="fc" id="L33">                ServerLog.warning(&quot;Tecnico rechazado: RFC duplicado &quot; + tecnico.getRfc());</span>
-<span class="fc" id="L34">                throw new ReglaNegocioException(&quot;Ya existe un tecnico con el RFC indicado&quot;);</span>
+<span class="pc bpc" id="L32" title="2 of 4 branches missed.">            if (!mismoId &amp;&amp; mismoRfc) {</span>
+<span class="nc" id="L33">                ServerLog.warning(&quot;Tecnico rechazado: RFC duplicado &quot; + tecnico.getRfc());</span>
+<span class="nc" id="L34">                throw new ReglaNegocioException(&quot;Ya existe un tecnico con el RFC indicado&quot;);</span>
             }
 <span class="pc bpc" id="L36" title="1 of 4 branches missed.">            if (!mismoId &amp;&amp; mismoCorreo) {</span>
 <span class="fc" id="L37">                ServerLog.warning(&quot;Tecnico rechazado: correo duplicado &quot; + tecnico.getCorreo());</span>
 <span class="fc" id="L38">                throw new ReglaNegocioException(&quot;Ya existe un tecnico con el correo indicado&quot;);</span>
             }
-<span class="fc" id="L40">        }</span>
+        }
 
 <span class="fc" id="L42">        InMemorySigomeiStore.TECNICOS.put(tecnico.getIdTecnico(), copiar(tecnico));</span>
 <span class="fc" id="L43">        ServerLog.info(&quot;Tecnico registrado id=&quot; + tecnico.getIdTecnico());</span>
@@ -48,7 +48,7 @@ public class TecnicoService {
 <span class="fc" id="L48">        List&lt;TecnicoDTO&gt; tecnicos = new ArrayList&lt;&gt;();</span>
 <span class="fc bfc" id="L49" title="All 2 branches covered.">        for (TecnicoDTO tecnico : InMemorySigomeiStore.TECNICOS.values()) {</span>
 <span class="fc" id="L50">            tecnicos.add(copiar(tecnico));</span>
-<span class="fc" id="L51">        }</span>
+        }
 <span class="fc" id="L52">        ServerLog.info(&quot;Consulta de tecnicos&quot;);</span>
 <span class="fc" id="L53">        return tecnicos;</span>
     }
@@ -57,15 +57,15 @@ public class TecnicoService {
 <span class="fc" id="L57">        List&lt;TecnicoDTO&gt; resultado = new ArrayList&lt;&gt;();</span>
 
 <span class="fc bfc" id="L59" title="All 2 branches covered.">        for (TecnicoDTO tecnico : InMemorySigomeiStore.TECNICOS.values()) {</span>
-<span class="fc bfc" id="L60" title="All 4 branches covered.">            boolean coincideNombre = nombre == null || nombre.isBlank()</span>
-<span class="fc bfc" id="L61" title="All 2 branches covered.">                    || tecnico.getNombreCompleto().toLowerCase().contains(nombre.toLowerCase());</span>
-<span class="fc bfc" id="L62" title="All 4 branches covered.">            boolean coincideEspecialidad = especialidad == null || tecnico.getEspecialidad() == especialidad;</span>
-<span class="fc bfc" id="L63" title="All 4 branches covered.">            boolean coincideNivel = nivelCertificacion == null || tecnico.getNivelCertificacion() == nivelCertificacion;</span>
+<span class="pc bpc" id="L60" title="3 of 4 branches missed.">            boolean coincideNombre = nombre == null || nombre.isBlank()</span>
+<span class="nc bnc" id="L61" title="All 2 branches missed.">                    || tecnico.getNombreCompleto().toLowerCase().contains(nombre.toLowerCase());</span>
+<span class="pc bpc" id="L62" title="1 of 4 branches missed.">            boolean coincideEspecialidad = especialidad == null || tecnico.getEspecialidad() == especialidad;</span>
+<span class="pc bpc" id="L63" title="3 of 4 branches missed.">            boolean coincideNivel = nivelCertificacion == null || tecnico.getNivelCertificacion() == nivelCertificacion;</span>
 
-<span class="pc bpc" id="L65" title="1 of 6 branches missed.">            if (coincideNombre &amp;&amp; coincideEspecialidad &amp;&amp; coincideNivel) {</span>
+<span class="pc bpc" id="L65" title="2 of 6 branches missed.">            if (coincideNombre &amp;&amp; coincideEspecialidad &amp;&amp; coincideNivel) {</span>
 <span class="fc" id="L66">                resultado.add(copiar(tecnico));</span>
             }
-<span class="fc" id="L68">        }</span>
+        }
 
 <span class="fc" id="L70">        ServerLog.info(&quot;Filtro de tecnicos especialidad=&quot; + especialidad);</span>
 <span class="fc" id="L71">        return resultado;</span>
@@ -74,8 +74,8 @@ public class TecnicoService {
     public TecnicoDTO actualizarTecnico(TecnicoDTO tecnico)
             throws ValidacionException, RegistroNoEncontradoException {
 
-<span class="fc bfc" id="L77" title="All 4 branches covered.">        if (tecnico == null || !InMemorySigomeiStore.TECNICOS.containsKey(tecnico.getIdTecnico())) {</span>
-<span class="fc" id="L78">            throw new RegistroNoEncontradoException(&quot;Tecnico no encontrado&quot;);</span>
+<span class="pc bpc" id="L77" title="2 of 4 branches missed.">        if (tecnico == null || !InMemorySigomeiStore.TECNICOS.containsKey(tecnico.getIdTecnico())) {</span>
+<span class="nc" id="L78">            throw new RegistroNoEncontradoException(&quot;Tecnico no encontrado&quot;);</span>
         }
 
 <span class="fc" id="L81">        validarTecnico(tecnico);</span>
@@ -92,7 +92,7 @@ public class TecnicoService {
 <span class="fc" id="L92">            throw new RegistroNoEncontradoException(&quot;Tecnico no encontrado&quot;);</span>
         }
 
-<span class="fc bfc" id="L95" title="All 4 branches covered.">        if (nuevoEstatus == EstadoTecnico.INACTIVO &amp;&amp; tieneOrdenesActivas(idTecnico)) {</span>
+<span class="pc bpc" id="L95" title="1 of 4 branches missed.">        if (nuevoEstatus == EstadoTecnico.INACTIVO &amp;&amp; tieneOrdenesActivas(idTecnico)) {</span>
 <span class="fc" id="L96">            ServerLog.warning(&quot;Tecnico rechazado RN-03: tiene ordenes activas id=&quot; + idTecnico);</span>
 <span class="fc" id="L97">            throw new ReglaNegocioException(&quot;Este tecnico tiene ordenes activas, no puedes cambiarlo a inactivo&quot;);</span>
         }
@@ -119,14 +119,14 @@ public class TecnicoService {
 <span class="fc" id="L119">    }</span>
 
     private void validarTecnico(TecnicoDTO tecnico) throws ValidacionException {
-<span class="fc bfc" id="L122" title="All 2 branches covered.">        if (tecnico == null) {</span>
-<span class="fc" id="L123">            throw new ValidacionException(&quot;El tecnico tiene datos obligatorios incompletos&quot;);</span>
+<span class="pc bpc" id="L122" title="1 of 2 branches missed.">        if (tecnico == null) {</span>
+<span class="nc" id="L123">            throw new ValidacionException(&quot;El tecnico tiene datos obligatorios incompletos&quot;);</span>
         }
-<span class="fc bfc" id="L125" title="All 4 branches covered.">        if (tecnico.getIdTecnico() &lt;= 0 || esBlanco(tecnico.getNombreCompleto())</span>
-<span class="fc bfc" id="L126" title="All 4 branches covered.">                || esBlanco(tecnico.getRfc()) || esBlanco(tecnico.getTelefono())</span>
-<span class="fc bfc" id="L127" title="All 4 branches covered.">                || esBlanco(tecnico.getCorreo()) || tecnico.getEspecialidad() == null</span>
-<span class="fc bfc" id="L128" title="All 4 branches covered.">                || tecnico.getNivelCertificacion() == null || tecnico.getFechaIngreso() == null</span>
-<span class="fc bfc" id="L129" title="All 2 branches covered.">                || tecnico.getEstatus() == null) {</span>
+<span class="pc bpc" id="L125" title="2 of 4 branches missed.">        if (tecnico.getIdTecnico() &lt;= 0 || esBlanco(tecnico.getNombreCompleto())</span>
+<span class="pc bpc" id="L126" title="2 of 4 branches missed.">                || esBlanco(tecnico.getRfc()) || esBlanco(tecnico.getTelefono())</span>
+<span class="pc bpc" id="L127" title="1 of 4 branches missed.">                || esBlanco(tecnico.getCorreo()) || tecnico.getEspecialidad() == null</span>
+<span class="pc bpc" id="L128" title="2 of 4 branches missed.">                || tecnico.getNivelCertificacion() == null || tecnico.getFechaIngreso() == null</span>
+<span class="pc bpc" id="L129" title="1 of 2 branches missed.">                || tecnico.getEstatus() == null) {</span>
 <span class="fc" id="L130">            throw new ValidacionException(&quot;El tecnico tiene datos obligatorios incompletos&quot;);</span>
         }
 <span class="fc" id="L132">    }</span>
@@ -136,7 +136,7 @@ public class TecnicoService {
 <span class="fc bfc" id="L136" title="All 2 branches covered.">            if (orden.getIdTecnico() == idTecnico) {</span>
 <span class="fc" id="L137">                return true;</span>
             }
-<span class="fc" id="L139">        }</span>
+        }
 <span class="fc" id="L140">        return false;</span>
     }
 
@@ -148,7 +148,7 @@ public class TecnicoService {
 <span class="pc bpc" id="L148" title="1 of 4 branches missed.">            if (esDelTecnico &amp;&amp; estaActiva) {</span>
 <span class="fc" id="L149">                return true;</span>
             }
-<span class="fc" id="L151">        }</span>
+        }
 <span class="fc" id="L152">        return false;</span>
     }
 

@@ -47,7 +47,7 @@ public class OrdenService {
 <span class="fc" id="L47">        List&lt;OrdenDTO&gt; ordenes = new ArrayList&lt;&gt;();</span>
 <span class="fc bfc" id="L48" title="All 2 branches covered.">        for (OrdenDTO orden : InMemorySigomeiStore.ORDENES.values()) {</span>
 <span class="fc" id="L49">            ordenes.add(copiar(orden));</span>
-<span class="fc" id="L50">        }</span>
+        }
 <span class="fc" id="L51">        ServerLog.info(&quot;Consulta de ordenes&quot;);</span>
 <span class="fc" id="L52">        return ordenes;</span>
     }
@@ -56,14 +56,14 @@ public class OrdenService {
 <span class="fc" id="L56">        List&lt;OrdenDTO&gt; resultado = new ArrayList&lt;&gt;();</span>
 
 <span class="fc bfc" id="L58" title="All 2 branches covered.">        for (OrdenDTO orden : InMemorySigomeiStore.ORDENES.values()) {</span>
-<span class="fc bfc" id="L59" title="All 4 branches covered.">            boolean coincideEstado = estado == null || orden.getEstadoOrden() == estado;</span>
-<span class="fc bfc" id="L60" title="All 4 branches covered.">            boolean despuesDeInicio = fechaInicio == null || !orden.getFechaProgramada().isBefore(fechaInicio);</span>
-<span class="pc bpc" id="L61" title="1 of 4 branches missed.">            boolean antesDeCierre = fechaCierre == null || !orden.getFechaProgramada().isAfter(fechaCierre);</span>
+<span class="pc bpc" id="L59" title="1 of 4 branches missed.">            boolean coincideEstado = estado == null || orden.getEstadoOrden() == estado;</span>
+<span class="pc bpc" id="L60" title="3 of 4 branches missed.">            boolean despuesDeInicio = fechaInicio == null || !orden.getFechaProgramada().isBefore(fechaInicio);</span>
+<span class="pc bpc" id="L61" title="3 of 4 branches missed.">            boolean antesDeCierre = fechaCierre == null || !orden.getFechaProgramada().isAfter(fechaCierre);</span>
 
 <span class="pc bpc" id="L63" title="2 of 6 branches missed.">            if (coincideEstado &amp;&amp; despuesDeInicio &amp;&amp; antesDeCierre) {</span>
 <span class="fc" id="L64">                resultado.add(copiar(orden));</span>
             }
-<span class="fc" id="L66">        }</span>
+        }
 
 <span class="fc" id="L68">        ServerLog.info(&quot;Filtro de ordenes estado=&quot; + estado);</span>
 <span class="fc" id="L69">        return resultado;</span>
@@ -72,8 +72,8 @@ public class OrdenService {
     public OrdenDTO actualizarOrden(OrdenDTO orden)
             throws ValidacionException, ReglaNegocioException, RegistroNoEncontradoException {
 
-<span class="fc bfc" id="L75" title="All 4 branches covered.">        if (orden == null || !InMemorySigomeiStore.ORDENES.containsKey(orden.getIdOrden())) {</span>
-<span class="fc" id="L76">            throw new RegistroNoEncontradoException(&quot;Orden no encontrada&quot;);</span>
+<span class="pc bpc" id="L75" title="2 of 4 branches missed.">        if (orden == null || !InMemorySigomeiStore.ORDENES.containsKey(orden.getIdOrden())) {</span>
+<span class="nc" id="L76">            throw new RegistroNoEncontradoException(&quot;Orden no encontrada&quot;);</span>
         }
 
 <span class="fc" id="L79">        validarOrdenBasica(orden);</span>
@@ -92,8 +92,8 @@ public class OrdenService {
             throws ReglaNegocioException, RegistroNoEncontradoException {
 
 <span class="fc" id="L94">        OrdenDTO orden = InMemorySigomeiStore.ORDENES.get(idOrden);</span>
-<span class="fc bfc" id="L95" title="All 2 branches covered.">        if (orden == null) {</span>
-<span class="fc" id="L96">            throw new RegistroNoEncontradoException(&quot;Orden no encontrada&quot;);</span>
+<span class="pc bpc" id="L95" title="1 of 2 branches missed.">        if (orden == null) {</span>
+<span class="nc" id="L96">            throw new RegistroNoEncontradoException(&quot;Orden no encontrada&quot;);</span>
         }
 
 <span class="fc bfc" id="L99" title="All 2 branches covered.">        if (!esTransicionValida(orden.getEstadoOrden(), nuevoEstado)) {</span>
@@ -124,35 +124,35 @@ public class OrdenService {
 <span class="fc" id="L124">        List&lt;OrdenDTO&gt; resultado = new ArrayList&lt;&gt;();</span>
 
 <span class="fc bfc" id="L126" title="All 2 branches covered.">        for (OrdenDTO orden : InMemorySigomeiStore.ORDENES.values()) {</span>
-<span class="fc bfc" id="L127" title="All 4 branches covered.">            boolean coincideEquipo = idEquipo == null || orden.getIdEquipo() == idEquipo;</span>
-<span class="fc bfc" id="L128" title="All 4 branches covered.">            boolean coincideTecnico = idTecnico == null || orden.getIdTecnico() == idTecnico;</span>
-<span class="fc bfc" id="L129" title="All 4 branches covered.">            boolean coincideEstado = estadoOrden == null || orden.getEstadoOrden() == estadoOrden;</span>
+<span class="pc bpc" id="L127" title="1 of 4 branches missed.">            boolean coincideEquipo = idEquipo == null || orden.getIdEquipo() == idEquipo;</span>
+<span class="pc bpc" id="L128" title="1 of 4 branches missed.">            boolean coincideTecnico = idTecnico == null || orden.getIdTecnico() == idTecnico;</span>
+<span class="pc bpc" id="L129" title="1 of 4 branches missed.">            boolean coincideEstado = estadoOrden == null || orden.getEstadoOrden() == estadoOrden;</span>
 
 <span class="pc bpc" id="L131" title="1 of 6 branches missed.">            if (coincideEquipo &amp;&amp; coincideTecnico &amp;&amp; coincideEstado) {</span>
 <span class="fc" id="L132">                resultado.add(copiar(orden));</span>
             }
-<span class="fc" id="L134">        }</span>
+        }
 
 <span class="fc" id="L136">        ServerLog.info(&quot;Consulta historial ordenes&quot;);</span>
 <span class="fc" id="L137">        return resultado;</span>
     }
 
     public void eliminarOrden(int idOrden) throws RegistroNoEncontradoException {
-<span class="fc bfc" id="L141" title="All 2 branches covered.">        if (!InMemorySigomeiStore.ORDENES.containsKey(idOrden)) {</span>
-<span class="fc" id="L142">            throw new RegistroNoEncontradoException(&quot;Orden no encontrada&quot;);</span>
+<span class="nc bnc" id="L141" title="All 2 branches missed.">        if (!InMemorySigomeiStore.ORDENES.containsKey(idOrden)) {</span>
+<span class="nc" id="L142">            throw new RegistroNoEncontradoException(&quot;Orden no encontrada&quot;);</span>
         }
 
-<span class="fc" id="L145">        InMemorySigomeiStore.ORDENES.remove(idOrden);</span>
-<span class="fc" id="L146">        ServerLog.info(&quot;Orden eliminada id=&quot; + idOrden);</span>
-<span class="fc" id="L147">    }</span>
+<span class="nc" id="L145">        InMemorySigomeiStore.ORDENES.remove(idOrden);</span>
+<span class="nc" id="L146">        ServerLog.info(&quot;Orden eliminada id=&quot; + idOrden);</span>
+<span class="nc" id="L147">    }</span>
 
     private void validarOrdenBasica(OrdenDTO orden) throws ValidacionException {
-<span class="fc bfc" id="L150" title="All 2 branches covered.">        if (orden == null) {</span>
-<span class="fc" id="L151">            throw new ValidacionException(&quot;La orden tiene datos obligatorios incompletos&quot;);</span>
+<span class="pc bpc" id="L150" title="1 of 2 branches missed.">        if (orden == null) {</span>
+<span class="nc" id="L151">            throw new ValidacionException(&quot;La orden tiene datos obligatorios incompletos&quot;);</span>
         }
-<span class="fc bfc" id="L153" title="All 6 branches covered.">        if (orden.getIdOrden() &lt;= 0 || orden.getIdEquipo() &lt;= 0 || orden.getIdTecnico() &lt;= 0</span>
-<span class="fc bfc" id="L154" title="All 4 branches covered.">                || orden.getTipoMantenimiento() == null || orden.getFechaProgramada() == null</span>
-<span class="fc bfc" id="L155" title="All 4 branches covered.">                || orden.getEstadoOrden() == null || orden.getCostoEstimado() == null</span>
+<span class="pc bpc" id="L153" title="3 of 6 branches missed.">        if (orden.getIdOrden() &lt;= 0 || orden.getIdEquipo() &lt;= 0 || orden.getIdTecnico() &lt;= 0</span>
+<span class="pc bpc" id="L154" title="2 of 4 branches missed.">                || orden.getTipoMantenimiento() == null || orden.getFechaProgramada() == null</span>
+<span class="pc bpc" id="L155" title="2 of 4 branches missed.">                || orden.getEstadoOrden() == null || orden.getCostoEstimado() == null</span>
 <span class="fc bfc" id="L156" title="All 2 branches covered.">                || esBlanco(orden.getDescripcionTrabajo())) {</span>
 <span class="fc" id="L157">            throw new ValidacionException(&quot;La orden tiene datos obligatorios incompletos&quot;);</span>
         }
@@ -160,16 +160,16 @@ public class OrdenService {
 
     private EquipoDTO buscarEquipo(int idEquipo) throws RegistroNoEncontradoException {
 <span class="fc" id="L162">        EquipoDTO equipo = InMemorySigomeiStore.EQUIPOS.get(idEquipo);</span>
-<span class="fc bfc" id="L163" title="All 2 branches covered.">        if (equipo == null) {</span>
-<span class="fc" id="L164">            throw new RegistroNoEncontradoException(&quot;Equipo no encontrado&quot;);</span>
+<span class="pc bpc" id="L163" title="1 of 2 branches missed.">        if (equipo == null) {</span>
+<span class="nc" id="L164">            throw new RegistroNoEncontradoException(&quot;Equipo no encontrado&quot;);</span>
         }
 <span class="fc" id="L166">        return equipo;</span>
     }
 
     private TecnicoDTO buscarTecnico(int idTecnico) throws RegistroNoEncontradoException {
 <span class="fc" id="L170">        TecnicoDTO tecnico = InMemorySigomeiStore.TECNICOS.get(idTecnico);</span>
-<span class="fc bfc" id="L171" title="All 2 branches covered.">        if (tecnico == null) {</span>
-<span class="fc" id="L172">            throw new RegistroNoEncontradoException(&quot;Tecnico no encontrado&quot;);</span>
+<span class="pc bpc" id="L171" title="1 of 2 branches missed.">        if (tecnico == null) {</span>
+<span class="nc" id="L172">            throw new RegistroNoEncontradoException(&quot;Tecnico no encontrado&quot;);</span>
         }
 <span class="fc" id="L174">        return tecnico;</span>
     }
@@ -204,7 +204,7 @@ public class OrdenService {
 <span class="fc" id="L204">            throw new ReglaNegocioException(&quot;La fecha de inicio no respeta el orden cronologico&quot;);</span>
         }
 
-<span class="fc bfc" id="L207" title="All 4 branches covered.">        if (orden.getFechaCierre() != null &amp;&amp; orden.getFechaInicio() != null</span>
+<span class="pc bpc" id="L207" title="1 of 4 branches missed.">        if (orden.getFechaCierre() != null &amp;&amp; orden.getFechaInicio() != null</span>
 <span class="fc bfc" id="L208" title="All 2 branches covered.">                &amp;&amp; orden.getFechaCierre().isBefore(orden.getFechaInicio())) {</span>
 <span class="fc" id="L209">            ServerLog.warning(&quot;Orden rechazada RN-05: fecha de cierre anterior a inicio&quot;);</span>
 <span class="fc" id="L210">            throw new ReglaNegocioException(&quot;La fecha de cierre no respeta el orden cronologico&quot;);</span>
@@ -219,9 +219,9 @@ public class OrdenService {
 <span class="fc" id="L219">            throw new ReglaNegocioException(&quot;La fecha de cierre y el costo real son obligatorios para finalizar&quot;);</span>
         }
 
-<span class="fc bfc" id="L222" title="All 6 branches covered.">        if (estado != EstadoOrden.FINALIZADA &amp;&amp; (fechaCierre != null || costoReal != null)) {</span>
-<span class="fc" id="L223">            ServerLog.warning(&quot;Orden rechazada RN-06: datos de cierre en orden no finalizada&quot;);</span>
-<span class="fc" id="L224">            throw new ReglaNegocioException(&quot;Solo una orden finalizada puede tener fecha de cierre y costo real&quot;);</span>
+<span class="pc bpc" id="L222" title="2 of 6 branches missed.">        if (estado != EstadoOrden.FINALIZADA &amp;&amp; (fechaCierre != null || costoReal != null)) {</span>
+<span class="nc" id="L223">            ServerLog.warning(&quot;Orden rechazada RN-06: datos de cierre en orden no finalizada&quot;);</span>
+<span class="nc" id="L224">            throw new ReglaNegocioException(&quot;Solo una orden finalizada puede tener fecha de cierre y costo real&quot;);</span>
         }
 <span class="fc" id="L226">    }</span>
 
@@ -237,7 +237,7 @@ public class OrdenService {
 <span class="fc" id="L237">                        + &quot; fecha=&quot; + nuevaOrden.getFechaProgramada());</span>
 <span class="fc" id="L238">                throw new ReglaNegocioException(&quot;Ya existe una orden activa duplicada para el equipo y fecha&quot;);</span>
             }
-<span class="fc" id="L240">        }</span>
+        }
 <span class="fc" id="L241">    }</span>
 
     private boolean esTransicionValida(EstadoOrden actual, EstadoOrden nuevo) {
