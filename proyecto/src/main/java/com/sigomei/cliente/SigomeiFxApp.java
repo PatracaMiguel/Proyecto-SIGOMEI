@@ -727,6 +727,9 @@ public class SigomeiFxApp extends Application {
             if (sigomei != null) {
                 sigomei.eliminarEquipo(equipo.getIdEquipo());
             } else {
+                if (tieneOrdenesEquipoDemo(equipo.getIdEquipo())) {
+                    throw new IllegalStateException("No se puede eliminar un equipo con ordenes relacionadas");
+                }
                 equiposDemo.removeIf(actual -> actual.getIdEquipo() == equipo.getIdEquipo());
             }
             return true;
@@ -741,6 +744,9 @@ public class SigomeiFxApp extends Application {
             if (sigomei != null) {
                 sigomei.eliminarTecnico(tecnico.getIdTecnico());
             } else {
+                if (tieneOrdenesTecnicoDemo(tecnico.getIdTecnico())) {
+                    throw new IllegalStateException("No se puede eliminar un tecnico con ordenes relacionadas");
+                }
                 tecnicosDemo.removeIf(actual -> actual.getIdTecnico() == tecnico.getIdTecnico());
             }
             return true;
@@ -769,6 +775,9 @@ public class SigomeiFxApp extends Application {
             if (sigomei != null) {
                 sigomei.cambiarEstadoEquipo(equipo.getIdEquipo(), EstadoOperativo.INACTIVO);
             } else {
+                if (tieneOrdenesEquipoDemo(equipo.getIdEquipo())) {
+                    throw new IllegalStateException("Este equipo esta relacionado a una orden, no puedes cambiarle el estado");
+                }
                 equipo.setEstadoOperativo(EstadoOperativo.INACTIVO);
                 reemplazarEquipoDemo(equipo);
             }
@@ -784,6 +793,9 @@ public class SigomeiFxApp extends Application {
             if (sigomei != null) {
                 sigomei.cambiarEstatusTecnico(tecnico.getIdTecnico(), EstadoTecnico.INACTIVO);
             } else {
+                if (tieneOrdenesActivasTecnicoDemo(tecnico.getIdTecnico())) {
+                    throw new IllegalStateException("Este tecnico tiene ordenes activas, no puedes cambiarlo a inactivo");
+                }
                 tecnico.setEstatus(EstadoTecnico.INACTIVO);
                 reemplazarTecnicoDemo(tecnico);
             }
@@ -996,6 +1008,7 @@ public class SigomeiFxApp extends Application {
     private void guardarEquipo(EquipoDTO equipoEditar, String nombre, String marca, String modelo, String serie,
                                String ubicacion, String fecha, String tipo, String estado, String criticidad) {
         try {
+            validarCamposObligatorios(nombre, marca, modelo, serie, ubicacion, fecha, tipo, estado, criticidad);
             int id = equipoEditar == null ? siguienteIdEquipo() : equipoEditar.getIdEquipo();
             EquipoDTO equipo = new EquipoDTO(id, nombre, tipoEquipo(tipo), marca, modelo, serie,
                     ubicacion, LocalDate.parse(fecha), estadoEquipo(estado), criticidad(criticidad));
@@ -1006,8 +1019,10 @@ public class SigomeiFxApp extends Application {
                     sigomei.actualizarEquipo(equipo);
                 }
             } else if (equipoEditar == null) {
+                validarEquipoDemo(equipo, null);
                 equiposDemo.add(equipo);
             } else {
+                validarEquipoDemo(equipo, equipoEditar);
                 reemplazarEquipoDemo(equipo);
             }
             mostrarEquipos();
@@ -1019,6 +1034,7 @@ public class SigomeiFxApp extends Application {
     private void guardarTecnico(TecnicoDTO tecnicoEditar, String nombre, String rfc, String telefono, String correo,
                                 String especialidad, String certificacion, String fecha, String estatus) {
         try {
+            validarCamposObligatorios(nombre, rfc, telefono, correo, especialidad, certificacion, fecha, estatus);
             int id = tecnicoEditar == null ? siguienteIdTecnico() : tecnicoEditar.getIdTecnico();
             TecnicoDTO tecnico = new TecnicoDTO(id, nombre, rfc, telefono, correo, tipoEquipo(especialidad),
                     NivelCertificacion.valueOf(certificacion), LocalDate.parse(fecha), estadoTecnico(estatus));
@@ -1029,8 +1045,10 @@ public class SigomeiFxApp extends Application {
                     sigomei.actualizarTecnico(tecnico);
                 }
             } else if (tecnicoEditar == null) {
+                validarTecnicoDemo(tecnico, null);
                 tecnicosDemo.add(tecnico);
             } else {
+                validarTecnicoDemo(tecnico, tecnicoEditar);
                 reemplazarTecnicoDemo(tecnico);
             }
             mostrarTecnicos();
@@ -1043,6 +1061,7 @@ public class SigomeiFxApp extends Application {
                               String fechaProgramada, String fechaInicio, String fechaCierre, String descripcion,
                               String costoEstimado, String costoReal, String estado) {
         try {
+            validarCamposObligatorios(idEquipo, idTecnico, tipo, fechaProgramada, descripcion, costoEstimado, estado);
             int idOrden = ordenEditar == null ? siguienteIdOrden() : ordenEditar.getIdOrden();
             OrdenDTO orden = new OrdenDTO(
                     idOrden,
@@ -1066,15 +1085,30 @@ public class SigomeiFxApp extends Application {
                     sigomei.actualizarOrden(orden);
                 }
             } else if (ordenEditar == null) {
+                validarOrdenDemo(orden, null);
                 ordenesDemo.add(orden);
             } else {
                 if (esSupervisor()) {
-                    OrdenDTO actualizada = ordenEditar;
+                    OrdenDTO actualizada = new OrdenDTO(
+                            ordenEditar.getIdOrden(),
+                            ordenEditar.getIdEquipo(),
+                            ordenEditar.getIdTecnico(),
+                            ordenEditar.getTipoMantenimiento(),
+                            ordenEditar.getFechaProgramada(),
+                            ordenEditar.getFechaInicio(),
+                            ordenEditar.getFechaCierre(),
+                            ordenEditar.getDescripcionTrabajo(),
+                            ordenEditar.getCostoEstimado(),
+                            ordenEditar.getCostoReal(),
+                            ordenEditar.getEstadoOrden()
+                    );
                     actualizada.setEstadoOrden(estadoOrden(estado));
                     actualizada.setFechaCierre(fecha(fechaCierre));
                     actualizada.setCostoReal(decimal(costoReal));
+                    validarOrdenDemo(actualizada, ordenEditar);
                     reemplazarOrdenDemo(actualizada);
                 } else {
+                    validarOrdenDemo(orden, ordenEditar);
                     reemplazarOrdenDemo(orden);
                 }
             }
@@ -1082,6 +1116,137 @@ public class SigomeiFxApp extends Application {
         } catch (Exception ex) {
             mostrarError("No se pudo guardar la orden", ex.getMessage());
         }
+    }
+
+    private void validarCamposObligatorios(String... campos) {
+        for (String campo : campos) {
+            if (campo == null || campo.trim().isEmpty()) {
+                throw new IllegalArgumentException("Los campos son obligatorios");
+            }
+        }
+    }
+
+    private void validarEquipoDemo(EquipoDTO equipo, EquipoDTO anterior) {
+        for (EquipoDTO actual : equiposDemo) {
+            if (actual.getIdEquipo() != equipo.getIdEquipo()
+                    && actual.getNumeroSerie().equalsIgnoreCase(equipo.getNumeroSerie())) {
+                throw new IllegalStateException("Ya existe un equipo con el numero de serie indicado");
+            }
+        }
+        boolean pasaAInactivo = anterior != null
+                && anterior.getEstadoOperativo() != EstadoOperativo.INACTIVO
+                && equipo.getEstadoOperativo() == EstadoOperativo.INACTIVO;
+        if (pasaAInactivo && tieneOrdenesEquipoDemo(equipo.getIdEquipo())) {
+            throw new IllegalStateException("Este equipo esta relacionado a una orden, no puedes cambiarle el estado");
+        }
+    }
+
+    private void validarTecnicoDemo(TecnicoDTO tecnico, TecnicoDTO anterior) {
+        for (TecnicoDTO actual : tecnicosDemo) {
+            if (actual.getIdTecnico() != tecnico.getIdTecnico()
+                    && actual.getRfc().equalsIgnoreCase(tecnico.getRfc())) {
+                throw new IllegalStateException("Ya existe un tecnico con el RFC indicado");
+            }
+            if (actual.getIdTecnico() != tecnico.getIdTecnico()
+                    && actual.getCorreo().equalsIgnoreCase(tecnico.getCorreo())) {
+                throw new IllegalStateException("Ya existe un tecnico con el correo indicado");
+            }
+        }
+        boolean pasaAInactivo = anterior != null
+                && anterior.getEstatus() != EstadoTecnico.INACTIVO
+                && tecnico.getEstatus() == EstadoTecnico.INACTIVO;
+        if (pasaAInactivo && tieneOrdenesActivasTecnicoDemo(tecnico.getIdTecnico())) {
+            throw new IllegalStateException("Este tecnico tiene ordenes activas, no puedes cambiarlo a inactivo");
+        }
+    }
+
+    private void validarOrdenDemo(OrdenDTO orden, OrdenDTO anterior) {
+        EquipoDTO equipo = buscarEquipoDemo(orden.getIdEquipo());
+        TecnicoDTO tecnico = buscarTecnicoDemo(orden.getIdTecnico());
+        if (equipo == null) {
+            throw new IllegalStateException("Equipo no encontrado");
+        }
+        if (tecnico == null) {
+            throw new IllegalStateException("Tecnico no encontrado");
+        }
+        if (equipo.getTipo() != tecnico.getEspecialidad()) {
+            throw new IllegalStateException("La especialidad del tecnico no coincide con el equipo");
+        }
+        if (tecnico.getEstatus() != EstadoTecnico.ACTIVO) {
+            throw new IllegalStateException("El tecnico esta inactivo");
+        }
+        if (equipo.getCriticidad() == Criticidad.ALTA
+                && tecnico.getNivelCertificacion() == NivelCertificacion.I) {
+            throw new IllegalStateException("La criticidad alta requiere certificacion nivel II o III");
+        }
+        if (anterior != null && anterior.getEstadoOrden() != orden.getEstadoOrden()
+                && !esTransicionOrdenValida(anterior.getEstadoOrden(), orden.getEstadoOrden())) {
+            throw new IllegalStateException("Transicion de estado no permitida");
+        }
+        if (orden.getFechaInicio() != null && orden.getFechaInicio().isBefore(orden.getFechaProgramada())) {
+            throw new IllegalStateException("La fecha de inicio no respeta el orden cronologico");
+        }
+        if (orden.getFechaCierre() != null && orden.getFechaInicio() != null
+                && orden.getFechaCierre().isBefore(orden.getFechaInicio())) {
+            throw new IllegalStateException("La fecha de cierre no respeta el orden cronologico");
+        }
+        boolean finalizada = orden.getEstadoOrden() == EstadoOrden.FINALIZADA;
+        if (finalizada && (orden.getFechaCierre() == null || orden.getCostoReal() == null)) {
+            throw new IllegalStateException("La fecha de cierre y el costo real son obligatorios para finalizar");
+        }
+        if (!finalizada && (orden.getFechaCierre() != null || orden.getCostoReal() != null)) {
+            throw new IllegalStateException("Solo una orden finalizada puede tener fecha de cierre y costo real");
+        }
+        for (OrdenDTO actual : ordenesDemo) {
+            boolean distinta = actual.getIdOrden() != orden.getIdOrden();
+            boolean mismoEquipo = actual.getIdEquipo() == orden.getIdEquipo();
+            boolean mismaFecha = actual.getFechaProgramada().equals(orden.getFechaProgramada());
+            if (distinta && mismoEquipo && mismaFecha
+                    && esOrdenActiva(actual.getEstadoOrden()) && esOrdenActiva(orden.getEstadoOrden())) {
+                throw new IllegalStateException("Ya existe una orden activa duplicada para el equipo y fecha");
+            }
+        }
+    }
+
+    private EquipoDTO buscarEquipoDemo(int idEquipo) {
+        return equiposDemo.stream()
+                .filter(equipo -> equipo.getIdEquipo() == idEquipo)
+                .findFirst()
+                .orElse(null);
+    }
+
+    private TecnicoDTO buscarTecnicoDemo(int idTecnico) {
+        return tecnicosDemo.stream()
+                .filter(tecnico -> tecnico.getIdTecnico() == idTecnico)
+                .findFirst()
+                .orElse(null);
+    }
+
+    private boolean tieneOrdenesEquipoDemo(int idEquipo) {
+        return ordenesDemo.stream().anyMatch(orden -> orden.getIdEquipo() == idEquipo);
+    }
+
+    private boolean tieneOrdenesTecnicoDemo(int idTecnico) {
+        return ordenesDemo.stream().anyMatch(orden -> orden.getIdTecnico() == idTecnico);
+    }
+
+    private boolean tieneOrdenesActivasTecnicoDemo(int idTecnico) {
+        return ordenesDemo.stream().anyMatch(orden -> orden.getIdTecnico() == idTecnico
+                && esOrdenActiva(orden.getEstadoOrden()));
+    }
+
+    private boolean esOrdenActiva(EstadoOrden estado) {
+        return estado == EstadoOrden.PROGRAMADA || estado == EstadoOrden.EN_EJECUCION;
+    }
+
+    private boolean esTransicionOrdenValida(EstadoOrden actual, EstadoOrden nuevo) {
+        if (actual == EstadoOrden.PROGRAMADA) {
+            return nuevo == EstadoOrden.EN_EJECUCION || nuevo == EstadoOrden.CANCELADA;
+        }
+        if (actual == EstadoOrden.EN_EJECUCION) {
+            return nuevo == EstadoOrden.FINALIZADA || nuevo == EstadoOrden.CANCELADA;
+        }
+        return false;
     }
 
     private void mostrarOrdenEstado() {
@@ -1294,33 +1459,35 @@ public class SigomeiFxApp extends Application {
     }
 
     private int siguienteIdEquipo() {
-        int mayor = 0;
+        List<Integer> ids = new ArrayList<>();
         for (EquipoDTO equipo : obtenerEquipos()) {
-            if (equipo.getIdEquipo() > mayor) {
-                mayor = equipo.getIdEquipo();
-            }
+            ids.add(equipo.getIdEquipo());
         }
-        return mayor + 1;
+        return menorIdDisponible(ids);
     }
 
     private int siguienteIdTecnico() {
-        int mayor = 0;
+        List<Integer> ids = new ArrayList<>();
         for (TecnicoDTO tecnico : obtenerTecnicos()) {
-            if (tecnico.getIdTecnico() > mayor) {
-                mayor = tecnico.getIdTecnico();
-            }
+            ids.add(tecnico.getIdTecnico());
         }
-        return mayor + 1;
+        return menorIdDisponible(ids);
     }
 
     private int siguienteIdOrden() {
-        int mayor = 0;
+        List<Integer> ids = new ArrayList<>();
         for (OrdenDTO orden : obtenerOrdenes()) {
-            if (orden.getIdOrden() > mayor) {
-                mayor = orden.getIdOrden();
-            }
+            ids.add(orden.getIdOrden());
         }
-        return mayor + 1;
+        return menorIdDisponible(ids);
+    }
+
+    private int menorIdDisponible(List<Integer> ids) {
+        int candidato = 1;
+        while (ids.contains(candidato)) {
+            candidato++;
+        }
+        return candidato;
     }
 
     private void reemplazarEquipoDemo(EquipoDTO equipo) {

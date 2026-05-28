@@ -31,18 +31,7 @@ public class EquipoService {
             throws ValidacionException, ReglaNegocioException {
 
         validarEquipo(equipo);
-
-        List<EquipoDTO> equipos = repository == null
-                ? new ArrayList<>(InMemorySigomeiStore.EQUIPOS.values())
-                : repository.consultarTodos();
-        for (EquipoDTO actual : equipos) {
-            boolean mismoId = actual.getIdEquipo() == equipo.getIdEquipo();
-            boolean mismaSerie = actual.getNumeroSerie().equalsIgnoreCase(equipo.getNumeroSerie());
-            if (!mismoId && mismaSerie) {
-                ServerLog.warning("Equipo rechazado: numero de serie duplicado " + equipo.getNumeroSerie());
-                throw new ReglaNegocioException("Ya existe un equipo con el numero de serie indicado");
-            }
-        }
+        validarSerieUnica(equipo);
 
         EquipoDTO guardado;
         if (repository == null) {
@@ -91,13 +80,23 @@ public class EquipoService {
     }
 
     public EquipoDTO actualizarEquipo(EquipoDTO equipo)
-            throws ValidacionException, RegistroNoEncontradoException {
+            throws ValidacionException, ReglaNegocioException, RegistroNoEncontradoException {
 
-        if (equipo == null || buscarPorId(equipo.getIdEquipo()) == null) {
+        EquipoDTO existente = equipo == null ? null : buscarPorId(equipo.getIdEquipo());
+        if (existente == null) {
             throw new RegistroNoEncontradoException("Equipo no encontrado");
         }
 
         validarEquipo(equipo);
+        validarSerieUnica(equipo);
+
+        if (existente.getEstadoOperativo() != EstadoOperativo.INACTIVO
+                && equipo.getEstadoOperativo() == EstadoOperativo.INACTIVO
+                && tieneOrdenesRelacionadas(equipo.getIdEquipo())) {
+            ServerLog.warning("Equipo rechazado RN-03: equipo relacionado a orden id=" + equipo.getIdEquipo());
+            throw new ReglaNegocioException("Este equipo esta relacionado a una orden, no puedes cambiarle el estado");
+        }
+
         EquipoDTO actualizado;
         if (repository == null) {
             InMemorySigomeiStore.EQUIPOS.put(equipo.getIdEquipo(), copiar(equipo));
@@ -164,6 +163,20 @@ public class EquipoService {
                 || equipo.getFechaInstalacion() == null || equipo.getEstadoOperativo() == null
                 || equipo.getCriticidad() == null) {
             throw new ValidacionException("El equipo tiene datos obligatorios incompletos");
+        }
+    }
+
+    private void validarSerieUnica(EquipoDTO equipo) throws ReglaNegocioException {
+        List<EquipoDTO> equipos = repository == null
+                ? new ArrayList<>(InMemorySigomeiStore.EQUIPOS.values())
+                : repository.consultarTodos();
+        for (EquipoDTO actual : equipos) {
+            boolean mismoId = actual.getIdEquipo() == equipo.getIdEquipo();
+            boolean mismaSerie = actual.getNumeroSerie().equalsIgnoreCase(equipo.getNumeroSerie());
+            if (!mismoId && mismaSerie) {
+                ServerLog.warning("Equipo rechazado: numero de serie duplicado " + equipo.getNumeroSerie());
+                throw new ReglaNegocioException("Ya existe un equipo con el numero de serie indicado");
+            }
         }
     }
 

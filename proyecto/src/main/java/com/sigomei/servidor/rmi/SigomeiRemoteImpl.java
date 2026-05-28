@@ -89,7 +89,7 @@ public class SigomeiRemoteImpl extends UnicastRemoteObject implements SigomeiRem
 
     @Override
     public EquipoDTO actualizarEquipo(EquipoDTO equipo)
-            throws RemoteException, ValidacionException, RegistroNoEncontradoException {
+            throws RemoteException, ValidacionException, ReglaNegocioException, RegistroNoEncontradoException {
         return equipoService.actualizarEquipo(equipo);
     }
 
@@ -125,7 +125,7 @@ public class SigomeiRemoteImpl extends UnicastRemoteObject implements SigomeiRem
 
     @Override
     public TecnicoDTO actualizarTecnico(TecnicoDTO tecnico)
-            throws RemoteException, ValidacionException, RegistroNoEncontradoException {
+            throws RemoteException, ValidacionException, ReglaNegocioException, RegistroNoEncontradoException {
         return tecnicoService.actualizarTecnico(tecnico);
     }
 

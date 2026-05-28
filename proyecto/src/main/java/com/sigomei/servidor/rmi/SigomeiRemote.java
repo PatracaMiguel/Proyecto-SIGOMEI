@@ -41,7 +41,7 @@ public interface SigomeiRemote extends Remote {
             throws RemoteException;
 
     EquipoDTO actualizarEquipo(EquipoDTO equipo)
-            throws RemoteException, ValidacionException, RegistroNoEncontradoException;
+            throws RemoteException, ValidacionException, ReglaNegocioException, RegistroNoEncontradoException;
 
     EquipoDTO cambiarEstadoEquipo(int idEquipo, EstadoOperativo nuevoEstado)
             throws RemoteException, ReglaNegocioException, RegistroNoEncontradoException;
@@ -59,7 +59,7 @@ public interface SigomeiRemote extends Remote {
             throws RemoteException;
 
     TecnicoDTO actualizarTecnico(TecnicoDTO tecnico)
-            throws RemoteException, ValidacionException, RegistroNoEncontradoException;
+            throws RemoteException, ValidacionException, ReglaNegocioException, RegistroNoEncontradoException;
 
     TecnicoDTO cambiarEstatusTecnico(int idTecnico, EstadoTecnico nuevoEstatus)
             throws RemoteException, ReglaNegocioException, RegistroNoEncontradoException;

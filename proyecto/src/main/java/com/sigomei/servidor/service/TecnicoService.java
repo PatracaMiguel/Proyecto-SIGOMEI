@@ -32,23 +32,7 @@ public class TecnicoService {
             throws ValidacionException, ReglaNegocioException {
 
         validarTecnico(tecnico);
-
-        List<TecnicoDTO> tecnicos = repository == null
-                ? new ArrayList<>(InMemorySigomeiStore.TECNICOS.values())
-                : repository.consultarTodos();
-        for (TecnicoDTO actual : tecnicos) {
-            boolean mismoId = actual.getIdTecnico() == tecnico.getIdTecnico();
-            boolean mismoRfc = actual.getRfc().equalsIgnoreCase(tecnico.getRfc());
-            boolean mismoCorreo = actual.getCorreo().equalsIgnoreCase(tecnico.getCorreo());
-            if (!mismoId && mismoRfc) {
-                ServerLog.warning("Tecnico rechazado: RFC duplicado " + tecnico.getRfc());
-                throw new ReglaNegocioException("Ya existe un tecnico con el RFC indicado");
-            }
-            if (!mismoId && mismoCorreo) {
-                ServerLog.warning("Tecnico rechazado: correo duplicado " + tecnico.getCorreo());
-                throw new ReglaNegocioException("Ya existe un tecnico con el correo indicado");
-            }
-        }
+        validarDatosUnicos(tecnico);
 
         TecnicoDTO guardado;
         if (repository == null) {
@@ -97,13 +81,23 @@ public class TecnicoService {
     }
 
     public TecnicoDTO actualizarTecnico(TecnicoDTO tecnico)
-            throws ValidacionException, RegistroNoEncontradoException {
+            throws ValidacionException, ReglaNegocioException, RegistroNoEncontradoException {
 
-        if (tecnico == null || buscarPorId(tecnico.getIdTecnico()) == null) {
+        TecnicoDTO existente = tecnico == null ? null : buscarPorId(tecnico.getIdTecnico());
+        if (existente == null) {
             throw new RegistroNoEncontradoException("Tecnico no encontrado");
         }
 
         validarTecnico(tecnico);
+        validarDatosUnicos(tecnico);
+
+        if (existente.getEstatus() != EstadoTecnico.INACTIVO
+                && tecnico.getEstatus() == EstadoTecnico.INACTIVO
+                && tieneOrdenesActivas(tecnico.getIdTecnico())) {
+            ServerLog.warning("Tecnico rechazado RN-03: tiene ordenes activas id=" + tecnico.getIdTecnico());
+            throw new ReglaNegocioException("Este tecnico tiene ordenes activas, no puedes cambiarlo a inactivo");
+        }
+
         TecnicoDTO actualizado;
         if (repository == null) {
             InMemorySigomeiStore.TECNICOS.put(tecnico.getIdTecnico(), copiar(tecnico));
@@ -170,6 +164,25 @@ public class TecnicoService {
                 || tecnico.getNivelCertificacion() == null || tecnico.getFechaIngreso() == null
                 || tecnico.getEstatus() == null) {
             throw new ValidacionException("El tecnico tiene datos obligatorios incompletos");
+        }
+    }
+
+    private void validarDatosUnicos(TecnicoDTO tecnico) throws ReglaNegocioException {
+        List<TecnicoDTO> tecnicos = repository == null
+                ? new ArrayList<>(InMemorySigomeiStore.TECNICOS.values())
+                : repository.consultarTodos();
+        for (TecnicoDTO actual : tecnicos) {
+            boolean mismoId = actual.getIdTecnico() == tecnico.getIdTecnico();
+            boolean mismoRfc = actual.getRfc().equalsIgnoreCase(tecnico.getRfc());
+            boolean mismoCorreo = actual.getCorreo().equalsIgnoreCase(tecnico.getCorreo());
+            if (!mismoId && mismoRfc) {
+                ServerLog.warning("Tecnico rechazado: RFC duplicado " + tecnico.getRfc());
+                throw new ReglaNegocioException("Ya existe un tecnico con el RFC indicado");
+            }
+            if (!mismoId && mismoCorreo) {
+                ServerLog.warning("Tecnico rechazado: correo duplicado " + tecnico.getCorreo());
+                throw new ReglaNegocioException("Ya existe un tecnico con el correo indicado");
+            }
         }
     }
 

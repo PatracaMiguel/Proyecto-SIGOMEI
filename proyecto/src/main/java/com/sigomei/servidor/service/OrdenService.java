@@ -103,16 +103,32 @@ public class OrdenService {
     public OrdenDTO actualizarOrden(OrdenDTO orden)
             throws ValidacionException, ReglaNegocioException, RegistroNoEncontradoException {
 
-        if (orden == null || buscarOrdenPorId(orden.getIdOrden()) == null) {
+        OrdenDTO existente = orden == null ? null : buscarOrdenPorId(orden.getIdOrden());
+        if (existente == null) {
             throw new RegistroNoEncontradoException("Orden no encontrada");
         }
 
         validarOrdenBasica(orden);
-        buscarEquipo(orden.getIdEquipo());
-        buscarTecnico(orden.getIdTecnico());
+        EquipoDTO equipo = buscarEquipo(orden.getIdEquipo());
+        TecnicoDTO tecnico = buscarTecnico(orden.getIdTecnico());
+        validarTecnicoCompatible(equipo, tecnico);
+        validarTecnicoActivo(tecnico);
+        validarCertificacionParaCriticidad(equipo, tecnico);
+        if (existente.getEstadoOrden() != orden.getEstadoOrden()
+                && !esTransicionValida(existente.getEstadoOrden(), orden.getEstadoOrden())) {
+            ServerLog.warning("Transicion rechazada idOrden=" + orden.getIdOrden()
+                    + " nuevoEstado=" + orden.getEstadoOrden());
+            throw new ReglaNegocioException("Transicion de estado no permitida");
+        }
         validarFechas(orden);
         validarFinalizacion(orden.getEstadoOrden(), orden.getFechaCierre(), orden.getCostoReal());
         validarOrdenActivaDuplicada(orden);
+
+        if (existente.getEstadoOrden() != orden.getEstadoOrden()
+                && orden.getEstadoOrden() == EstadoOrden.EN_EJECUCION
+                && orden.getFechaInicio() == null) {
+            orden.setFechaInicio(LocalDate.now());
+        }
 
         OrdenDTO actualizada;
         if (ordenRepository == null) {

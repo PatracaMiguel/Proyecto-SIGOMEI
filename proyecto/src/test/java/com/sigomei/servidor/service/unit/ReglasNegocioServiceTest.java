@@ -122,6 +122,29 @@ public class ReglasNegocioServiceTest {
     }
 
     @Test
+    public void rn03_negativo_actualizarEquipoNoPuedeInactivarConOrdenesRelacionadas() {
+        EquipoDTO equipo = new EquipoDTO(
+                1,
+                "Compresor electrico",
+                TipoEquipo.ELECTRICO,
+                "Atlas",
+                "AX-10",
+                "EQ-001",
+                "Planta Norte",
+                LocalDate.of(2024, 1, 10),
+                EstadoOperativo.INACTIVO,
+                Criticidad.ALTA
+        );
+
+        ReglaNegocioException error = assertThrows(
+                ReglaNegocioException.class,
+                () -> equipoService.actualizarEquipo(equipo)
+        );
+
+        assertTrue(error.getMessage().toLowerCase().contains("orden"));
+    }
+
+    @Test
     public void rn04_positivo_tecnicoActivo() {
         OrdenDTO orden = crearOrdenConFecha(106, 1, 1, LocalDate.of(2026, 5, 22));
 
@@ -141,6 +164,28 @@ public class ReglasNegocioServiceTest {
         );
 
         assertTrue(error.getMessage().toLowerCase().contains("inactivo"));
+    }
+
+    @Test
+    public void rn04_negativo_actualizarTecnicoNoPuedeInactivarConOrdenesActivas() {
+        TecnicoDTO tecnico = new TecnicoDTO(
+                1,
+                "Ana Lopez",
+                "LOAA900101AA1",
+                "5551000001",
+                "ana@example.com",
+                TipoEquipo.ELECTRICO,
+                NivelCertificacion.II,
+                LocalDate.of(2022, 1, 10),
+                EstadoTecnico.INACTIVO
+        );
+
+        ReglaNegocioException error = assertThrows(
+                ReglaNegocioException.class,
+                () -> tecnicoService.actualizarTecnico(tecnico)
+        );
+
+        assertTrue(error.getMessage().toLowerCase().contains("activas"));
     }
 
     @Test
@@ -303,6 +348,23 @@ public class ReglasNegocioServiceTest {
                         null,
                         null
                 )
+        );
+
+        assertTrue(error.getMessage().toLowerCase().contains("transicion"));
+    }
+
+    @Test
+    public void rn08_negativo_actualizarOrdenNoPermiteTransicionInvalida() {
+        OrdenDTO orden = crearOrdenConFecha(120, 1, 1, LocalDate.of(2026, 5, 30));
+        assertDoesNotThrow(() -> ordenService.registrarOrden(orden));
+        OrdenDTO actualizada = crearOrdenConFecha(120, 1, 1, LocalDate.of(2026, 5, 30));
+        actualizada.setEstadoOrden(EstadoOrden.FINALIZADA);
+        actualizada.setFechaCierre(LocalDate.of(2026, 5, 31));
+        actualizada.setCostoReal(new BigDecimal("1700.00"));
+
+        ReglaNegocioException error = assertThrows(
+                ReglaNegocioException.class,
+                () -> ordenService.actualizarOrden(actualizada)
         );
 
         assertTrue(error.getMessage().toLowerCase().contains("transicion"));

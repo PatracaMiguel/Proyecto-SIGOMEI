@@ -3142,3 +3142,5 @@
 2026-05-27 20:41:57 [WARNING] Equipo rechazado: numero de serie duplicado EQ-001
 2026-05-27 20:41:57 [WARNING] Equipo rechazado RN-03: equipo relacionado a orden id=1
 2026-05-27 20:41:57 [INFO] Estado equipo actualizado id=2 estado=OPERATIVO
+2026-05-27 21:42:28 [INFO] Servidor SIGOMEI iniciado en puerto RMI 1099
+2026-05-27 22:07:37 [INFO] Servidor SIGOMEI iniciado en puerto RMI 1099

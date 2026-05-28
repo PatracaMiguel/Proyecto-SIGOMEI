@@ -18,10 +18,10 @@ public class EquipoService {
 
     private final EquipoRepository repository;
 
-<span class="fc" id="L21">    public EquipoService() {</span>
-<span class="fc" id="L22">        InMemorySigomeiStore.reset();</span>
-<span class="fc" id="L23">        this.repository = null;</span>
-<span class="fc" id="L24">    }</span>
+<span class="nc" id="L21">    public EquipoService() {</span>
+<span class="nc" id="L22">        InMemorySigomeiStore.reset();</span>
+<span class="nc" id="L23">        this.repository = null;</span>
+<span class="nc" id="L24">    }</span>
 
 <span class="nc" id="L26">    public EquipoService(EquipoRepository repository) {</span>
 <span class="nc" id="L27">        this.repository = repository;</span>
@@ -30,163 +30,176 @@ public class EquipoService {
     public EquipoDTO registrarEquipo(EquipoDTO equipo)
             throws ValidacionException, ReglaNegocioException {
 
-<span class="fc" id="L33">        validarEquipo(equipo);</span>
-
-<span class="pc bpc" id="L35" title="1 of 2 branches missed.">        List&lt;EquipoDTO&gt; equipos = repository == null</span>
-<span class="fc" id="L36">                ? new ArrayList&lt;&gt;(InMemorySigomeiStore.EQUIPOS.values())</span>
-<span class="nc" id="L37">                : repository.consultarTodos();</span>
-<span class="fc bfc" id="L38" title="All 2 branches covered.">        for (EquipoDTO actual : equipos) {</span>
-<span class="pc bpc" id="L39" title="1 of 2 branches missed.">            boolean mismoId = actual.getIdEquipo() == equipo.getIdEquipo();</span>
-<span class="fc" id="L40">            boolean mismaSerie = actual.getNumeroSerie().equalsIgnoreCase(equipo.getNumeroSerie());</span>
-<span class="pc bpc" id="L41" title="1 of 4 branches missed.">            if (!mismoId &amp;&amp; mismaSerie) {</span>
-<span class="fc" id="L42">                ServerLog.warning(&quot;Equipo rechazado: numero de serie duplicado &quot; + equipo.getNumeroSerie());</span>
-<span class="fc" id="L43">                throw new ReglaNegocioException(&quot;Ya existe un equipo con el numero de serie indicado&quot;);</span>
-            }
-        }
+<span class="nc" id="L33">        validarEquipo(equipo);</span>
+<span class="nc" id="L34">        validarSerieUnica(equipo);</span>
 
         EquipoDTO guardado;
-<span class="pc bpc" id="L48" title="1 of 2 branches missed.">        if (repository == null) {</span>
-<span class="fc" id="L49">            InMemorySigomeiStore.EQUIPOS.put(equipo.getIdEquipo(), copiar(equipo));</span>
-<span class="fc" id="L50">            guardado = copiar(equipo);</span>
-<span class="fc" id="L51">        } else {</span>
-<span class="nc" id="L52">            guardado = repository.guardar(equipo);</span>
+<span class="nc bnc" id="L37" title="All 2 branches missed.">        if (repository == null) {</span>
+<span class="nc" id="L38">            InMemorySigomeiStore.EQUIPOS.put(equipo.getIdEquipo(), copiar(equipo));</span>
+<span class="nc" id="L39">            guardado = copiar(equipo);</span>
+<span class="nc" id="L40">        } else {</span>
+<span class="nc" id="L41">            guardado = repository.guardar(equipo);</span>
         }
-<span class="fc" id="L54">        ServerLog.info(&quot;Equipo registrado id=&quot; + equipo.getIdEquipo());</span>
-<span class="fc" id="L55">        return copiar(guardado);</span>
+<span class="nc" id="L43">        ServerLog.info(&quot;Equipo registrado id=&quot; + equipo.getIdEquipo());</span>
+<span class="nc" id="L44">        return copiar(guardado);</span>
     }
 
     public List&lt;EquipoDTO&gt; consultarEquipos() {
-<span class="pc bpc" id="L59" title="1 of 2 branches missed.">        if (repository != null) {</span>
-<span class="nc" id="L60">            ServerLog.info(&quot;Consulta de equipos&quot;);</span>
-<span class="nc" id="L61">            return repository.consultarTodos();</span>
+<span class="nc bnc" id="L48" title="All 2 branches missed.">        if (repository != null) {</span>
+<span class="nc" id="L49">            ServerLog.info(&quot;Consulta de equipos&quot;);</span>
+<span class="nc" id="L50">            return repository.consultarTodos();</span>
         }
-<span class="fc" id="L63">        List&lt;EquipoDTO&gt; equipos = new ArrayList&lt;&gt;();</span>
-<span class="fc bfc" id="L64" title="All 2 branches covered.">        for (EquipoDTO equipo : InMemorySigomeiStore.EQUIPOS.values()) {</span>
-<span class="fc" id="L65">            equipos.add(copiar(equipo));</span>
+<span class="nc" id="L52">        List&lt;EquipoDTO&gt; equipos = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L53" title="All 2 branches missed.">        for (EquipoDTO equipo : InMemorySigomeiStore.EQUIPOS.values()) {</span>
+<span class="nc" id="L54">            equipos.add(copiar(equipo));</span>
         }
-<span class="fc" id="L67">        ServerLog.info(&quot;Consulta de equipos&quot;);</span>
-<span class="fc" id="L68">        return equipos;</span>
+<span class="nc" id="L56">        ServerLog.info(&quot;Consulta de equipos&quot;);</span>
+<span class="nc" id="L57">        return equipos;</span>
     }
 
     public List&lt;EquipoDTO&gt; filtrarEquipos(String nombre, TipoEquipo tipo, Criticidad criticidad) {
-<span class="pc bpc" id="L72" title="1 of 2 branches missed.">        if (repository != null) {</span>
-<span class="nc" id="L73">            ServerLog.info(&quot;Filtro de equipos tipo=&quot; + tipo);</span>
-<span class="nc" id="L74">            return repository.filtrar(nombre, tipo, criticidad);</span>
+<span class="nc bnc" id="L61" title="All 2 branches missed.">        if (repository != null) {</span>
+<span class="nc" id="L62">            ServerLog.info(&quot;Filtro de equipos tipo=&quot; + tipo);</span>
+<span class="nc" id="L63">            return repository.filtrar(nombre, tipo, criticidad);</span>
         }
-<span class="fc" id="L76">        List&lt;EquipoDTO&gt; resultado = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L65">        List&lt;EquipoDTO&gt; resultado = new ArrayList&lt;&gt;();</span>
 
-<span class="fc bfc" id="L78" title="All 2 branches covered.">        for (EquipoDTO equipo : InMemorySigomeiStore.EQUIPOS.values()) {</span>
-<span class="fc bfc" id="L79" title="All 4 branches covered.">            boolean coincideNombre = nombre == null || nombre.isBlank()</span>
-<span class="fc bfc" id="L80" title="All 2 branches covered.">                    || equipo.getNombre().toLowerCase().contains(nombre.toLowerCase());</span>
-<span class="fc bfc" id="L81" title="All 4 branches covered.">            boolean coincideTipo = tipo == null || equipo.getTipo() == tipo;</span>
-<span class="fc bfc" id="L82" title="All 4 branches covered.">            boolean coincideCriticidad = criticidad == null || equipo.getCriticidad() == criticidad;</span>
+<span class="nc bnc" id="L67" title="All 2 branches missed.">        for (EquipoDTO equipo : InMemorySigomeiStore.EQUIPOS.values()) {</span>
+<span class="nc bnc" id="L68" title="All 4 branches missed.">            boolean coincideNombre = nombre == null || nombre.isBlank()</span>
+<span class="nc bnc" id="L69" title="All 2 branches missed.">                    || equipo.getNombre().toLowerCase().contains(nombre.toLowerCase());</span>
+<span class="nc bnc" id="L70" title="All 4 branches missed.">            boolean coincideTipo = tipo == null || equipo.getTipo() == tipo;</span>
+<span class="nc bnc" id="L71" title="All 4 branches missed.">            boolean coincideCriticidad = criticidad == null || equipo.getCriticidad() == criticidad;</span>
 
-<span class="pc bpc" id="L84" title="1 of 6 branches missed.">            if (coincideNombre &amp;&amp; coincideTipo &amp;&amp; coincideCriticidad) {</span>
-<span class="fc" id="L85">                resultado.add(copiar(equipo));</span>
+<span class="nc bnc" id="L73" title="All 6 branches missed.">            if (coincideNombre &amp;&amp; coincideTipo &amp;&amp; coincideCriticidad) {</span>
+<span class="nc" id="L74">                resultado.add(copiar(equipo));</span>
             }
         }
 
-<span class="fc" id="L89">        ServerLog.info(&quot;Filtro de equipos tipo=&quot; + tipo);</span>
-<span class="fc" id="L90">        return resultado;</span>
+<span class="nc" id="L78">        ServerLog.info(&quot;Filtro de equipos tipo=&quot; + tipo);</span>
+<span class="nc" id="L79">        return resultado;</span>
     }
 
     public EquipoDTO actualizarEquipo(EquipoDTO equipo)
-            throws ValidacionException, RegistroNoEncontradoException {
+            throws ValidacionException, ReglaNegocioException, RegistroNoEncontradoException {
 
-<span class="fc bfc" id="L96" title="All 4 branches covered.">        if (equipo == null || buscarPorId(equipo.getIdEquipo()) == null) {</span>
-<span class="fc" id="L97">            throw new RegistroNoEncontradoException(&quot;Equipo no encontrado&quot;);</span>
+<span class="nc bnc" id="L85" title="All 2 branches missed.">        EquipoDTO existente = equipo == null ? null : buscarPorId(equipo.getIdEquipo());</span>
+<span class="nc bnc" id="L86" title="All 2 branches missed.">        if (existente == null) {</span>
+<span class="nc" id="L87">            throw new RegistroNoEncontradoException(&quot;Equipo no encontrado&quot;);</span>
         }
 
-<span class="fc" id="L100">        validarEquipo(equipo);</span>
+<span class="nc" id="L90">        validarEquipo(equipo);</span>
+<span class="nc" id="L91">        validarSerieUnica(equipo);</span>
+
+<span class="nc bnc" id="L93" title="All 2 branches missed.">        if (existente.getEstadoOperativo() != EstadoOperativo.INACTIVO</span>
+<span class="nc bnc" id="L94" title="All 2 branches missed.">                &amp;&amp; equipo.getEstadoOperativo() == EstadoOperativo.INACTIVO</span>
+<span class="nc bnc" id="L95" title="All 2 branches missed.">                &amp;&amp; tieneOrdenesRelacionadas(equipo.getIdEquipo())) {</span>
+<span class="nc" id="L96">            ServerLog.warning(&quot;Equipo rechazado RN-03: equipo relacionado a orden id=&quot; + equipo.getIdEquipo());</span>
+<span class="nc" id="L97">            throw new ReglaNegocioException(&quot;Este equipo esta relacionado a una orden, no puedes cambiarle el estado&quot;);</span>
+        }
+
         EquipoDTO actualizado;
-<span class="pc bpc" id="L102" title="1 of 2 branches missed.">        if (repository == null) {</span>
-<span class="fc" id="L103">            InMemorySigomeiStore.EQUIPOS.put(equipo.getIdEquipo(), copiar(equipo));</span>
-<span class="fc" id="L104">            actualizado = copiar(equipo);</span>
-<span class="fc" id="L105">        } else {</span>
-<span class="nc" id="L106">            actualizado = repository.actualizar(equipo);</span>
+<span class="nc bnc" id="L101" title="All 2 branches missed.">        if (repository == null) {</span>
+<span class="nc" id="L102">            InMemorySigomeiStore.EQUIPOS.put(equipo.getIdEquipo(), copiar(equipo));</span>
+<span class="nc" id="L103">            actualizado = copiar(equipo);</span>
+<span class="nc" id="L104">        } else {</span>
+<span class="nc" id="L105">            actualizado = repository.actualizar(equipo);</span>
         }
-<span class="fc" id="L108">        ServerLog.info(&quot;Equipo actualizado id=&quot; + equipo.getIdEquipo());</span>
-<span class="fc" id="L109">        return copiar(actualizado);</span>
+<span class="nc" id="L107">        ServerLog.info(&quot;Equipo actualizado id=&quot; + equipo.getIdEquipo());</span>
+<span class="nc" id="L108">        return copiar(actualizado);</span>
     }
 
     public EquipoDTO cambiarEstadoEquipo(int idEquipo, EstadoOperativo nuevoEstado)
             throws ReglaNegocioException, RegistroNoEncontradoException {
 
-<span class="fc" id="L115">        EquipoDTO equipo = buscarPorId(idEquipo);</span>
-<span class="fc bfc" id="L116" title="All 2 branches covered.">        if (equipo == null) {</span>
-<span class="fc" id="L117">            throw new RegistroNoEncontradoException(&quot;Equipo no encontrado&quot;);</span>
+<span class="nc" id="L114">        EquipoDTO equipo = buscarPorId(idEquipo);</span>
+<span class="nc bnc" id="L115" title="All 2 branches missed.">        if (equipo == null) {</span>
+<span class="nc" id="L116">            throw new RegistroNoEncontradoException(&quot;Equipo no encontrado&quot;);</span>
         }
 
-<span class="fc bfc" id="L120" title="All 4 branches covered.">        if (nuevoEstado == EstadoOperativo.INACTIVO &amp;&amp; tieneOrdenesRelacionadas(idEquipo)) {</span>
-<span class="fc" id="L121">            ServerLog.warning(&quot;Equipo rechazado RN-03: equipo relacionado a orden id=&quot; + idEquipo);</span>
-<span class="fc" id="L122">            throw new ReglaNegocioException(&quot;Este equipo esta relacionado a una orden, no puedes cambiarle el estado&quot;);</span>
+<span class="nc bnc" id="L119" title="All 4 branches missed.">        if (nuevoEstado == EstadoOperativo.INACTIVO &amp;&amp; tieneOrdenesRelacionadas(idEquipo)) {</span>
+<span class="nc" id="L120">            ServerLog.warning(&quot;Equipo rechazado RN-03: equipo relacionado a orden id=&quot; + idEquipo);</span>
+<span class="nc" id="L121">            throw new ReglaNegocioException(&quot;Este equipo esta relacionado a una orden, no puedes cambiarle el estado&quot;);</span>
         }
 
-<span class="fc" id="L125">        equipo.setEstadoOperativo(nuevoEstado);</span>
-<span class="pc bpc" id="L126" title="1 of 2 branches missed.">        if (repository != null) {</span>
-<span class="nc" id="L127">            equipo = repository.actualizar(equipo);</span>
+<span class="nc" id="L124">        equipo.setEstadoOperativo(nuevoEstado);</span>
+<span class="nc bnc" id="L125" title="All 2 branches missed.">        if (repository != null) {</span>
+<span class="nc" id="L126">            equipo = repository.actualizar(equipo);</span>
         }
-<span class="fc" id="L129">        ServerLog.info(&quot;Estado equipo actualizado id=&quot; + idEquipo + &quot; estado=&quot; + nuevoEstado);</span>
-<span class="fc" id="L130">        return copiar(equipo);</span>
+<span class="nc" id="L128">        ServerLog.info(&quot;Estado equipo actualizado id=&quot; + idEquipo + &quot; estado=&quot; + nuevoEstado);</span>
+<span class="nc" id="L129">        return copiar(equipo);</span>
     }
 
     public void eliminarEquipo(int idEquipo)
             throws ReglaNegocioException, RegistroNoEncontradoException {
 
-<span class="fc bfc" id="L136" title="All 2 branches covered.">        if (buscarPorId(idEquipo) == null) {</span>
-<span class="fc" id="L137">            throw new RegistroNoEncontradoException(&quot;Equipo no encontrado&quot;);</span>
+<span class="nc bnc" id="L135" title="All 2 branches missed.">        if (buscarPorId(idEquipo) == null) {</span>
+<span class="nc" id="L136">            throw new RegistroNoEncontradoException(&quot;Equipo no encontrado&quot;);</span>
         }
 
-<span class="pc bpc" id="L140" title="1 of 2 branches missed.">        if (tieneOrdenesRelacionadas(idEquipo)) {</span>
-<span class="fc" id="L141">            ServerLog.warning(&quot;Equipo rechazado RN-03: equipo relacionado a orden id=&quot; + idEquipo);</span>
-<span class="fc" id="L142">            throw new ReglaNegocioException(&quot;No se puede eliminar un equipo con ordenes relacionadas&quot;);</span>
+<span class="nc bnc" id="L139" title="All 2 branches missed.">        if (tieneOrdenesRelacionadas(idEquipo)) {</span>
+<span class="nc" id="L140">            ServerLog.warning(&quot;Equipo rechazado RN-03: equipo relacionado a orden id=&quot; + idEquipo);</span>
+<span class="nc" id="L141">            throw new ReglaNegocioException(&quot;No se puede eliminar un equipo con ordenes relacionadas&quot;);</span>
         }
 
-<span class="nc bnc" id="L145" title="All 2 branches missed.">        if (repository == null) {</span>
-<span class="nc" id="L146">            InMemorySigomeiStore.EQUIPOS.remove(idEquipo);</span>
-<span class="nc" id="L147">        } else {</span>
-<span class="nc" id="L148">            repository.eliminar(idEquipo);</span>
+<span class="nc bnc" id="L144" title="All 2 branches missed.">        if (repository == null) {</span>
+<span class="nc" id="L145">            InMemorySigomeiStore.EQUIPOS.remove(idEquipo);</span>
+<span class="nc" id="L146">        } else {</span>
+<span class="nc" id="L147">            repository.eliminar(idEquipo);</span>
         }
-<span class="nc" id="L150">        ServerLog.info(&quot;Equipo eliminado id=&quot; + idEquipo);</span>
-<span class="nc" id="L151">    }</span>
+<span class="nc" id="L149">        ServerLog.info(&quot;Equipo eliminado id=&quot; + idEquipo);</span>
+<span class="nc" id="L150">    }</span>
 
     private EquipoDTO buscarPorId(int idEquipo) {
-<span class="pc bpc" id="L154" title="1 of 2 branches missed.">        return repository == null ? InMemorySigomeiStore.EQUIPOS.get(idEquipo) : repository.buscarPorId(idEquipo);</span>
+<span class="nc bnc" id="L153" title="All 2 branches missed.">        return repository == null ? InMemorySigomeiStore.EQUIPOS.get(idEquipo) : repository.buscarPorId(idEquipo);</span>
     }
 
     private void validarEquipo(EquipoDTO equipo) throws ValidacionException {
-<span class="fc bfc" id="L158" title="All 2 branches covered.">        if (equipo == null) {</span>
-<span class="fc" id="L159">            throw new ValidacionException(&quot;El equipo tiene datos obligatorios incompletos&quot;);</span>
+<span class="nc bnc" id="L157" title="All 2 branches missed.">        if (equipo == null) {</span>
+<span class="nc" id="L158">            throw new ValidacionException(&quot;El equipo tiene datos obligatorios incompletos&quot;);</span>
         }
-<span class="fc bfc" id="L161" title="All 6 branches covered.">        if (equipo.getIdEquipo() &lt;= 0 || esBlanco(equipo.getNombre()) || equipo.getTipo() == null</span>
-<span class="fc bfc" id="L162" title="All 4 branches covered.">                || esBlanco(equipo.getMarca()) || esBlanco(equipo.getModelo())</span>
-<span class="fc bfc" id="L163" title="All 4 branches covered.">                || esBlanco(equipo.getNumeroSerie()) || esBlanco(equipo.getUbicacionPlanta())</span>
-<span class="fc bfc" id="L164" title="All 4 branches covered.">                || equipo.getFechaInstalacion() == null || equipo.getEstadoOperativo() == null</span>
-<span class="fc bfc" id="L165" title="All 2 branches covered.">                || equipo.getCriticidad() == null) {</span>
-<span class="fc" id="L166">            throw new ValidacionException(&quot;El equipo tiene datos obligatorios incompletos&quot;);</span>
+<span class="nc bnc" id="L160" title="All 6 branches missed.">        if (equipo.getIdEquipo() &lt;= 0 || esBlanco(equipo.getNombre()) || equipo.getTipo() == null</span>
+<span class="nc bnc" id="L161" title="All 4 branches missed.">                || esBlanco(equipo.getMarca()) || esBlanco(equipo.getModelo())</span>
+<span class="nc bnc" id="L162" title="All 4 branches missed.">                || esBlanco(equipo.getNumeroSerie()) || esBlanco(equipo.getUbicacionPlanta())</span>
+<span class="nc bnc" id="L163" title="All 4 branches missed.">                || equipo.getFechaInstalacion() == null || equipo.getEstadoOperativo() == null</span>
+<span class="nc bnc" id="L164" title="All 2 branches missed.">                || equipo.getCriticidad() == null) {</span>
+<span class="nc" id="L165">            throw new ValidacionException(&quot;El equipo tiene datos obligatorios incompletos&quot;);</span>
         }
-<span class="fc" id="L168">    }</span>
+<span class="nc" id="L167">    }</span>
 
-    private boolean tieneOrdenesRelacionadas(int idEquipo) {
-<span class="pc bpc" id="L171" title="1 of 2 branches missed.">        if (repository != null) {</span>
-<span class="nc" id="L172">            return repository.tieneOrdenesRelacionadas(idEquipo);</span>
-        }
-<span class="fc bfc" id="L174" title="All 2 branches covered.">        for (OrdenDTO orden : InMemorySigomeiStore.ORDENES.values()) {</span>
-<span class="fc bfc" id="L175" title="All 2 branches covered.">            if (orden.getIdEquipo() == idEquipo) {</span>
-<span class="fc" id="L176">                return true;</span>
+    private void validarSerieUnica(EquipoDTO equipo) throws ReglaNegocioException {
+<span class="nc bnc" id="L170" title="All 2 branches missed.">        List&lt;EquipoDTO&gt; equipos = repository == null</span>
+<span class="nc" id="L171">                ? new ArrayList&lt;&gt;(InMemorySigomeiStore.EQUIPOS.values())</span>
+<span class="nc" id="L172">                : repository.consultarTodos();</span>
+<span class="nc bnc" id="L173" title="All 2 branches missed.">        for (EquipoDTO actual : equipos) {</span>
+<span class="nc bnc" id="L174" title="All 2 branches missed.">            boolean mismoId = actual.getIdEquipo() == equipo.getIdEquipo();</span>
+<span class="nc" id="L175">            boolean mismaSerie = actual.getNumeroSerie().equalsIgnoreCase(equipo.getNumeroSerie());</span>
+<span class="nc bnc" id="L176" title="All 4 branches missed.">            if (!mismoId &amp;&amp; mismaSerie) {</span>
+<span class="nc" id="L177">                ServerLog.warning(&quot;Equipo rechazado: numero de serie duplicado &quot; + equipo.getNumeroSerie());</span>
+<span class="nc" id="L178">                throw new ReglaNegocioException(&quot;Ya existe un equipo con el numero de serie indicado&quot;);</span>
             }
         }
-<span class="fc" id="L179">        return false;</span>
+<span class="nc" id="L181">    }</span>
+
+    private boolean tieneOrdenesRelacionadas(int idEquipo) {
+<span class="nc bnc" id="L184" title="All 2 branches missed.">        if (repository != null) {</span>
+<span class="nc" id="L185">            return repository.tieneOrdenesRelacionadas(idEquipo);</span>
+        }
+<span class="nc bnc" id="L187" title="All 2 branches missed.">        for (OrdenDTO orden : InMemorySigomeiStore.ORDENES.values()) {</span>
+<span class="nc bnc" id="L188" title="All 2 branches missed.">            if (orden.getIdEquipo() == idEquipo) {</span>
+<span class="nc" id="L189">                return true;</span>
+            }
+        }
+<span class="nc" id="L192">        return false;</span>
     }
 
     private boolean esBlanco(String valor) {
-<span class="pc bpc" id="L183" title="1 of 4 branches missed.">        return valor == null || valor.isBlank();</span>
+<span class="nc bnc" id="L196" title="All 4 branches missed.">        return valor == null || valor.isBlank();</span>
     }
 
     private EquipoDTO copiar(EquipoDTO equipo) {
-<span class="fc" id="L187">        return new EquipoDTO(equipo.getIdEquipo(), equipo.getNombre(), equipo.getTipo(), equipo.getMarca(),</span>
-<span class="fc" id="L188">                equipo.getModelo(), equipo.getNumeroSerie(), equipo.getUbicacionPlanta(),</span>
-<span class="fc" id="L189">                equipo.getFechaInstalacion(), equipo.getEstadoOperativo(), equipo.getCriticidad());</span>
+<span class="nc" id="L200">        return new EquipoDTO(equipo.getIdEquipo(), equipo.getNombre(), equipo.getTipo(), equipo.getMarca(),</span>
+<span class="nc" id="L201">                equipo.getModelo(), equipo.getNumeroSerie(), equipo.getUbicacionPlanta(),</span>
+<span class="nc" id="L202">                equipo.getFechaInstalacion(), equipo.getEstadoOperativo(), equipo.getCriticidad());</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
