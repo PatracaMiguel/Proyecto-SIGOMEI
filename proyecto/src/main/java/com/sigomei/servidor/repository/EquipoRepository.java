@@ -21,4 +21,6 @@ public interface EquipoRepository {
     boolean tieneOrdenesRelacionadas(int idEquipo);
 
     boolean tieneOrdenesActivas(int idEquipo);
+
+    void eliminar(int idEquipo);
 }

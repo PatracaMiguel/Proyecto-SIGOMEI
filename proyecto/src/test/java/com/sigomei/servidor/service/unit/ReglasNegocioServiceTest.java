@@ -80,7 +80,7 @@ public class ReglasNegocioServiceTest {
 
     @Test
     public void rn03_positivo_eliminarTecnicoSinOrdenes() {
-        int idTecnicoSinOrdenes = 10;
+        int idTecnicoSinOrdenes = 5;
 
         assertDoesNotThrow(() -> tecnicoService.eliminarTecnico(idTecnicoSinOrdenes));
     }
@@ -99,7 +99,7 @@ public class ReglasNegocioServiceTest {
 
     @Test
     public void rn03_positivo_cambiarEstadoEquipoSinOrdenesRelacionadas() {
-        int idEquipoSinOrdenes = 10;
+        int idEquipoSinOrdenes = 3;
 
         EquipoDTO resultado = assertDoesNotThrow(() ->
                 equipoService.cambiarEstadoEquipo(idEquipoSinOrdenes, EstadoOperativo.INACTIVO)

@@ -122,7 +122,7 @@ INSERT INTO equipo (
 ) VALUES
 (1, 'Compresor electrico', 'ELECTRICO', 'Atlas', 'AX-10', 'EQ-001', 'Planta Norte', '2024-01-10', 'OPERATIVO', 'ALTA'),
 (2, 'Bomba mecanica', 'MECANICO', 'Flow', 'BM-22', 'EQ-002', 'Planta Sur', '2024-02-12', 'OPERATIVO', 'MEDIA'),
-(10, 'Prensa hidraulica', 'HIDRAULICO', 'Hydra', 'PH-10', 'EQ-010', 'Planta Oeste', '2024-03-01', 'OPERATIVO', 'BAJA');
+(3, 'Prensa hidraulica', 'HIDRAULICO', 'Hydra', 'PH-10', 'EQ-010', 'Planta Oeste', '2024-03-01', 'OPERATIVO', 'BAJA');
 
 INSERT INTO tecnico (
     id_tecnico,
@@ -139,7 +139,7 @@ INSERT INTO tecnico (
 (2, 'Bruno Ruiz', 'RUBB900101BB1', '5551000002', 'bruno@example.com', 'MECANICO', 'II', '2022-02-10', 'ACTIVO'),
 (3, 'Carla Soto', 'SOCC900101CC1', '5551000003', 'carla@example.com', 'ELECTRICO', 'II', '2022-03-10', 'INACTIVO'),
 (4, 'Diego Mora', 'MODD900101DD1', '5551000004', 'diego@example.com', 'ELECTRICO', 'I', '2022-04-10', 'ACTIVO'),
-(10, 'Elena Vera', 'VEEE900101EE1', '5551000010', 'elena@example.com', 'HIDRAULICO', 'III', '2022-05-10', 'ACTIVO');
+(5, 'Elena Vera', 'VEEE900101EE1', '5551000010', 'elena@example.com', 'HIDRAULICO', 'III', '2022-05-10', 'ACTIVO');
 
 INSERT INTO orden_mantenimiento (
     id_orden,
@@ -158,7 +158,7 @@ INSERT INTO orden_mantenimiento (
 (2, 2, 2, 'CORRECTIVO', '2026-05-19', '2026-05-19', NULL, 'Orden en ejecucion base', 1800.00, NULL, 'EN_EJECUCION'),
 (3, 2, 2, 'PREVENTIVO', '2026-05-18', '2026-05-18', '2026-05-19', 'Orden finalizada base', 1200.00, 1250.00, 'FINALIZADA');
 
-ALTER TABLE usuario AUTO_INCREMENT = 100;
-ALTER TABLE equipo AUTO_INCREMENT = 100;
-ALTER TABLE tecnico AUTO_INCREMENT = 100;
-ALTER TABLE orden_mantenimiento AUTO_INCREMENT = 100;
+ALTER TABLE usuario AUTO_INCREMENT = 4;
+ALTER TABLE equipo AUTO_INCREMENT = 4;
+ALTER TABLE tecnico AUTO_INCREMENT = 6;
+ALTER TABLE orden_mantenimiento AUTO_INCREMENT = 4;

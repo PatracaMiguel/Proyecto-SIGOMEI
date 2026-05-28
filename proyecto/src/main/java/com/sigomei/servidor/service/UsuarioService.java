@@ -4,16 +4,32 @@ import com.sigomei.api.catalogos.EstatusUsuario;
 import com.sigomei.api.dto.UsuarioDTO;
 import com.sigomei.api.excepciones.AutenticacionException;
 import com.sigomei.servidor.config.ServerLog;
+import com.sigomei.servidor.repository.UsuarioRepository;
 
 public class UsuarioService {
+
+    private final UsuarioRepository repository;
+
+    public UsuarioService() {
+        this.repository = null;
+    }
+
+    public UsuarioService(UsuarioRepository repository) {
+        this.repository = repository;
+    }
 
     public UsuarioDTO iniciarSesion(String usuario, String contrasena)
             throws AutenticacionException {
 
-        UsuarioDTO encontrado = InMemorySigomeiStore.USUARIOS.values().stream()
+        UsuarioDTO encontrado = repository == null
+                ? InMemorySigomeiStore.USUARIOS.values().stream()
                 .filter(actual -> actual.getNombreUsuario().equals(usuario))
                 .findFirst()
-                .orElseThrow(() -> new AutenticacionException("Usuario o contrasena incorrectos"));
+                .orElseThrow(() -> new AutenticacionException("Usuario o contrasena incorrectos"))
+                : repository.buscarPorUsuario(usuario);
+        if (encontrado == null) {
+            throw new AutenticacionException("Usuario o contrasena incorrectos");
+        }
         if (!encontrado.getContrasena().equals(contrasena) || encontrado.getEstatus() != EstatusUsuario.ACTIVO) {
             throw new AutenticacionException("Usuario o contrasena incorrectos");
         }

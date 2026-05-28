@@ -23,6 +23,10 @@ C:\Users\Migue\proyecto_Sigomei\Proyecto-SIGOMEI\proyecto\src\main\java\com\sigo
 C:\Users\Migue\proyecto_Sigomei\Proyecto-SIGOMEI\proyecto\src\main\java\com\sigomei\servidor\config\PruebaConexion.java
 C:\Users\Migue\proyecto_Sigomei\Proyecto-SIGOMEI\proyecto\src\main\java\com\sigomei\servidor\config\ServerLog.java
 C:\Users\Migue\proyecto_Sigomei\Proyecto-SIGOMEI\proyecto\src\main\java\com\sigomei\servidor\repository\EquipoRepository.java
+C:\Users\Migue\proyecto_Sigomei\Proyecto-SIGOMEI\proyecto\src\main\java\com\sigomei\servidor\repository\JdbcEquipoRepository.java
+C:\Users\Migue\proyecto_Sigomei\Proyecto-SIGOMEI\proyecto\src\main\java\com\sigomei\servidor\repository\JdbcOrdenRepository.java
+C:\Users\Migue\proyecto_Sigomei\Proyecto-SIGOMEI\proyecto\src\main\java\com\sigomei\servidor\repository\JdbcTecnicoRepository.java
+C:\Users\Migue\proyecto_Sigomei\Proyecto-SIGOMEI\proyecto\src\main\java\com\sigomei\servidor\repository\JdbcUsuarioRepository.java
 C:\Users\Migue\proyecto_Sigomei\Proyecto-SIGOMEI\proyecto\src\main\java\com\sigomei\servidor\repository\OrdenRepository.java
 C:\Users\Migue\proyecto_Sigomei\Proyecto-SIGOMEI\proyecto\src\main\java\com\sigomei\servidor\repository\TecnicoRepository.java
 C:\Users\Migue\proyecto_Sigomei\Proyecto-SIGOMEI\proyecto\src\main\java\com\sigomei\servidor\repository\UsuarioRepository.java

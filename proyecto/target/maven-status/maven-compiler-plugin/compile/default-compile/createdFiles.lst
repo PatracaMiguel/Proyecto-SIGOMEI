@@ -5,6 +5,8 @@ com\sigomei\api\dto\OrdenDTO.class
 com\sigomei\api\excepciones\ValidacionException.class
 com\sigomei\api\catalogos\EstatusUsuario.class
 com\sigomei\cliente\SigomeiFxApp.class
+com\sigomei\servidor\repository\JdbcUsuarioRepository.class
+com\sigomei\servidor\repository\JdbcEquipoRepository.class
 com\sigomei\cliente\SigomeiFxApp$1.class
 com\sigomei\servidor\service\EquipoService.class
 com\sigomei\api\catalogos\Criticidad.class
@@ -25,6 +27,7 @@ com\sigomei\servidor\config\PruebaConexion.class
 com\sigomei\api\dto\TecnicoDTO.class
 com\sigomei\cliente\VideoRmi.class
 com\sigomei\servidor\config\ConexionBD.class
+com\sigomei\servidor\repository\JdbcOrdenRepository.class
 com\sigomei\cliente\DemoClienteRmi.class
 com\sigomei\servidor\config\ServerLog.class
 com\sigomei\api\catalogos\NivelCertificacion.class
@@ -35,6 +38,7 @@ com\sigomei\servidor\config\ServerLog$PlainFormatter.class
 com\sigomei\servidor\repository\UsuarioRepository.class
 com\sigomei\servidor\service\OrdenService.class
 com\sigomei\servidor\config\AppConfig.class
+com\sigomei\servidor\repository\JdbcTecnicoRepository.class
 com\sigomei\api\excepciones\ReglaNegocioException.class
 com\sigomei\cliente\SigomeiFxApp$3.class
 com\sigomei\api\catalogos\EstadoOrden.class

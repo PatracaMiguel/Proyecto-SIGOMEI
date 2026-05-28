@@ -21,4 +21,6 @@ public interface OrdenRepository {
     boolean existeOrdenActivaMismaFecha(int idEquipo, LocalDate fechaProgramada);
 
     List<OrdenDTO> consultarHistorial(Integer idEquipo, Integer idTecnico, EstadoOrden estadoOrden);
+
+    void eliminar(int idOrden);
 }
