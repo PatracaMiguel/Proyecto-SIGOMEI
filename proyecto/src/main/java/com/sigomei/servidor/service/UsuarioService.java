@@ -4,6 +4,7 @@ import com.sigomei.api.catalogos.EstatusUsuario;
 import com.sigomei.api.dto.UsuarioDTO;
 import com.sigomei.api.excepciones.AutenticacionException;
 import com.sigomei.servidor.config.ServerLog;
+import com.sigomei.servidor.repository.JdbcUsuarioRepository;
 import com.sigomei.servidor.repository.UsuarioRepository;
 
 public class UsuarioService {
@@ -11,7 +12,7 @@ public class UsuarioService {
     private final UsuarioRepository repository;
 
     public UsuarioService() {
-        this.repository = null;
+        this(new JdbcUsuarioRepository());
     }
 
     public UsuarioService(UsuarioRepository repository) {
@@ -21,12 +22,7 @@ public class UsuarioService {
     public UsuarioDTO iniciarSesion(String usuario, String contrasena)
             throws AutenticacionException {
 
-        UsuarioDTO encontrado = repository == null
-                ? InMemorySigomeiStore.USUARIOS.values().stream()
-                .filter(actual -> actual.getNombreUsuario().equals(usuario))
-                .findFirst()
-                .orElseThrow(() -> new AutenticacionException("Usuario o contrasena incorrectos"))
-                : repository.buscarPorUsuario(usuario);
+        UsuarioDTO encontrado = repository.buscarPorUsuario(usuario);
         if (encontrado == null) {
             throw new AutenticacionException("Usuario o contrasena incorrectos");
         }

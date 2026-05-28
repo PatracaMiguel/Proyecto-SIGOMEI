@@ -12,12 +12,14 @@ import com.sigomei.api.excepciones.RegistroNoEncontradoException;
 import com.sigomei.api.excepciones.ValidacionException;
 import com.sigomei.servidor.config.ServerLog;
 import com.sigomei.servidor.repository.EquipoRepository;
+import com.sigomei.servidor.repository.JdbcEquipoRepository;
+import com.sigomei.servidor.repository.JdbcOrdenRepository;
+import com.sigomei.servidor.repository.JdbcTecnicoRepository;
 import com.sigomei.servidor.repository.OrdenRepository;
 import com.sigomei.servidor.repository.TecnicoRepository;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 public class OrdenService {
@@ -27,10 +29,7 @@ public class OrdenService {
     private final TecnicoRepository tecnicoRepository;
 
     public OrdenService() {
-        InMemorySigomeiStore.reset();
-        this.ordenRepository = null;
-        this.equipoRepository = null;
-        this.tecnicoRepository = null;
+        this(new JdbcOrdenRepository(), new JdbcEquipoRepository(), new JdbcTecnicoRepository());
     }
 
     public OrdenService(OrdenRepository ordenRepository, EquipoRepository equipoRepository,
@@ -55,49 +54,19 @@ public class OrdenService {
         validarFinalizacion(orden.getEstadoOrden(), orden.getFechaCierre(), orden.getCostoReal());
         validarOrdenActivaDuplicada(orden);
 
-        OrdenDTO guardada;
-        if (ordenRepository == null) {
-            InMemorySigomeiStore.ORDENES.put(orden.getIdOrden(), copiar(orden));
-            guardada = copiar(orden);
-        } else {
-            guardada = ordenRepository.guardar(orden);
-        }
+        OrdenDTO guardada = ordenRepository.guardar(orden);
         ServerLog.info("Orden registrada id=" + orden.getIdOrden());
         return copiar(guardada);
     }
 
     public List<OrdenDTO> consultarOrdenes() {
-        if (ordenRepository != null) {
-            ServerLog.info("Consulta de ordenes");
-            return ordenRepository.consultarTodas();
-        }
-        List<OrdenDTO> ordenes = new ArrayList<>();
-        for (OrdenDTO orden : InMemorySigomeiStore.ORDENES.values()) {
-            ordenes.add(copiar(orden));
-        }
         ServerLog.info("Consulta de ordenes");
-        return ordenes;
+        return ordenRepository.consultarTodas();
     }
 
     public List<OrdenDTO> filtrarOrdenes(EstadoOrden estado, LocalDate fechaInicio, LocalDate fechaCierre) {
-        if (ordenRepository != null) {
-            ServerLog.info("Filtro de ordenes estado=" + estado);
-            return ordenRepository.filtrar(estado, fechaInicio, fechaCierre);
-        }
-        List<OrdenDTO> resultado = new ArrayList<>();
-
-        for (OrdenDTO orden : InMemorySigomeiStore.ORDENES.values()) {
-            boolean coincideEstado = estado == null || orden.getEstadoOrden() == estado;
-            boolean despuesDeInicio = fechaInicio == null || !orden.getFechaProgramada().isBefore(fechaInicio);
-            boolean antesDeCierre = fechaCierre == null || !orden.getFechaProgramada().isAfter(fechaCierre);
-
-            if (coincideEstado && despuesDeInicio && antesDeCierre) {
-                resultado.add(copiar(orden));
-            }
-        }
-
         ServerLog.info("Filtro de ordenes estado=" + estado);
-        return resultado;
+        return ordenRepository.filtrar(estado, fechaInicio, fechaCierre);
     }
 
     public OrdenDTO actualizarOrden(OrdenDTO orden)
@@ -114,13 +83,7 @@ public class OrdenService {
         validarFinalizacion(orden.getEstadoOrden(), orden.getFechaCierre(), orden.getCostoReal());
         validarOrdenActivaDuplicada(orden);
 
-        OrdenDTO actualizada;
-        if (ordenRepository == null) {
-            InMemorySigomeiStore.ORDENES.put(orden.getIdOrden(), copiar(orden));
-            actualizada = copiar(orden);
-        } else {
-            actualizada = ordenRepository.actualizar(orden);
-        }
+        OrdenDTO actualizada = ordenRepository.actualizar(orden);
         ServerLog.info("Orden actualizada id=" + orden.getIdOrden());
         return copiar(actualizada);
     }
@@ -152,34 +115,14 @@ public class OrdenService {
             actualizada.setCostoReal(costoReal);
         }
 
-        if (ordenRepository == null) {
-            InMemorySigomeiStore.ORDENES.put(idOrden, actualizada);
-        } else {
-            actualizada = ordenRepository.actualizar(actualizada);
-        }
+        actualizada = ordenRepository.actualizar(actualizada);
         ServerLog.info("Estado de orden actualizado id=" + idOrden + " estado=" + nuevoEstado);
         return copiar(actualizada);
     }
 
     public List<OrdenDTO> consultarHistorialOrdenes(Integer idEquipo, Integer idTecnico, EstadoOrden estadoOrden) {
-        if (ordenRepository != null) {
-            ServerLog.info("Consulta historial ordenes");
-            return ordenRepository.consultarHistorial(idEquipo, idTecnico, estadoOrden);
-        }
-        List<OrdenDTO> resultado = new ArrayList<>();
-
-        for (OrdenDTO orden : InMemorySigomeiStore.ORDENES.values()) {
-            boolean coincideEquipo = idEquipo == null || orden.getIdEquipo() == idEquipo;
-            boolean coincideTecnico = idTecnico == null || orden.getIdTecnico() == idTecnico;
-            boolean coincideEstado = estadoOrden == null || orden.getEstadoOrden() == estadoOrden;
-
-            if (coincideEquipo && coincideTecnico && coincideEstado) {
-                resultado.add(copiar(orden));
-            }
-        }
-
         ServerLog.info("Consulta historial ordenes");
-        return resultado;
+        return ordenRepository.consultarHistorial(idEquipo, idTecnico, estadoOrden);
     }
 
     public void eliminarOrden(int idOrden) throws RegistroNoEncontradoException {
@@ -187,16 +130,12 @@ public class OrdenService {
             throw new RegistroNoEncontradoException("Orden no encontrada");
         }
 
-        if (ordenRepository == null) {
-            InMemorySigomeiStore.ORDENES.remove(idOrden);
-        } else {
-            ordenRepository.eliminar(idOrden);
-        }
+        ordenRepository.eliminar(idOrden);
         ServerLog.info("Orden eliminada id=" + idOrden);
     }
 
     private OrdenDTO buscarOrdenPorId(int idOrden) {
-        return ordenRepository == null ? InMemorySigomeiStore.ORDENES.get(idOrden) : ordenRepository.buscarPorId(idOrden);
+        return ordenRepository.buscarPorId(idOrden);
     }
 
     private void validarOrdenBasica(OrdenDTO orden) throws ValidacionException {
@@ -212,9 +151,7 @@ public class OrdenService {
     }
 
     private EquipoDTO buscarEquipo(int idEquipo) throws RegistroNoEncontradoException {
-        EquipoDTO equipo = equipoRepository == null
-                ? InMemorySigomeiStore.EQUIPOS.get(idEquipo)
-                : equipoRepository.buscarPorId(idEquipo);
+        EquipoDTO equipo = equipoRepository.buscarPorId(idEquipo);
         if (equipo == null) {
             throw new RegistroNoEncontradoException("Equipo no encontrado");
         }
@@ -222,9 +159,7 @@ public class OrdenService {
     }
 
     private TecnicoDTO buscarTecnico(int idTecnico) throws RegistroNoEncontradoException {
-        TecnicoDTO tecnico = tecnicoRepository == null
-                ? InMemorySigomeiStore.TECNICOS.get(idTecnico)
-                : tecnicoRepository.buscarPorId(idTecnico);
+        TecnicoDTO tecnico = tecnicoRepository.buscarPorId(idTecnico);
         if (tecnico == null) {
             throw new RegistroNoEncontradoException("Tecnico no encontrado");
         }
@@ -283,9 +218,7 @@ public class OrdenService {
     }
 
     private void validarOrdenActivaDuplicada(OrdenDTO nuevaOrden) throws ReglaNegocioException {
-        List<OrdenDTO> ordenes = ordenRepository == null
-                ? new ArrayList<>(InMemorySigomeiStore.ORDENES.values())
-                : ordenRepository.consultarTodas();
+        List<OrdenDTO> ordenes = ordenRepository.consultarTodas();
         for (OrdenDTO orden : ordenes) {
             boolean distintaOrden = orden.getIdOrden() != nuevaOrden.getIdOrden();
             boolean mismoEquipo = orden.getIdEquipo() == nuevaOrden.getIdEquipo();

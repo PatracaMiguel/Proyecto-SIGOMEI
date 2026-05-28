@@ -4,15 +4,14 @@ import com.sigomei.api.catalogos.EstadoOrden;
 import com.sigomei.api.catalogos.EstadoTecnico;
 import com.sigomei.api.catalogos.NivelCertificacion;
 import com.sigomei.api.catalogos.TipoEquipo;
-import com.sigomei.api.dto.OrdenDTO;
 import com.sigomei.api.dto.TecnicoDTO;
 import com.sigomei.api.excepciones.ReglaNegocioException;
 import com.sigomei.api.excepciones.RegistroNoEncontradoException;
 import com.sigomei.api.excepciones.ValidacionException;
 import com.sigomei.servidor.config.ServerLog;
+import com.sigomei.servidor.repository.JdbcTecnicoRepository;
 import com.sigomei.servidor.repository.TecnicoRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TecnicoService {
@@ -20,8 +19,7 @@ public class TecnicoService {
     private final TecnicoRepository repository;
 
     public TecnicoService() {
-        InMemorySigomeiStore.reset();
-        this.repository = null;
+        this(new JdbcTecnicoRepository());
     }
 
     public TecnicoService(TecnicoRepository repository) {
@@ -33,9 +31,7 @@ public class TecnicoService {
 
         validarTecnico(tecnico);
 
-        List<TecnicoDTO> tecnicos = repository == null
-                ? new ArrayList<>(InMemorySigomeiStore.TECNICOS.values())
-                : repository.consultarTodos();
+        List<TecnicoDTO> tecnicos = repository.consultarTodos();
         for (TecnicoDTO actual : tecnicos) {
             boolean mismoId = actual.getIdTecnico() == tecnico.getIdTecnico();
             boolean mismoRfc = actual.getRfc().equalsIgnoreCase(tecnico.getRfc());
@@ -50,50 +46,19 @@ public class TecnicoService {
             }
         }
 
-        TecnicoDTO guardado;
-        if (repository == null) {
-            InMemorySigomeiStore.TECNICOS.put(tecnico.getIdTecnico(), copiar(tecnico));
-            guardado = copiar(tecnico);
-        } else {
-            guardado = repository.guardar(tecnico);
-        }
+        TecnicoDTO guardado = repository.guardar(tecnico);
         ServerLog.info("Tecnico registrado id=" + tecnico.getIdTecnico());
         return copiar(guardado);
     }
 
     public List<TecnicoDTO> consultarTecnicos() {
-        if (repository != null) {
-            ServerLog.info("Consulta de tecnicos");
-            return repository.consultarTodos();
-        }
-        List<TecnicoDTO> tecnicos = new ArrayList<>();
-        for (TecnicoDTO tecnico : InMemorySigomeiStore.TECNICOS.values()) {
-            tecnicos.add(copiar(tecnico));
-        }
         ServerLog.info("Consulta de tecnicos");
-        return tecnicos;
+        return repository.consultarTodos();
     }
 
     public List<TecnicoDTO> filtrarTecnicos(String nombre, TipoEquipo especialidad, NivelCertificacion nivelCertificacion) {
-        if (repository != null) {
-            ServerLog.info("Filtro de tecnicos especialidad=" + especialidad);
-            return repository.filtrar(nombre, especialidad, nivelCertificacion);
-        }
-        List<TecnicoDTO> resultado = new ArrayList<>();
-
-        for (TecnicoDTO tecnico : InMemorySigomeiStore.TECNICOS.values()) {
-            boolean coincideNombre = nombre == null || nombre.isBlank()
-                    || tecnico.getNombreCompleto().toLowerCase().contains(nombre.toLowerCase());
-            boolean coincideEspecialidad = especialidad == null || tecnico.getEspecialidad() == especialidad;
-            boolean coincideNivel = nivelCertificacion == null || tecnico.getNivelCertificacion() == nivelCertificacion;
-
-            if (coincideNombre && coincideEspecialidad && coincideNivel) {
-                resultado.add(copiar(tecnico));
-            }
-        }
-
         ServerLog.info("Filtro de tecnicos especialidad=" + especialidad);
-        return resultado;
+        return repository.filtrar(nombre, especialidad, nivelCertificacion);
     }
 
     public TecnicoDTO actualizarTecnico(TecnicoDTO tecnico)
@@ -104,13 +69,7 @@ public class TecnicoService {
         }
 
         validarTecnico(tecnico);
-        TecnicoDTO actualizado;
-        if (repository == null) {
-            InMemorySigomeiStore.TECNICOS.put(tecnico.getIdTecnico(), copiar(tecnico));
-            actualizado = copiar(tecnico);
-        } else {
-            actualizado = repository.actualizar(tecnico);
-        }
+        TecnicoDTO actualizado = repository.actualizar(tecnico);
         ServerLog.info("Tecnico actualizado id=" + tecnico.getIdTecnico());
         return copiar(actualizado);
     }
@@ -129,9 +88,7 @@ public class TecnicoService {
         }
 
         tecnico.setEstatus(nuevoEstatus);
-        if (repository != null) {
-            tecnico = repository.actualizar(tecnico);
-        }
+        tecnico = repository.actualizar(tecnico);
         ServerLog.info("Estatus tecnico actualizado id=" + idTecnico + " estatus=" + nuevoEstatus);
         return copiar(tecnico);
     }
@@ -148,16 +105,12 @@ public class TecnicoService {
             throw new ReglaNegocioException("No se puede eliminar un tecnico con ordenes relacionadas");
         }
 
-        if (repository == null) {
-            InMemorySigomeiStore.TECNICOS.remove(idTecnico);
-        } else {
-            repository.eliminar(idTecnico);
-        }
+        repository.eliminar(idTecnico);
         ServerLog.info("Tecnico eliminado id=" + idTecnico);
     }
 
     private TecnicoDTO buscarPorId(int idTecnico) {
-        return repository == null ? InMemorySigomeiStore.TECNICOS.get(idTecnico) : repository.buscarPorId(idTecnico);
+        return repository.buscarPorId(idTecnico);
     }
 
     private void validarTecnico(TecnicoDTO tecnico) throws ValidacionException {
@@ -174,30 +127,11 @@ public class TecnicoService {
     }
 
     private boolean tieneOrdenesRelacionadas(int idTecnico) {
-        if (repository != null) {
-            return repository.tieneOrdenesRelacionadas(idTecnico);
-        }
-        for (OrdenDTO orden : InMemorySigomeiStore.ORDENES.values()) {
-            if (orden.getIdTecnico() == idTecnico) {
-                return true;
-            }
-        }
-        return false;
+        return repository.tieneOrdenesRelacionadas(idTecnico);
     }
 
     private boolean tieneOrdenesActivas(int idTecnico) {
-        if (repository != null) {
-            return repository.tieneOrdenesActivas(idTecnico);
-        }
-        for (OrdenDTO orden : InMemorySigomeiStore.ORDENES.values()) {
-            boolean esDelTecnico = orden.getIdTecnico() == idTecnico;
-            boolean estaActiva = orden.getEstadoOrden() == EstadoOrden.PROGRAMADA
-                    || orden.getEstadoOrden() == EstadoOrden.EN_EJECUCION;
-            if (esDelTecnico && estaActiva) {
-                return true;
-            }
-        }
-        return false;
+        return repository.tieneOrdenesActivas(idTecnico);
     }
 
     private boolean esBlanco(String valor) {
