@@ -1,0 +1,214 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R 5 0 R 7 0 R 9 0 R] /Count 4 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> /F2 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >> >> >> /Contents 4 0 R >>
+endobj
+4 0 obj
+<< /Length 4227 >>
+stream
+BT /F2 22.0 Tf 48.0 744.0 Td (GUIA DE EXPOSICION - PROYECTO SIGOMEI) Tj ET
+BT /F1 12.0 Tf 48.0 711.0 Td (Arquitectura distribuida con Java RMI, contrato cliente-servidor, ciclo TDD,) Tj ET
+BT /F1 12.0 Tf 48.0 696.0 Td (matriz de trazabilidad, cobertura, demos y preguntas tecnicas.) Tj ET
+BT /F1 9.0 Tf 48.0 669.0 Td (Tecnologia | Java RMI + JavaFX + JUnit 5 + JaCoCo) Tj ET
+BT /F1 9.0 Tf 48.0 656.0 Td (Servicio remoto | SIGOMEI publicado por SigomeiServer en el registry RMI) Tj ET
+BT /F1 9.0 Tf 48.0 643.0 Td (Entidades CRUD | Equipo, Tecnico y Orden) Tj ET
+BT /F1 9.0 Tf 48.0 630.0 Td (Resultado pruebas | mvn test: 71 pruebas, 0 fallas, 0 errores, 1 omitida manual) Tj ET
+BT /F2 15.5 Tf 48.0 609.0 Td (1. Apertura sugerida) Tj ET
+BT /F1 11.0 Tf 48.0 584.5 Td ("Nuestro sistema se llama SIGOMEI y resuelve la gestion de mantenimiento industrial. Lo) Tj ET
+BT /F1 11.0 Tf 48.0 570.5 Td (implementamos como una aplicacion distribuida: el cliente JavaFX invoca un servicio remoto) Tj ET
+BT /F1 11.0 Tf 48.0 556.5 Td (publicado por el servidor mediante Java RMI. La capa de servicio concentra validaciones,) Tj ET
+BT /F1 11.0 Tf 48.0 542.5 Td (reglas de negocio y operaciones CRUD sobre equipos, tecnicos y ordenes.") Tj ET
+BT /F2 15.5 Tf 48.0 520.5 Td (2. Arquitectura distribuida implementada) Tj ET
+BT /F1 10.1 Tf 56.0 496.0 Td (- Cliente: SigomeiFxApp. Presenta pantallas, captura datos, filtra informacion y llama metodos) Tj ET
+BT /F1 10.1 Tf 56.0 482.9 Td (remotos del contrato SigomeiRemote.) Tj ET
+BT /F1 10.1 Tf 56.0 467.8 Td (- Servidor: SigomeiServer crea el registry RMI, instancia SigomeiRemoteImpl y publica el) Tj ET
+BT /F1 10.1 Tf 56.0 454.7 Td (servicio con el nombre SIGOMEI.) Tj ET
+BT /F1 10.1 Tf 56.0 439.6 Td (- Implementacion remota: SigomeiRemoteImpl extiende UnicastRemoteObject y delega en) Tj ET
+BT /F1 10.1 Tf 56.0 426.5 Td (UsuarioService, EquipoService, TecnicoService y OrdenService.) Tj ET
+BT /F1 10.1 Tf 56.0 411.4 Td (- Servicios: contienen validaciones, reglas de negocio, CRUD e historial. El cliente no accede) Tj ET
+BT /F1 10.1 Tf 56.0 398.3 Td (directamente a la logica interna.) Tj ET
+BT /F1 10.1 Tf 56.0 383.2 Td (- Datos compartidos: DTOs y catalogos en api/dto y api/catalogos viajan entre cliente y) Tj ET
+BT /F1 10.1 Tf 56.0 370.1 Td (servidor.) Tj ET
+BT /F2 12.2 Tf 48.0 355.0 Td (Lectura rapida) Tj ET
+BT /F1 10.5 Tf 48.0 335.8 Td (El cliente solo conoce el contrato. El servidor conserva la autoridad de negocio. Si una regla) Tj ET
+BT /F1 10.5 Tf 48.0 322.3 Td (falla, el servidor lanza una excepcion de dominio y el cliente la muestra al usuario.) Tj ET
+BT /F2 15.5 Tf 48.0 300.8 Td (3. Justificacion tecnica de RMI) Tj ET
+BT /F1 10.1 Tf 56.0 276.3 Td (- Encaja con el proyecto porque cliente y servidor estan hechos en Java.) Tj ET
+BT /F1 10.1 Tf 56.0 261.2 Td (- Permite invocar metodos remotos tipados casi como metodos locales.) Tj ET
+BT /F1 10.1 Tf 56.0 246.1 Td (- Evita construir un protocolo manual con sockets: codigos de operacion, parseo, serializacion y) Tj ET
+BT /F1 10.1 Tf 56.0 233.0 Td (manejo de errores.) Tj ET
+BT /F1 10.1 Tf 56.0 217.9 Td (- Transporta DTOs y excepciones de dominio, lo que hace mas claro el contrato.) Tj ET
+BT /F1 10.1 Tf 56.0 202.8 Td (- Su trade-off es que acopla a Java; aun asi, para este proyecto academico Java-Java reduce) Tj ET
+BT /F1 10.1 Tf 56.0 189.7 Td (complejidad y favorece la claridad.) Tj ET
+BT /F2 15.5 Tf 48.0 170.6 Td (4. Contrato de comunicacion) Tj ET
+BT /F1 10.5 Tf 48.0 146.1 Td (El contrato esta en SigomeiRemote, que extiende Remote. Cada metodo declara RemoteException y,) Tj ET
+BT /F1 10.5 Tf 48.0 132.6 Td (cuando aplica, excepciones de dominio: ValidacionException, ReglaNegocioException,) Tj ET
+BT /F1 10.5 Tf 48.0 119.1 Td (RegistroNoEncontradoException y AutenticacionException.) Tj ET
+BT /F1 9.0 Tf 48.0 101.6 Td (Modulo | Operaciones principales | Errores controlados) Tj ET
+BT /F1 9.0 Tf 48.0 88.6 Td (Sesion | iniciarSesion, cerrarSesion | Credenciales invalidas o usuario inactivo) Tj ET
+BT /F1 9.0 Tf 48.0 75.6 Td (Equipo | registrar, consultar, filtrar, actualizar, cambiar estado, eliminar | Campos obligatorios, serie) Tj ET
+BT /F1 9.0 Tf 48.0 63.6 Td (duplicada, equipo relacionado a orden) Tj ET
+endstream
+endobj
+5 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> /F2 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >> >> >> /Contents 6 0 R >>
+endobj
+6 0 obj
+<< /Length 4456 >>
+stream
+BT /F1 9.0 Tf 48.0 744.0 Td (Tecnico | registrar, consultar, filtrar, actualizar, cambiar estatus, eliminar | RFC/correo duplicado, tecnico) Tj ET
+BT /F1 9.0 Tf 48.0 732.0 Td (con ordenes activas) Tj ET
+BT /F1 9.0 Tf 48.0 719.0 Td (Orden | registrar, consultar, filtrar, actualizar, cambiar estado, historial, eliminar | Tecnico incompatible,) Tj ET
+BT /F1 9.0 Tf 48.0 707.0 Td (duplicidad, fechas invalidas, transicion no permitida) Tj ET
+BT /F2 15.5 Tf 48.0 686.0 Td (5. Ciclo TDD aplicado) Tj ET
+BT /F1 9.0 Tf 48.0 661.5 Td (Etapa | Aplicacion en SIGOMEI) Tj ET
+BT /F1 9.0 Tf 48.0 648.5 Td (Plan | Se identificaron entidades, RF, reglas RN01-RN10 y casos CP01-CP35.) Tj ET
+BT /F1 9.0 Tf 48.0 635.5 Td (Diseno | Se escribieron pruebas positivas y negativas en ReglasNegocioServiceTest y ValidacionesServiceTest.) Tj ET
+BT /F1 9.0 Tf 48.0 622.5 Td (ROJO | La prueba fallaba cuando la regla aun no existia o no lanzaba la excepcion esperada.) Tj ET
+BT /F1 9.0 Tf 48.0 609.5 Td (VERDE | Se implemento la logica minima en servicios para pasar la prueba.) Tj ET
+BT /F1 9.0 Tf 48.0 596.5 Td (Ejecucion | Se corrio mvn test con JUnit 5 y Surefire.) Tj ET
+BT /F1 9.0 Tf 48.0 583.5 Td (Reporte | JaCoCo genero cobertura de la capa com.sigomei.servidor.service.) Tj ET
+BT /F2 10.5 Tf 48.0 566.5 Td (Frase clave: TDD no fue probar al final; las pruebas definieron que se acepta, que se rechaza) Tj ET
+BT /F2 10.5 Tf 48.0 553.0 Td (y que excepcion debe regresar el servicio.) Tj ET
+BT /F2 15.5 Tf 48.0 531.5 Td (6. Matriz de trazabilidad RF/RN - Caso - Estado) Tj ET
+BT /F1 9.0 Tf 48.0 507.0 Td (RF/RN | Caso | Estado) Tj ET
+BT /F1 9.0 Tf 48.0 494.0 Td (RF-01 Iniciar sesion | CP01 + usuario_cubreAutenticacionCorrectaEIncorrecta | Aprobado) Tj ET
+BT /F1 9.0 Tf 48.0 481.0 Td (RF-02 CRUD Equipo | CP02-CP04 + CrudServiceTest.crudEquipo | Aprobado) Tj ET
+BT /F1 9.0 Tf 48.0 468.0 Td (RF-03 CRUD Tecnico | CP05-CP09 + CrudServiceTest.crudTecnico | Aprobado) Tj ET
+BT /F1 9.0 Tf 48.0 455.0 Td (RF-04 CRUD Orden | CP10-CP16 + CrudServiceTest.crudOrden | Aprobado) Tj ET
+BT /F1 9.0 Tf 48.0 442.0 Td (RN-01 Tecnico compatible | rn01 positivo/negativo | Aprobado) Tj ET
+BT /F1 9.0 Tf 48.0 429.0 Td (RN-02 Sin orden activa duplicada | rn02_negativo_ordenDuplicada + CP23 | Aprobado) Tj ET
+BT /F1 9.0 Tf 48.0 416.0 Td (RN-03 No eliminar/inactivar con ordenes | rn03 + CP30 + CP31 | Aprobado) Tj ET
+BT /F1 9.0 Tf 48.0 403.0 Td (RN-04 Tecnico activo | rn04_negativo_tecnicoInactivo + CP24 | Aprobado) Tj ET
+BT /F1 9.0 Tf 48.0 390.0 Td (RN-05 Fechas cronologicas | rn05 + CP26 | Aprobado) Tj ET
+BT /F1 9.0 Tf 48.0 377.0 Td (RN-06 Finalizacion completa | rn06 + CP28 | Aprobado) Tj ET
+BT /F1 9.0 Tf 48.0 364.0 Td (RN-07 Criticidad alta | rn07 + CP25 | Aprobado) Tj ET
+BT /F1 9.0 Tf 48.0 351.0 Td (RN-08 Transiciones de estado | rn08 + CP27 | Aprobado) Tj ET
+BT /F1 9.0 Tf 48.0 338.0 Td (CP-35 Desconexion durante operacion | Prueba deshabilitada | Manual) Tj ET
+BT /F2 15.5 Tf 48.0 317.0 Td (7. Reporte de cobertura) Tj ET
+BT /F1 9.0 Tf 48.0 292.5 Td (Metrica | Resultado | Interpretacion) Tj ET
+BT /F1 9.0 Tf 48.0 279.5 Td (Instrucciones | 1839/1858 = 98.98% | La mayoria de la logica de servicio fue ejecutada) Tj ET
+BT /F1 9.0 Tf 48.0 266.5 Td (Ramas | 296/320 = 92.50% | Se probaron condiciones positivas y negativas) Tj ET
+BT /F1 9.0 Tf 48.0 253.5 Td (Lineas | 343/346 = 99.13% | Casi todas las lineas de servicio fueron recorridas) Tj ET
+BT /F1 9.0 Tf 48.0 240.5 Td (Metodos | 51/51 = 100% | Todos los metodos de servicio incluidos fueron ejercitados) Tj ET
+BT /F1 9.0 Tf 48.0 227.5 Td (Maven | 71 pruebas, 0 fallas, 0 errores, 1 omitida | La omitida es manual por desconexion del servidor) Tj ET
+BT /F2 15.5 Tf 48.0 206.5 Td (8. Demostracion en vivo recomendada) Tj ET
+BT /F2 12.2 Tf 48.0 182.0 Td (CRUD remoto de 3 entidades) Tj ET
+BT /F1 10.1 Tf 56.0 162.8 Td (- Levantar SigomeiServer desde el IDE o comando configurado.) Tj ET
+BT /F1 10.1 Tf 56.0 147.7 Td (- Abrir SigomeiFxApp y entrar con admin / admin123.) Tj ET
+BT /F1 10.1 Tf 56.0 132.6 Td (- Equipo: registrar, filtrar y actualizar ubicacion o estado.) Tj ET
+BT /F1 10.1 Tf 56.0 117.5 Td (- Tecnico: registrar, editar telefono y eliminar si no tiene ordenes.) Tj ET
+BT /F1 10.1 Tf 56.0 102.4 Td (- Orden: registrar con equipo/tecnico compatibles, actualizar descripcion y cambiar de) Tj ET
+BT /F1 10.1 Tf 56.0 89.3 Td (PROGRAMADA a EN_EJECUCION.) Tj ET
+BT /F2 12.2 Tf 48.0 74.2 Td (Tres casos obligatorios) Tj ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> /F2 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >> >> >> /Contents 8 0 R >>
+endobj
+8 0 obj
+<< /Length 4180 >>
+stream
+BT /F1 9.0 Tf 48.0 744.0 Td (Caso | Que mostrar | Mensaje) Tj ET
+BT /F1 9.0 Tf 48.0 731.0 Td (Unitaria con memoria | mvn -Dtest=ReglasNegocioServiceTest test | InMemorySigomeiStore aisla la capa de) Tj ET
+BT /F1 9.0 Tf 48.0 719.0 Td (servicio sin depender de MySQL) Tj ET
+BT /F1 9.0 Tf 48.0 706.0 Td (Negativo GUI | Dejar fecha vacia o mal formada en Equipo | La GUI captura la excepcion y muestra dialogo de) Tj ET
+BT /F1 9.0 Tf 48.0 694.0 Td (error) Tj ET
+BT /F1 9.0 Tf 48.0 681.0 Td (Regla de negocio | Orden con tecnico incompatible o duplicada | El servidor rechaza con ReglaNegocioException) Tj ET
+BT /F2 12.2 Tf 48.0 664.0 Td (Tres reglas aceptado/rechazado) Tj ET
+BT /F1 9.0 Tf 48.0 644.8 Td (Regla | Aceptado | Rechazado) Tj ET
+BT /F1 9.0 Tf 48.0 631.8 Td (RN-01 | Equipo electrico + tecnico electrico | Equipo electrico + tecnico mecanico) Tj ET
+BT /F1 9.0 Tf 48.0 618.8 Td (RN-02 | Mismo equipo en fecha distinta | Mismo equipo, misma fecha, ambas activas) Tj ET
+BT /F1 9.0 Tf 48.0 605.8 Td (RN-06 | Finalizada con fecha de cierre y costo real | Finalizar sin fecha o sin costo) Tj ET
+BT /F2 15.5 Tf 48.0 584.8 Td (9. Analisis critico y recomendaciones) Tj ET
+BT /F1 10.1 Tf 56.0 560.3 Td (- Defecto/riesgo: CP-35 queda manual porque depende de apagar el servidor durante una operacion.) Tj ET
+BT /F1 10.1 Tf 56.0 545.2 Td (- Riesgo: la persistencia de prueba usa memoria; conviene ampliar pruebas con MySQL para) Tj ET
+BT /F1 10.1 Tf 56.0 532.1 Td (integracion real.) Tj ET
+BT /F1 10.1 Tf 56.0 517.0 Td (- Riesgo: la GUI captura excepciones generales; seria mejor diferenciar validacion, regla de) Tj ET
+BT /F1 10.1 Tf 56.0 503.9 Td (negocio y conexion.) Tj ET
+BT /F1 10.1 Tf 56.0 488.8 Td (- Valor de TDD: documento reglas como comportamiento verificable, evito regresiones y facilito) Tj ET
+BT /F1 10.1 Tf 56.0 475.7 Td (la matriz de trazabilidad.) Tj ET
+BT /F1 10.1 Tf 56.0 460.6 Td (- Recomendaciones: automatizar desconexion controlada, agregar validaciones visuales previas,) Tj ET
+BT /F1 10.1 Tf 56.0 447.5 Td (separar repositorios por interfaces y mantener JaCoCo en cada entrega.) Tj ET
+BT /F2 15.5 Tf 48.0 428.4 Td (10. Preguntas probables con respuestas) Tj ET
+BT /F2 10.2 Tf 48.0 403.9 Td (P: Por que RMI y no sockets?) Tj ET
+BT /F1 10.0 Tf 58.0 389.7 Td (R: Porque ambos extremos estan en Java. RMI da invocacion remota tipada, serializacion de DTOs y) Tj ET
+BT /F1 10.0 Tf 58.0 376.7 Td (excepciones sin protocolo manual.) Tj ET
+BT /F2 10.2 Tf 48.0 358.7 Td (P: Cual es el contrato?) Tj ET
+BT /F1 10.0 Tf 58.0 344.5 Td (R: SigomeiRemote. Define metodos, DTOs y excepciones que puede recibir el cliente.) Tj ET
+BT /F2 10.2 Tf 48.0 326.5 Td (P: Que viaja por la red?) Tj ET
+BT /F1 10.0 Tf 58.0 312.3 Td (R: DTOs y parametros simples: IDs, fechas, catalogos, textos y costos; no viajan servicios ni) Tj ET
+BT /F1 10.0 Tf 58.0 299.3 Td (repositorios.) Tj ET
+BT /F2 10.2 Tf 48.0 281.3 Td (P: Donde estan las reglas?) Tj ET
+BT /F1 10.0 Tf 58.0 267.1 Td (R: En la capa service: OrdenService, EquipoService y TecnicoService.) Tj ET
+BT /F2 10.2 Tf 48.0 249.1 Td (P: Como aplicaron TDD?) Tj ET
+BT /F1 10.0 Tf 58.0 234.9 Td (R: Primero pruebas positivas/negativas, luego implementacion minima para pasar de rojo a verde,) Tj ET
+BT /F1 10.0 Tf 58.0 221.9 Td (despues suite completa y JaCoCo.) Tj ET
+BT /F2 10.2 Tf 48.0 203.9 Td (P: Que significa rojo/verde?) Tj ET
+BT /F1 10.0 Tf 58.0 189.7 Td (R: Rojo: la prueba falla porque la regla no existe. Verde: la logica se implementa y la prueba) Tj ET
+BT /F1 10.0 Tf 58.0 176.7 Td (pasa.) Tj ET
+BT /F2 10.2 Tf 48.0 158.7 Td (P: Como saben que el CRUD remoto funciona?) Tj ET
+BT /F1 10.0 Tf 58.0 144.5 Td (R: El contrato expone CRUD de Equipo, Tecnico y Orden; CrudServiceTest lo verifica y la demo) Tj ET
+BT /F1 10.0 Tf 58.0 131.5 Td (JavaFX lo invoca via RMI.) Tj ET
+BT /F2 10.2 Tf 48.0 113.5 Td (P: Que pasa si el servidor no esta disponible?) Tj ET
+BT /F1 10.0 Tf 58.0 99.3 Td (R: La llamada RMI falla con excepcion remota/conexion. CP32 cubre servidor no disponible y CP35) Tj ET
+BT /F1 10.0 Tf 58.0 86.3 Td (queda manual para desconexion durante operacion.) Tj ET
+BT /F2 10.2 Tf 48.0 68.3 Td (P: Por que DTOs?) Tj ET
+endstream
+endobj
+9 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> /F2 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >> >> >> /Contents 10 0 R >>
+endobj
+10 0 obj
+<< /Length 2136 >>
+stream
+BT /F1 10.0 Tf 58.0 744.0 Td (R: Separan datos de transporte de la logica interna y evitan exponer implementaciones del) Tj ET
+BT /F1 10.0 Tf 58.0 731.0 Td (servidor.) Tj ET
+BT /F2 10.2 Tf 48.0 713.0 Td (P: Que regla es mas importante?) Tj ET
+BT /F1 10.0 Tf 58.0 698.8 Td (R: RN-02 evita duplicidad de ordenes activas y RN-06 obliga cierre completo con fecha y costo) Tj ET
+BT /F1 10.0 Tf 58.0 685.8 Td (real.) Tj ET
+BT /F2 10.2 Tf 48.0 667.8 Td (P: La memoria reemplaza MySQL?) Tj ET
+BT /F1 10.0 Tf 58.0 653.6 Td (R: No. Sirve para pruebas unitarias rapidas y repetibles; MySQL corresponde a persistencia real o) Tj ET
+BT /F1 10.0 Tf 58.0 640.6 Td (integracion.) Tj ET
+BT /F2 10.2 Tf 48.0 622.6 Td (P: Que cubre JaCoCo?) Tj ET
+BT /F1 10.0 Tf 58.0 608.4 Td (R: La capa com.sigomei.servidor.service, donde viven reglas y validaciones principales.) Tj ET
+BT /F2 10.2 Tf 48.0 590.4 Td (P: Limitacion de RMI?) Tj ET
+BT /F1 10.0 Tf 58.0 576.2 Td (R: Acopla a Java y es menos interoperable que HTTP/REST, pero simplifica un proyecto Java-Java.) Tj ET
+BT /F2 10.2 Tf 48.0 558.2 Td (P: Como repartir participacion?) Tj ET
+BT /F1 10.0 Tf 58.0 544.0 Td (R: Arquitectura, contrato RMI, TDD/cobertura, demo CRUD, reglas/analisis; todos deben responder) Tj ET
+BT /F1 10.0 Tf 58.0 531.0 Td (al menos una pregunta.) Tj ET
+BT /F2 15.5 Tf 48.0 509.0 Td (11. Reparto sugerido) Tj ET
+BT /F1 9.0 Tf 48.0 484.5 Td (Integrante | Parte | Tiempo) Tj ET
+BT /F1 9.0 Tf 48.0 471.5 Td (1 | Problema, arquitectura cliente-servidor y RMI | 2 min) Tj ET
+BT /F1 9.0 Tf 48.0 458.5 Td (2 | Contrato SigomeiRemote, DTOs y excepciones | 2 min) Tj ET
+BT /F1 9.0 Tf 48.0 445.5 Td (3 | Ciclo TDD, pruebas unitarias y cobertura | 3 min) Tj ET
+BT /F1 9.0 Tf 48.0 432.5 Td (4 | Demo CRUD remoto de Equipo, Tecnico y Orden | 4 min) Tj ET
+BT /F1 9.0 Tf 48.0 419.5 Td (5 | Demo de reglas, matriz, analisis y recomendaciones | 3 min) Tj ET
+BT /F2 10.5 Tf 48.0 402.5 Td (Cierre: SIGOMEI separa cliente, contrato remoto y servicios; RMI simplifica la comunicacion) Tj ET
+BT /F2 10.5 Tf 48.0 389.0 Td (Java-Java; TDD permitio convertir reglas de negocio en pruebas verificables.) Tj ET
+endstream
+endobj
+xref
+0 11
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000139 00000 n 
+0000000378 00000 n 
+0000004657 00000 n 
+0000004896 00000 n 
+0000009404 00000 n 
+0000009643 00000 n 
+0000013875 00000 n 
+0000014115 00000 n 
+trailer
+<< /Size 11 /Root 1 0 R >>
+startxref
+16304
+%%EOF

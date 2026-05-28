@@ -33,41 +33,41 @@ final class InMemorySigomeiStore {
 
 <span class="fc" id="L34">        EQUIPOS.put(1, new EquipoDTO(1, &quot;Compresor electrico&quot;, TipoEquipo.ELECTRICO, &quot;Atlas&quot;,</span>
 <span class="fc" id="L35">                &quot;AX-10&quot;, &quot;EQ-001&quot;, &quot;Planta Norte&quot;, LocalDate.of(2024, 1, 10),</span>
-                EstadoOperativo.OPERATIVO, Criticidad.ALTA));
+<span class="fc" id="L36">                EstadoOperativo.OPERATIVO, Criticidad.ALTA));</span>
 <span class="fc" id="L37">        EQUIPOS.put(2, new EquipoDTO(2, &quot;Bomba mecanica&quot;, TipoEquipo.MECANICO, &quot;Flow&quot;,</span>
 <span class="fc" id="L38">                &quot;BM-22&quot;, &quot;EQ-002&quot;, &quot;Planta Sur&quot;, LocalDate.of(2024, 2, 12),</span>
-                EstadoOperativo.OPERATIVO, Criticidad.MEDIA));
+<span class="fc" id="L39">                EstadoOperativo.OPERATIVO, Criticidad.MEDIA));</span>
 <span class="fc" id="L40">        EQUIPOS.put(3, new EquipoDTO(3, &quot;Prensa hidraulica&quot;, TipoEquipo.HIDRAULICO, &quot;Hydra&quot;,</span>
 <span class="fc" id="L41">                &quot;PH-10&quot;, &quot;EQ-010&quot;, &quot;Planta Oeste&quot;, LocalDate.of(2024, 3, 1),</span>
-                EstadoOperativo.OPERATIVO, Criticidad.BAJA));
+<span class="fc" id="L42">                EstadoOperativo.OPERATIVO, Criticidad.BAJA));</span>
 
 <span class="fc" id="L44">        TECNICOS.put(1, new TecnicoDTO(1, &quot;Ana Lopez&quot;, &quot;LOAA900101AA1&quot;, &quot;5551000001&quot;,</span>
-                &quot;ana@example.com&quot;, TipoEquipo.ELECTRICO, NivelCertificacion.II,
+<span class="fc" id="L45">                &quot;ana@example.com&quot;, TipoEquipo.ELECTRICO, NivelCertificacion.II,</span>
 <span class="fc" id="L46">                LocalDate.of(2022, 1, 10), EstadoTecnico.ACTIVO));</span>
 <span class="fc" id="L47">        TECNICOS.put(2, new TecnicoDTO(2, &quot;Bruno Ruiz&quot;, &quot;RUBB900101BB1&quot;, &quot;5551000002&quot;,</span>
-                &quot;bruno@example.com&quot;, TipoEquipo.MECANICO, NivelCertificacion.II,
+<span class="fc" id="L48">                &quot;bruno@example.com&quot;, TipoEquipo.MECANICO, NivelCertificacion.II,</span>
 <span class="fc" id="L49">                LocalDate.of(2022, 2, 10), EstadoTecnico.ACTIVO));</span>
 <span class="fc" id="L50">        TECNICOS.put(3, new TecnicoDTO(3, &quot;Carla Soto&quot;, &quot;SOCC900101CC1&quot;, &quot;5551000003&quot;,</span>
-                &quot;carla@example.com&quot;, TipoEquipo.ELECTRICO, NivelCertificacion.II,
+<span class="fc" id="L51">                &quot;carla@example.com&quot;, TipoEquipo.ELECTRICO, NivelCertificacion.II,</span>
 <span class="fc" id="L52">                LocalDate.of(2022, 3, 10), EstadoTecnico.INACTIVO));</span>
 <span class="fc" id="L53">        TECNICOS.put(4, new TecnicoDTO(4, &quot;Diego Mora&quot;, &quot;MODD900101DD1&quot;, &quot;5551000004&quot;,</span>
-                &quot;diego@example.com&quot;, TipoEquipo.ELECTRICO, NivelCertificacion.I,
+<span class="fc" id="L54">                &quot;diego@example.com&quot;, TipoEquipo.ELECTRICO, NivelCertificacion.I,</span>
 <span class="fc" id="L55">                LocalDate.of(2022, 4, 10), EstadoTecnico.ACTIVO));</span>
 <span class="fc" id="L56">        TECNICOS.put(5, new TecnicoDTO(5, &quot;Elena Vera&quot;, &quot;VEEE900101EE1&quot;, &quot;5551000010&quot;,</span>
-                &quot;elena@example.com&quot;, TipoEquipo.HIDRAULICO, NivelCertificacion.III,
+<span class="fc" id="L57">                &quot;elena@example.com&quot;, TipoEquipo.HIDRAULICO, NivelCertificacion.III,</span>
 <span class="fc" id="L58">                LocalDate.of(2022, 5, 10), EstadoTecnico.ACTIVO));</span>
 
 <span class="fc" id="L60">        ORDENES.put(1, new OrdenDTO(1, 1, 1, TipoMantenimiento.PREVENTIVO,</span>
 <span class="fc" id="L61">                LocalDate.of(2026, 5, 20), null, null, &quot;Orden programada base&quot;,</span>
-                new BigDecimal(&quot;1500.00&quot;), null, EstadoOrden.PROGRAMADA));
+<span class="fc" id="L62">                new BigDecimal(&quot;1500.00&quot;), null, EstadoOrden.PROGRAMADA));</span>
 <span class="fc" id="L63">        ORDENES.put(2, new OrdenDTO(2, 2, 2, TipoMantenimiento.CORRECTIVO,</span>
 <span class="fc" id="L64">                LocalDate.of(2026, 5, 19), LocalDate.of(2026, 5, 19), null,</span>
-                &quot;Orden en ejecucion base&quot;, new BigDecimal(&quot;1800.00&quot;), null,
-                EstadoOrden.EN_EJECUCION));
+<span class="fc" id="L65">                &quot;Orden en ejecucion base&quot;, new BigDecimal(&quot;1800.00&quot;), null,</span>
+<span class="fc" id="L66">                EstadoOrden.EN_EJECUCION));</span>
 <span class="fc" id="L67">        ORDENES.put(3, new OrdenDTO(3, 2, 2, TipoMantenimiento.PREVENTIVO,</span>
 <span class="fc" id="L68">                LocalDate.of(2026, 5, 18), LocalDate.of(2026, 5, 18),</span>
 <span class="fc" id="L69">                LocalDate.of(2026, 5, 19), &quot;Orden finalizada base&quot;,</span>
-                new BigDecimal(&quot;1200.00&quot;), new BigDecimal(&quot;1250.00&quot;), EstadoOrden.FINALIZADA));
+<span class="fc" id="L70">                new BigDecimal(&quot;1200.00&quot;), new BigDecimal(&quot;1250.00&quot;), EstadoOrden.FINALIZADA));</span>
 
 <span class="fc" id="L72">        USUARIOS.put(1, new UsuarioDTO(1, &quot;admin&quot;, &quot;admin123&quot;, RolUsuario.ADMINISTRADOR, EstatusUsuario.ACTIVO));</span>
 <span class="fc" id="L73">        USUARIOS.put(2, new UsuarioDTO(2, &quot;consulta&quot;, &quot;consulta123&quot;, RolUsuario.CONSULTOR, EstatusUsuario.ACTIVO));</span>

@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Guia de exposicion SIGOMEI</title>
+  <style>
+    @page { size: letter; margin: 15mm 14mm; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: #18202a;
+      font-family: "Segoe UI", Arial, sans-serif;
+      font-size: 11.5px;
+      line-height: 1.35;
+      background: #fff;
+    }
+    h1, h2, h3 { margin: 0; color: #102033; line-height: 1.1; }
+    h1 { font-size: 27px; }
+    h2 { font-size: 18px; margin-top: 18px; border-bottom: 2px solid #2c6f78; padding-bottom: 5px; }
+    h3 { font-size: 13px; margin-top: 12px; color: #2c5962; }
+    p { margin: 6px 0; }
+    ul, ol { margin: 6px 0 8px 18px; padding: 0; }
+    li { margin: 3px 0; }
+    table { width: 100%; border-collapse: collapse; margin: 7px 0 10px; table-layout: fixed; }
+    th, td { border: 1px solid #c8d2dc; padding: 5px 6px; vertical-align: top; }
+    th { background: #e8f2f3; color: #122935; font-weight: 700; }
+    .cover {
+      min-height: 190px;
+      padding: 26px 28px;
+      color: white;
+      background: linear-gradient(135deg, #143044, #2c6f78 62%, #6f8d3a);
+      border-radius: 8px;
+      margin-bottom: 12px;
+    }
+    .cover h1 { color: white; max-width: 620px; }
+    .cover p { max-width: 660px; font-size: 13px; margin-top: 10px; }
+    .meta {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-top: 18px;
+    }
+    .meta div {
+      background: rgba(255,255,255,.13);
+      border: 1px solid rgba(255,255,255,.26);
+      border-radius: 6px;
+      padding: 8px;
+      min-height: 54px;
+    }
+    .meta strong { display: block; font-size: 10px; opacity: .78; text-transform: uppercase; }
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; }
+    .box {
+      border: 1px solid #c8d2dc;
+      border-left: 5px solid #2c6f78;
+      border-radius: 6px;
+      padding: 9px 10px;
+      margin: 8px 0;
+      background: #fbfcfd;
+    }
+    .note {
+      border-left-color: #8b6f2a;
+      background: #fffaf0;
+    }
+    .ok { color: #1d6b47; font-weight: 700; }
+    .bad { color: #9c2f2f; font-weight: 700; }
+    .small { font-size: 10px; color: #4d5a66; }
+    .pagebreak { break-before: page; }
+    code {
+      font-family: Consolas, "Courier New", monospace;
+      background: #eef3f5;
+      border: 1px solid #d6e0e5;
+      border-radius: 4px;
+      padding: 1px 4px;
+    }
+    .script {
+      background: #f6f8fa;
+      border: 1px solid #ccd6dd;
+      border-radius: 6px;
+      padding: 8px 10px;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <section class="cover">
+    <h1>Exposicion del proyecto SIGOMEI</h1>
+    <p>Guia para presentar arquitectura distribuida con Java RMI, contrato cliente-servidor, ciclo TDD, pruebas, trazabilidad, cobertura, demostracion en vivo y preguntas tecnicas.</p>
+    <div class="meta">
+      <div><strong>Tecnologia</strong>Java RMI + JavaFX + JUnit 5</div>
+      <div><strong>Servidor</strong>Servicio remoto SIGOMEI</div>
+      <div><strong>Entidades CRUD</strong>Equipo, Tecnico, Orden</div>
+      <div><strong>Pruebas</strong>71 ejecutadas, 0 fallas</div>
+    </div>
+  </section>
+
+  <h2>1. Apertura sugerida</h2>
+  <div class="script">
+    "Nuestro sistema se llama SIGOMEI y resuelve la gestion de mantenimiento industrial. Lo implementamos como una aplicacion distribuida: el cliente JavaFX no accede directamente a la logica de negocio, sino que invoca un servicio remoto publicado por el servidor mediante Java RMI. La capa de servicio concentra validaciones, reglas de negocio y operaciones CRUD sobre equipos, tecnicos y ordenes."
+  </div>
+
+  <h2>2. Arquitectura distribuida implementada</h2>
+  <div class="grid2">
+    <div class="box">
+      <h3>Cliente</h3>
+      <p>Aplicacion JavaFX: <code>SigomeiFxApp</code>. Presenta pantallas, captura datos y llama metodos remotos del contrato <code>SigomeiRemote</code>.</p>
+      <p>No implementa reglas centrales: si el usuario deja campos vacios, captura el error y muestra un dialogo; si la regla depende del negocio, espera respuesta del servidor.</p>
+    </div>
+    <div class="box">
+      <h3>Servidor</h3>
+      <p><code>SigomeiServer</code> crea el registry RMI en el puerto configurado, instancia <code>SigomeiRemoteImpl</code> y publica el servicio con el nombre <code>SIGOMEI</code>.</p>
+      <p><code>SigomeiRemoteImpl</code> extiende <code>UnicastRemoteObject</code> y delega en <code>UsuarioService</code>, <code>EquipoService</code>, <code>TecnicoService</code> y <code>OrdenService</code>.</p>
+    </div>
+  </div>
+  <table>
+    <tr><th>Componente</th><th>Responsabilidad</th><th>Archivo clave</th></tr>
+    <tr><td>Vista/cliente</td><td>Interfaz, formularios, filtros, manejo de errores y llamadas remotas.</td><td><code>cliente/SigomeiFxApp.java</code></td></tr>
+    <tr><td>Contrato remoto</td><td>Define operaciones visibles para el cliente y excepciones esperadas.</td><td><code>servidor/rmi/SigomeiRemote.java</code></td></tr>
+    <tr><td>Implementacion RMI</td><td>Recibe invocaciones remotas y delega a servicios.</td><td><code>servidor/rmi/SigomeiRemoteImpl.java</code></td></tr>
+    <tr><td>Servicios</td><td>Validaciones, reglas RN, CRUD e historial.</td><td><code>servidor/service/*.java</code></td></tr>
+    <tr><td>DTO y catalogos</td><td>Objetos serializables que viajan entre cliente y servidor.</td><td><code>api/dto</code>, <code>api/catalogos</code></td></tr>
+  </table>
+
+  <h2>3. Justificacion tecnica de RMI</h2>
+  <ul>
+    <li><strong>Encaja con Java a Java:</strong> cliente, contrato, DTOs y servidor estan hechos en Java; RMI permite invocar metodos remotos casi como metodos locales.</li>
+    <li><strong>Contrato tipado:</strong> <code>SigomeiRemote</code> obliga a usar tipos concretos como <code>EquipoDTO</code>, <code>TecnicoDTO</code>, <code>OrdenDTO</code> y excepciones de dominio.</li>
+    <li><strong>Menos protocolo manual:</strong> con sockets habria que disenar mensajes, serializacion, codigos de operacion, parseo y manejo de errores. RMI ya resuelve transporte, stubs y serializacion de objetos.</li>
+    <li><strong>Separacion clara:</strong> el cliente no conoce repositorios ni reglas internas; solo conoce la interfaz remota.</li>
+    <li><strong>Trade-off:</strong> RMI acopla mas a Java que sockets o HTTP, pero para este proyecto academico con ambos extremos en Java reduce complejidad y hace mas clara la demostracion distribuida.</li>
+  </ul>
+
+  <h2>4. Contrato de comunicacion cliente-servidor</h2>
+  <p>El contrato esta en <code>SigomeiRemote</code>, que extiende <code>Remote</code>. Cada operacion declara <code>RemoteException</code> y, cuando aplica, excepciones de dominio: <code>ValidacionException</code>, <code>ReglaNegocioException</code>, <code>RegistroNoEncontradoException</code> y <code>AutenticacionException</code>.</p>
+  <table>
+    <tr><th>Modulo</th><th>Operaciones remotas principales</th><th>Errores controlados</th></tr>
+    <tr><td>Sesion</td><td><code>iniciarSesion</code>, <code>cerrarSesion</code></td><td>Credenciales invalidas o usuario inactivo.</td></tr>
+    <tr><td>Equipo</td><td><code>registrarEquipo</code>, <code>consultarEquipos</code>, <code>filtrarEquipos</code>, <code>actualizarEquipo</code>, <code>cambiarEstadoEquipo</code>, <code>eliminarEquipo</code></td><td>Campos obligatorios, serie duplicada, equipo relacionado a orden.</td></tr>
+    <tr><td>Tecnico</td><td><code>registrarTecnico</code>, <code>consultarTecnicos</code>, <code>filtrarTecnicos</code>, <code>actualizarTecnico</code>, <code>cambiarEstatusTecnico</code>, <code>eliminarTecnico</code></td><td>Campos obligatorios, RFC/correo duplicado, tecnico con ordenes activas.</td></tr>
+    <tr><td>Orden</td><td><code>registrarOrden</code>, <code>consultarOrdenes</code>, <code>filtrarOrdenes</code>, <code>actualizarOrden</code>, <code>cambiarEstadoOrden</code>, <code>consultarHistorialOrdenes</code>, <code>eliminarOrden</code></td><td>Tecnico incompatible, duplicidad, fechas invalidas, transicion no permitida.</td></tr>
+  </table>
+
+  <div class="pagebreak"></div>
+  <h2>5. Ciclo TDD aplicado</h2>
+  <table>
+    <tr><th>Etapa</th><th>Como se aplico en SIGOMEI</th><th>Evidencia</th></tr>
+    <tr><td>Plan</td><td>Se identificaron entidades y reglas: equipos, tecnicos, ordenes, autenticacion, filtros, historial y estados.</td><td>Casos CP01-CP35 y RN01-RN10.</td></tr>
+    <tr><td>Diseno</td><td>Se escribieron casos esperados positivos y negativos antes de cerrar la implementacion de servicio.</td><td><code>ReglasNegocioServiceTest</code>, <code>ValidacionesServiceTest</code>.</td></tr>
+    <tr><td>ROJO</td><td>Primero las pruebas fallaban porque la regla aun no existia o no lanzaba la excepcion esperada.</td><td>Ejemplo: RN02 duplicidad de orden activa.</td></tr>
+    <tr><td>VERDE</td><td>Se agrego la logica minima en servicios para pasar la prueba: validaciones, busquedas, transiciones y excepciones.</td><td><code>OrdenService.validarOrdenActivaDuplicada</code>, <code>cambiarEstadoOrden</code>.</td></tr>
+    <tr><td>Ejecucion</td><td>Se corrio <code>mvn test</code> con JUnit 5 y Surefire.</td><td>71 pruebas, 0 fallas, 0 errores, 1 omitida manual.</td></tr>
+    <tr><td>Reporte</td><td>JaCoCo genero cobertura de la capa de servicio.</td><td><code>target/site/jacoco/index.html</code>.</td></tr>
+  </table>
+  <div class="box note">
+    <strong>Idea clave para decir:</strong> "TDD no fue solo probar al final. Las pruebas nos obligaron a definir el comportamiento esperado: que se acepta, que se rechaza y que mensaje o excepcion debe regresar el servicio."
+  </div>
+
+  <h2>6. Matriz de trazabilidad RF/RN - Caso - Estado</h2>
+  <table>
+    <tr><th>RF/RN</th><th>Caso de prueba</th><th>Estado</th><th>Lectura para exposicion</th></tr>
+    <tr><td>RF-01 Iniciar sesion</td><td>CP01, usuario_cubreAutenticacionCorrectaEIncorrecta</td><td class="ok">Aprobado</td><td>El cliente puede entrar y consultar modulos; credenciales incorrectas se rechazan.</td></tr>
+    <tr><td>RF-02 CRUD Equipo</td><td>CP02-CP04, CrudServiceTest.crudEquipo</td><td class="ok">Aprobado</td><td>Registro, consulta, filtro, actualizacion y cambio de estado son compatibles con el contrato remoto.</td></tr>
+    <tr><td>RF-03 CRUD Tecnico</td><td>CP05-CP09, CrudServiceTest.crudTecnico</td><td class="ok">Aprobado</td><td>Se cubren alta, consulta, filtro, edicion, estatus y eliminacion controlada.</td></tr>
+    <tr><td>RF-04 CRUD Orden</td><td>CP10-CP16, CrudServiceTest.crudOrden</td><td class="ok">Aprobado</td><td>Ordenes soportan registro, consulta, filtro, actualizacion, cambio de estado e historial.</td></tr>
+    <tr><td>RN-01 Tecnico compatible</td><td>rn01_positivo_tecnicoCompatible, rn01_negativo_tecnicoIncompatible</td><td class="ok">Aprobado</td><td>La especialidad del tecnico debe coincidir con el tipo de equipo.</td></tr>
+    <tr><td>RN-02 Sin orden activa duplicada</td><td>rn02_negativo_ordenDuplicada, CP23</td><td class="ok">Aprobado</td><td>Se rechaza otra orden activa para el mismo equipo y fecha.</td></tr>
+    <tr><td>RN-03 No eliminar/inactivar con ordenes</td><td>rn03_negativo_eliminarTecnicoConOrdenes, CP30, CP31</td><td class="ok">Aprobado</td><td>Protege integridad entre ordenes, tecnicos y equipos.</td></tr>
+    <tr><td>RN-04 Tecnico activo</td><td>rn04_negativo_tecnicoInactivo, CP24</td><td class="ok">Aprobado</td><td>Una orden no puede asignarse a tecnico inactivo.</td></tr>
+    <tr><td>RN-05 Fechas cronologicas</td><td>rn05_negativo_fechaInicioAntesDeProgramada, CP26</td><td class="ok">Aprobado</td><td>Inicio no puede ser anterior a programada; cierre no puede ser anterior a inicio.</td></tr>
+    <tr><td>RN-06 Finalizacion completa</td><td>rn06_negativo_finalizarSinDatos, CP28</td><td class="ok">Aprobado</td><td>Para finalizar se requiere fecha de cierre y costo real.</td></tr>
+    <tr><td>RN-07 Criticidad alta</td><td>rn07_negativo_criticidadAltaConNivelI, CP25</td><td class="ok">Aprobado</td><td>Equipo de criticidad alta requiere tecnico con certificacion II o III.</td></tr>
+    <tr><td>RN-08 Transiciones de estado</td><td>rn08_negativo_transicionInvalida, CP27</td><td class="ok">Aprobado</td><td>Evita regresar de finalizada/en ejecucion a estados no permitidos.</td></tr>
+    <tr><td>CP-35 Desconexion durante operacion</td><td>cp35_mostrarErrorSiServidorSeDesconectaDuranteOperacion</td><td>Manual</td><td>Requiere apagar el servidor durante una operacion con cliente activo.</td></tr>
+  </table>
+
+  <h2>7. Reporte de cobertura</h2>
+  <table>
+    <tr><th>Metrica JaCoCo</th><th>Resultado</th><th>Interpretacion</th></tr>
+    <tr><td>Instrucciones</td><td>1839 cubiertas / 1858 totales = 98.98%</td><td>La mayoria de la logica de servicio fue ejecutada por pruebas.</td></tr>
+    <tr><td>Ramas</td><td>296 cubiertas / 320 totales = 92.50%</td><td>Se probaron condiciones positivas y negativas, especialmente reglas RN.</td></tr>
+    <tr><td>Lineas</td><td>343 cubiertas / 346 totales = 99.13%</td><td>Casi todas las lineas de servicios fueron recorridas.</td></tr>
+    <tr><td>Metodos</td><td>51 cubiertos / 51 totales = 100%</td><td>Todos los metodos de servicio incluidos en JaCoCo fueron ejercitados.</td></tr>
+    <tr><td>Ejecucion Maven</td><td>71 pruebas, 0 fallas, 0 errores, 1 omitida</td><td>El omitido es un caso manual de desconexion del servidor.</td></tr>
+  </table>
+
+  <div class="pagebreak"></div>
+  <h2>8. Demostracion en vivo recomendada</h2>
+  <h3>A. CRUD remoto de 3 entidades</h3>
+  <ol>
+    <li>Levantar servidor: <code>mvn exec:java</code> si tienen plugin, o ejecutar <code>SigomeiServer</code> desde el IDE.</li>
+    <li>Abrir cliente JavaFX <code>SigomeiFxApp</code> y entrar con <code>admin / admin123</code>.</li>
+    <li>Equipo: registrar un equipo nuevo, filtrarlo, editar ubicacion o estado.</li>
+    <li>Tecnico: registrar tecnico nuevo, editar telefono, eliminarlo si no tiene ordenes.</li>
+    <li>Orden: registrar orden con equipo y tecnico compatibles, actualizar descripcion, cambiar de programada a en ejecucion.</li>
+  </ol>
+
+  <h3>B. Tres casos obligatorios de pruebas</h3>
+  <table>
+    <tr><th>Caso</th><th>Que mostrar</th><th>Mensaje para decir</th></tr>
+    <tr><td>Prueba unitaria con BD/memoria</td><td>Ejecutar <code>mvn -Dtest=ReglasNegocioServiceTest test</code>.</td><td>"Usamos <code>InMemorySigomeiStore</code> como repositorio en memoria para aislar la capa de servicio y probar rapido sin depender de MySQL."</td></tr>
+    <tr><td>Negativo de GUI</td><td>En formulario Equipo, dejar fecha vacia o mal formada y presionar Guardar.</td><td>"La GUI captura la excepcion y muestra un dialogo: no se pudo guardar el equipo. Asi el usuario no ve una caida de la app."</td></tr>
+    <tr><td>Regla de negocio</td><td>Intentar registrar una orden para equipo electrico con tecnico mecanico, o una orden duplicada para mismo equipo/fecha.</td><td>"El servidor rechaza la operacion con <code>ReglaNegocioException</code>; el cliente solo presenta el mensaje."</td></tr>
+  </table>
+
+  <h3>C. Tres reglas para demostrar aceptado/rechazado</h3>
+  <table>
+    <tr><th>Regla</th><th>Aceptado</th><th>Rechazado</th></tr>
+    <tr><td>RN-01 Especialidad compatible</td><td>Equipo electrico + tecnico electrico.</td><td>Equipo electrico + tecnico mecanico.</td></tr>
+    <tr><td>RN-02 Orden duplicada</td><td>Mismo equipo en fecha distinta.</td><td>Mismo equipo, misma fecha, ambas activas.</td></tr>
+    <tr><td>RN-06 Finalizar orden</td><td>Estado FINALIZADA con fecha de cierre y costo real.</td><td>Finalizar sin fecha de cierre o sin costo real.</td></tr>
+  </table>
+
+  <h2>9. Analisis critico, defectos y recomendaciones</h2>
+  <div class="grid2">
+    <div class="box">
+      <h3>Defectos/riesgos detectados</h3>
+      <ul>
+        <li>El caso CP-35 queda manual porque depende de apagar el servidor durante una operacion.</li>
+        <li>La persistencia de prueba usa memoria; para produccion conviene integrar mas pruebas con MySQL.</li>
+        <li>La GUI atrapa excepciones generales; podria diferenciar mejor validacion, regla de negocio y conexion.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h3>Valor de TDD</h3>
+      <ul>
+        <li>Obligo a documentar reglas como comportamiento verificable.</li>
+        <li>Evito regresiones al modificar servicios.</li>
+        <li>Hizo clara la matriz RF/RN - caso - estado.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="box note">
+    <strong>Recomendaciones:</strong> automatizar el caso de desconexion con pruebas de integracion controladas, agregar validaciones visuales previas en JavaFX, separar repositorios reales de repositorios en memoria mediante interfaces, y mantener JaCoCo como evidencia en cada entrega.
+  </div>
+
+  <div class="pagebreak"></div>
+  <h2>10. Preguntas tecnicas probables y respuestas</h2>
+  <table>
+    <tr><th>Pregunta</th><th>Respuesta sugerida</th></tr>
+    <tr><td>Por que eligieron RMI y no sockets?</td><td>Porque ambos extremos estan en Java. RMI nos dio invocacion remota tipada, serializacion de DTOs y manejo de excepciones sin definir un protocolo manual. Sockets darian mas control, pero tambien mas codigo de bajo nivel.</td></tr>
+    <tr><td>Cual es el contrato de comunicacion?</td><td>La interfaz <code>SigomeiRemote</code>. Define las operaciones que el cliente puede invocar, los DTOs que viajan y las excepciones que puede recibir.</td></tr>
+    <tr><td>Que viaja por la red?</td><td>DTOs y parametros simples: IDs, fechas, catalogos, textos y costos. No viajan objetos de servicio ni repositorios.</td></tr>
+    <tr><td>Donde estan las reglas de negocio?</td><td>En la capa <code>service</code>, especialmente <code>OrdenService</code>, <code>EquipoService</code> y <code>TecnicoService</code>. El cliente solo solicita operaciones y muestra resultados o errores.</td></tr>
+    <tr><td>Como aplicaron TDD?</td><td>Primero se definieron pruebas positivas y negativas para reglas y validaciones. Luego se implemento lo minimo en servicios para pasar rojo a verde, y despues se ejecuto la suite completa con JaCoCo.</td></tr>
+    <tr><td>Que significa ROJO y VERDE?</td><td>ROJO: la prueba falla porque la funcion aun no cumple la regla. VERDE: se implementa la logica y la prueba pasa.</td></tr>
+    <tr><td>Como saben que el CRUD remoto funciona?</td><td>El contrato remoto expone CRUD para Equipo, Tecnico y Orden; <code>CrudServiceTest</code> verifica esas operaciones en servicios y la demo JavaFX las invoca desde cliente contra servidor RMI.</td></tr>
+    <tr><td>Que pasa si el servidor no esta disponible?</td><td>La llamada RMI falla con una excepcion de conexion/remota. Existe CP32 para servidor no disponible y CP35 como prueba manual para desconexion durante operacion.</td></tr>
+    <tr><td>Por que usar DTOs?</td><td>Porque separan datos de transporte de la logica interna. El cliente recibe estructuras simples y no conoce implementaciones del servidor.</td></tr>
+    <tr><td>Que regla consideran mas importante?</td><td>RN-02 y RN-06: evitan duplicidad de ordenes activas y obligan a cerrar una orden con datos completos, lo que protege consistencia operativa.</td></tr>
+    <tr><td>La base de datos en memoria reemplaza MySQL?</td><td>No. Sirve para pruebas unitarias rapidas y repetibles. MySQL es la dependencia real o futura para persistencia; en TDD conviene aislar reglas primero.</td></tr>
+    <tr><td>Que cubre JaCoCo?</td><td>Esta configurado para cubrir <code>com/sigomei/servidor/service/*</code>, es decir, la capa donde estan reglas y validaciones principales.</td></tr>
+    <tr><td>Que limitacion tiene RMI?</td><td>Acopla el sistema a Java y no es tan interoperable como HTTP/REST. En este proyecto conviene porque simplifica la arquitectura distribuida Java-Java.</td></tr>
+    <tr><td>Como se reparte la participacion del equipo?</td><td>Una persona explica arquitectura, otra contrato RMI, otra TDD/cobertura, otra demo CRUD, otra reglas de negocio y todos contestan al menos una pregunta tecnica.</td></tr>
+  </table>
+
+  <h2>11. Reparto de exposicion sugerido</h2>
+  <table>
+    <tr><th>Integrante</th><th>Parte</th><th>Tiempo</th></tr>
+    <tr><td>1</td><td>Problema, arquitectura cliente-servidor y RMI.</td><td>2 min</td></tr>
+    <tr><td>2</td><td>Contrato <code>SigomeiRemote</code>, DTOs y excepciones.</td><td>2 min</td></tr>
+    <tr><td>3</td><td>Ciclo TDD, pruebas unitarias y cobertura.</td><td>3 min</td></tr>
+    <tr><td>4</td><td>Demo CRUD remoto de Equipo, Tecnico y Orden.</td><td>4 min</td></tr>
+    <tr><td>5</td><td>Demo de reglas, matriz, analisis y recomendaciones.</td><td>3 min</td></tr>
+  </table>
+
+  <p class="small">Material generado para SIGOMEI. Datos verificados con <code>mvn test</code>: BUILD SUCCESS, 71 pruebas, 0 fallas, 0 errores, 1 omitida; reporte JaCoCo en <code>target/site/jacoco</code>.</p>
+</body>
+</html>

@@ -47,7 +47,7 @@ public class OrdenService {
 <span class="fc" id="L47">        List&lt;OrdenDTO&gt; ordenes = new ArrayList&lt;&gt;();</span>
 <span class="fc bfc" id="L48" title="All 2 branches covered.">        for (OrdenDTO orden : InMemorySigomeiStore.ORDENES.values()) {</span>
 <span class="fc" id="L49">            ordenes.add(copiar(orden));</span>
-<span class="fc" id="L50">        }</span>
+        }
 <span class="fc" id="L51">        ServerLog.info(&quot;Consulta de ordenes&quot;);</span>
 <span class="fc" id="L52">        return ordenes;</span>
     }
@@ -63,7 +63,7 @@ public class OrdenService {
 <span class="pc bpc" id="L63" title="2 of 6 branches missed.">            if (coincideEstado &amp;&amp; despuesDeInicio &amp;&amp; antesDeCierre) {</span>
 <span class="fc" id="L64">                resultado.add(copiar(orden));</span>
             }
-<span class="fc" id="L66">        }</span>
+        }
 
 <span class="fc" id="L68">        ServerLog.info(&quot;Filtro de ordenes estado=&quot; + estado);</span>
 <span class="fc" id="L69">        return resultado;</span>
@@ -131,7 +131,7 @@ public class OrdenService {
 <span class="pc bpc" id="L131" title="1 of 6 branches missed.">            if (coincideEquipo &amp;&amp; coincideTecnico &amp;&amp; coincideEstado) {</span>
 <span class="fc" id="L132">                resultado.add(copiar(orden));</span>
             }
-<span class="fc" id="L134">        }</span>
+        }
 
 <span class="fc" id="L136">        ServerLog.info(&quot;Consulta historial ordenes&quot;);</span>
 <span class="fc" id="L137">        return resultado;</span>
@@ -237,7 +237,7 @@ public class OrdenService {
 <span class="fc" id="L237">                        + &quot; fecha=&quot; + nuevaOrden.getFechaProgramada());</span>
 <span class="fc" id="L238">                throw new ReglaNegocioException(&quot;Ya existe una orden activa duplicada para el equipo y fecha&quot;);</span>
             }
-<span class="fc" id="L240">        }</span>
+        }
 <span class="fc" id="L241">    }</span>
 
     private boolean esTransicionValida(EstadoOrden actual, EstadoOrden nuevo) {
