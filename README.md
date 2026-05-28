@@ -6,7 +6,7 @@ La capa de servicio aplica las reglas de negocio RN-01 a RN-08 y el servidor gua
 ## Tecnologias
 
 - Java 17 o superior
-- Maven
+- Maven Wrapper
 - JUnit 5
 - Java RMI
 - JavaFX
@@ -14,111 +14,168 @@ La capa de servicio aplica las reglas de negocio RN-01 a RN-08 y el servidor gua
 
 ## Configuracion
 
-El servidor lee la configuracion de:
+El servidor lee la configuracion desde:
 
+```text
 proyecto/config/app.properties
+```
 
- ahi se configura la conexion local a MySQL:
+Ahi se configura la conexion local a MySQL:
 
-properties
+```properties
 db.url=jdbc:mysql://localhost:3306/sigomei_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
 db.user=root
-db.password=contraseña
+db.password=tu_contrasena
 rmi.registry.port=1099
 rmi.object.port=1100
 server.log.path=logs/server.log
+```
 
+El script final de la base de datos esta en:
 
-El script final de la bd  esta en  proyecto/src/main/resources/sql/sigomei_db.sql
+```text
+proyecto/src/main/resources/sql/sigomei_db.sql
+```
 
+## Comandos con Maven Wrapper
+
+En Windows no es necesario tener Maven instalado globalmente. Desde la carpeta `proyecto` use:
+
+```powershell
+.\mvnw.cmd comando
+```
+
+Si ya tiene Maven instalado tambien puede usar `mvn comando`.
 
 ## Compilar
 
-en la ruta  proyecto y  en powershell
-mvn -DskipTests package
+Desde la carpeta `proyecto`:
 
+```powershell
+.\mvnw.cmd -DskipTests package
+```
 
 ## Ejecutar Servidor RMI
 
-en  la carpeta proyecto y  en powershell ejecute 
-mvn exec:java
+Desde la carpeta `proyecto`:
 
-El servidor publica el servicio remoto con el nombre SIGOMEI
+```powershell
+.\mvnw.cmd exec:java
+```
+
+El servidor publica el servicio remoto con el nombre `SIGOMEI`.
+La terminal del servidor debe quedarse abierta. Para detenerlo use `Ctrl + C`.
 
 ## Ejecutar Cliente JavaFX
 
-En otra terminal, igual en la carpeta proyecto y en powershell ejecute
-mvn javafx:run
+En otra terminal, desde la carpeta `proyecto`:
 
+```powershell
+.\mvnw.cmd javafx:run
+```
 
-Usuarios  :
+Usuarios de prueba:
+
+```text
 admin / admin123
 consulta / consulta123
-
+```
 
 ## Ejecutar Cliente Demo
 
- Si quiree probar el cliente desde la consola en una terminal y en  la carpeta proyecto y  en powershell ejecute
-mvn exec:java "-Dexec.mainClass=com.sigomei.cliente.DemoClienteRmi"
+En otra terminal, desde la carpeta `proyecto`:
+
+```powershell
+.\mvnw.cmd exec:java "-Dexec.mainClass=com.sigomei.cliente.DemoClienteRmi"
+```
 
 El cliente se comunica por RMI. No contiene credenciales de base de datos y no se conecta directamente a MySQL.
 
-
 ## Logs
 
-La bitacora del servidor se genera en proyecto/logs/server.log
+La bitacora del servidor se genera en:
 
+```text
+proyecto/logs/server.log
+```
 
 ## Ejecutar Todas las Pruebas
 
-en la carpeta proyecto y en powershell ejecute 
-mvn test
+Desde la carpeta `proyecto`:
 
+```powershell
+.\mvnw.cmd test
+```
 
 Resultado esperado:
 
-
+```text
 Tests run: 71, Failures: 0, Errors: 0, Skipped: 1
 BUILD SUCCESS
+```
 
-
-El caso omitido es el CP-35, porque requiere ejecucion manual apagando el servidor durante una operacion del cliente.
+El caso omitido es CP-35, porque requiere ejecucion manual apagando el servidor durante una operacion del cliente.
 
 ## Pruebas por Suite
 
 Reglas de negocio RN-01 a RN-08:
 
-powershell
-mvn -Dtest=ReglasNegocioServiceTest test
+```powershell
+.\mvnw.cmd -Dtest=ReglasNegocioServiceTest test
+```
 
-Resultado esperado Tests run: 26, Failures: 0, Errors: 0, Skipped: 0
+Resultado esperado:
 
+```text
+Tests run: 26, Failures: 0, Errors: 0, Skipped: 0
+```
 
-Casos de sistema E2  en powershell
-mvn -Dtest=SistemaE2Test test
+Casos de sistema E2:
 
+```powershell
+.\mvnw.cmd -Dtest=SistemaE2Test test
+```
 
-Resultado esperado Tests run: 35, Failures: 0, Errors: 0, Skipped: 1
+Resultado esperado:
 
+```text
+Tests run: 35, Failures: 0, Errors: 0, Skipped: 1
+```
 
-Pruebas CRUD en powershell
-mvn -Dtest=CrudServiceTest test
-Resultado esperado  Tests run: 3, Failures: 0, Errors: 0, Skipped: 0
+Pruebas CRUD:
 
+```powershell
+.\mvnw.cmd -Dtest=CrudServiceTest test
+```
 
-Pruebas adicionales de validacion  en powershell
-mvn -Dtest=ValidacionesServiceTest test
+Resultado esperado:
 
-Resultado esperado Tests run: 7, Failures: 0, Errors: 0, Skipped: 0
+```text
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0
+```
 
+Pruebas adicionales de validacion:
+
+```powershell
+.\mvnw.cmd -Dtest=ValidacionesServiceTest test
+```
+
+Resultado esperado:
+
+```text
+Tests run: 7, Failures: 0, Errors: 0, Skipped: 0
+```
 
 ## Reporte de Cobertura
 
-JaCoCo se genera al ejecutar en powershell
-mvn test
+JaCoCo se genera al ejecutar:
 
+```powershell
+.\mvnw.cmd test
+```
 
 El reporte queda en:
 
+```text
 proyecto/target/site/jacoco/index.html
-
+```
