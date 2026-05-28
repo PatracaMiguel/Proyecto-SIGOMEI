@@ -4,26 +4,42 @@ import com.sigomei.api.catalogos.EstatusUsuario;
 import com.sigomei.api.dto.UsuarioDTO;
 import com.sigomei.api.excepciones.AutenticacionException;
 import com.sigomei.servidor.config.ServerLog;
+import com.sigomei.servidor.repository.UsuarioRepository;
 
-<span class="fc" id="L8">public class UsuarioService {</span>
+public class UsuarioService {
+
+    private final UsuarioRepository repository;
+
+<span class="fc" id="L13">    public UsuarioService() {</span>
+<span class="fc" id="L14">        this.repository = null;</span>
+<span class="fc" id="L15">    }</span>
+
+<span class="nc" id="L17">    public UsuarioService(UsuarioRepository repository) {</span>
+<span class="nc" id="L18">        this.repository = repository;</span>
+<span class="nc" id="L19">    }</span>
 
     public UsuarioDTO iniciarSesion(String usuario, String contrasena)
             throws AutenticacionException {
 
-<span class="fc" id="L13">        UsuarioDTO encontrado = InMemorySigomeiStore.USUARIOS.values().stream()</span>
-<span class="fc" id="L14">                .filter(actual -&gt; actual.getNombreUsuario().equals(usuario))</span>
-<span class="fc" id="L15">                .findFirst()</span>
-<span class="fc" id="L16">                .orElseThrow(() -&gt; new AutenticacionException(&quot;Usuario o contrasena incorrectos&quot;));</span>
-<span class="pc bpc" id="L17" title="1 of 4 branches missed.">        if (!encontrado.getContrasena().equals(contrasena) || encontrado.getEstatus() != EstatusUsuario.ACTIVO) {</span>
-<span class="fc" id="L18">            throw new AutenticacionException(&quot;Usuario o contrasena incorrectos&quot;);</span>
+<span class="pc bpc" id="L24" title="1 of 2 branches missed.">        UsuarioDTO encontrado = repository == null</span>
+<span class="fc" id="L25">                ? InMemorySigomeiStore.USUARIOS.values().stream()</span>
+<span class="fc" id="L26">                .filter(actual -&gt; actual.getNombreUsuario().equals(usuario))</span>
+<span class="fc" id="L27">                .findFirst()</span>
+<span class="fc" id="L28">                .orElseThrow(() -&gt; new AutenticacionException(&quot;Usuario o contrasena incorrectos&quot;))</span>
+<span class="pc" id="L29">                : repository.buscarPorUsuario(usuario);</span>
+<span class="pc bpc" id="L30" title="1 of 2 branches missed.">        if (encontrado == null) {</span>
+<span class="nc" id="L31">            throw new AutenticacionException(&quot;Usuario o contrasena incorrectos&quot;);</span>
         }
-<span class="fc" id="L20">        ServerLog.info(&quot;Sesion iniciada usuario=&quot; + usuario);</span>
-<span class="fc" id="L21">        return new UsuarioDTO(encontrado.getIdUsuario(), encontrado.getNombreUsuario(), null,</span>
-<span class="fc" id="L22">                encontrado.getRol(), encontrado.getEstatus());</span>
+<span class="pc bpc" id="L33" title="1 of 4 branches missed.">        if (!encontrado.getContrasena().equals(contrasena) || encontrado.getEstatus() != EstatusUsuario.ACTIVO) {</span>
+<span class="fc" id="L34">            throw new AutenticacionException(&quot;Usuario o contrasena incorrectos&quot;);</span>
+        }
+<span class="fc" id="L36">        ServerLog.info(&quot;Sesion iniciada usuario=&quot; + usuario);</span>
+<span class="fc" id="L37">        return new UsuarioDTO(encontrado.getIdUsuario(), encontrado.getNombreUsuario(), null,</span>
+<span class="fc" id="L38">                encontrado.getRol(), encontrado.getEstatus());</span>
     }
 
     public void cerrarSesion(int idUsuario) {
-<span class="fc" id="L26">        ServerLog.info(&quot;Sesion cerrada idUsuario=&quot; + idUsuario);</span>
-<span class="fc" id="L27">    }</span>
+<span class="fc" id="L42">        ServerLog.info(&quot;Sesion cerrada idUsuario=&quot; + idUsuario);</span>
+<span class="fc" id="L43">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

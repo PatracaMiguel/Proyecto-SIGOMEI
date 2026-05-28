@@ -21,6 +21,14 @@ import com.sigomei.servidor.service.EquipoService;
 import com.sigomei.servidor.service.OrdenService;
 import com.sigomei.servidor.service.TecnicoService;
 import com.sigomei.servidor.service.UsuarioService;
+import com.sigomei.servidor.repository.EquipoRepository;
+import com.sigomei.servidor.repository.JdbcEquipoRepository;
+import com.sigomei.servidor.repository.JdbcOrdenRepository;
+import com.sigomei.servidor.repository.JdbcTecnicoRepository;
+import com.sigomei.servidor.repository.JdbcUsuarioRepository;
+import com.sigomei.servidor.repository.OrdenRepository;
+import com.sigomei.servidor.repository.TecnicoRepository;
+import com.sigomei.servidor.repository.UsuarioRepository;
 
 import java.math.BigDecimal;
 import java.rmi.RemoteException;
@@ -38,10 +46,15 @@ public class SigomeiRemoteImpl extends UnicastRemoteObject implements SigomeiRem
     public SigomeiRemoteImpl() throws RemoteException {
         super(1100);
 
-        this.usuarioService = new UsuarioService();
-        this.equipoService = new EquipoService();
-        this.tecnicoService = new TecnicoService();
-        this.ordenService = new OrdenService();
+        UsuarioRepository usuarioRepository = new JdbcUsuarioRepository();
+        EquipoRepository equipoRepository = new JdbcEquipoRepository();
+        TecnicoRepository tecnicoRepository = new JdbcTecnicoRepository();
+        OrdenRepository ordenRepository = new JdbcOrdenRepository();
+
+        this.usuarioService = new UsuarioService(usuarioRepository);
+        this.equipoService = new EquipoService(equipoRepository);
+        this.tecnicoService = new TecnicoService(tecnicoRepository);
+        this.ordenService = new OrdenService(ordenRepository, equipoRepository, tecnicoRepository);
     }
 
     @Override

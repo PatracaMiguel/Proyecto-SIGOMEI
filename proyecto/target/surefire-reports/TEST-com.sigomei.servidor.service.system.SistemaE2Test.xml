@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.sigomei.servidor.service.system.SistemaE2Test" time="0.259" tests="35" errors="0" skipped="1" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.sigomei.servidor.service.system.SistemaE2Test" time="0.265" tests="35" errors="0" skipped="1" failures="0">
   <properties>
     <property name="java.specification.version" value="23"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="MX"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-23\bin"/>
-    <property name="sun.java.command" value="C:\Users\Migue\AppData\Local\Temp\surefire14511600519818824709\surefirebooter-20260527184538862_3.jar C:\Users\Migue\AppData\Local\Temp\surefire14511600519818824709 2026-05-27T18-45-38_471-jvmRun1 surefire-20260527184538862_1tmp surefire_0-20260527184538862_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\Migue\AppData\Local\Temp\surefire11719344170022136495\surefirebooter-20260527190802903_3.jar C:\Users\Migue\AppData\Local\Temp\surefire11719344170022136495 2026-05-27T19-08-02_684-jvmRun1 surefire-20260527190802903_1tmp surefire_0-20260527190802903_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\Migue\OneDrive\Documentos\PROYECTO_E5_CLIENTE-SERVIDOR\proyecto_Sigomei_v1.0\Proyecto-SIGOMEI_v1.0\proyecto\target\test-classes;C:\Users\Migue\OneDrive\Documentos\PROYECTO_E5_CLIENTE-SERVIDOR\proyecto_Sigomei_v1.0\Proyecto-SIGOMEI_v1.0\proyecto\target\classes;C:\Users\Migue\.m2\repository\com\mysql\mysql-connector-j\9.1.0\mysql-connector-j-9.1.0.jar;C:\Users\Migue\.m2\repository\com\google\protobuf\protobuf-java\4.26.1\protobuf-java-4.26.1.jar;C:\Users\Migue\.m2\repository\org\openjfx\javafx-controls\21.0.5\javafx-controls-21.0.5.jar;C:\Users\Migue\.m2\repository\org\openjfx\javafx-controls\21.0.5\javafx-controls-21.0.5-win.jar;C:\Users\Migue\.m2\repository\org\openjfx\javafx-graphics\21.0.5\javafx-graphics-21.0.5.jar;C:\Users\Migue\.m2\repository\org\openjfx\javafx-graphics\21.0.5\javafx-graphics-21.0.5-win.jar;C:\Users\Migue\.m2\repository\org\openjfx\javafx-base\21.0.5\javafx-base-21.0.5.jar;C:\Users\Migue\.m2\repository\org\openjfx\javafx-base\21.0.5\javafx-base-21.0.5-win.jar;C:\Users\Migue\.m2\repository\org\junit\jupiter\junit-jupiter\5.10.2\junit-jupiter-5.10.2.jar;C:\Users\Migue\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.2\junit-jupiter-api-5.10.2.jar;C:\Users\Migue\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\Migue\.m2\repository\org\junit\platform\junit-platform-commons\1.10.2\junit-platform-commons-1.10.2.jar;C:\Users\Migue\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\Migue\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.2\junit-jupiter-params-5.10.2.jar;C:\Users\Migue\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.2\junit-jupiter-engine-5.10.2.jar;C:\Users\Migue\.m2\repository\org\junit\platform\junit-platform-engine\1.10.2\junit-platform-engine-1.10.2.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -30,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\Migue\AppData\Local\Temp\surefire14511600519818824709\surefirebooter-20260527184538862_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\Migue\AppData\Local\Temp\surefire11719344170022136495\surefirebooter-20260527190802903_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="23.0.1+11-39"/>
@@ -58,41 +58,41 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="67.0"/>
   </properties>
-  <testcase name="cp06_filtrarTecnicosMecanicos" classname="com.sigomei.servidor.service.system.SistemaE2Test" time="0.003"/>
-  <testcase name="cp01_clienteConectaYAccedeModulos" classname="com.sigomei.servidor.service.system.SistemaE2Test" time="0.006"/>
-  <testcase name="cp13_cambiarOrdenProgramadaAEnEjecucion" classname="com.sigomei.servidor.service.system.SistemaE2Test" time="0.005"/>
-  <testcase name="cp14_finalizarOrdenEnEjecucionConDatos" classname="com.sigomei.servidor.service.system.SistemaE2Test" time="0.004"/>
-  <testcase name="cp09_eliminarTecnicoSinOrdenes" classname="com.sigomei.servidor.service.system.SistemaE2Test" time="0.011"/>
-  <testcase name="cp08_cambiarEstatusTecnicoActivoAInactivo" classname="com.sigomei.servidor.service.system.SistemaE2Test" time="0.004"/>
-  <testcase name="cp34_rechazarFinalizarOrdenCancelada" classname="com.sigomei.servidor.service.system.SistemaE2Test" time="0.005"/>
+  <testcase name="cp06_filtrarTecnicosMecanicos" classname="com.sigomei.servidor.service.system.SistemaE2Test" time="0.004"/>
+  <testcase name="cp01_clienteConectaYAccedeModulos" classname="com.sigomei.servidor.service.system.SistemaE2Test" time="0.004"/>
+  <testcase name="cp13_cambiarOrdenProgramadaAEnEjecucion" classname="com.sigomei.servidor.service.system.SistemaE2Test" time="0.004"/>
+  <testcase name="cp14_finalizarOrdenEnEjecucionConDatos" classname="com.sigomei.servidor.service.system.SistemaE2Test" time="0.002"/>
+  <testcase name="cp09_eliminarTecnicoSinOrdenes" classname="com.sigomei.servidor.service.system.SistemaE2Test" time="0.002"/>
+  <testcase name="cp08_cambiarEstatusTecnicoActivoAInactivo" classname="com.sigomei.servidor.service.system.SistemaE2Test" time="0.003"/>
+  <testcase name="cp34_rechazarFinalizarOrdenCancelada" classname="com.sigomei.servidor.service.system.SistemaE2Test" time="0.004"/>
   <testcase name="cp11_filtrarOrdenesProgramadas" classname="com.sigomei.servidor.service.system.SistemaE2Test" time="0.004"/>
-  <testcase name="cp28_rechazarFinalizarSinFechaCierre" classname="com.sigomei.servidor.service.system.SistemaE2Test" time="0.007"/>
+  <testcase name="cp28_rechazarFinalizarSinFechaCierre" classname="com.sigomei.servidor.service.system.SistemaE2Test" time="0.002"/>
   <testcase name="cp33_rechazarTecnicoConCorreoDuplicado" classname="com.sigomei.servidor.service.system.SistemaE2Test" time="0.006"/>
   <testcase name="cp29_rechazarCancelarOrdenFinalizada" classname="com.sigomei.servidor.service.system.SistemaE2Test" time="0.002"/>
-  <testcase name="cp27_rechazarCambioFinalizadaAProgramada" classname="com.sigomei.servidor.service.system.SistemaE2Test" time="0.002"/>
+  <testcase name="cp27_rechazarCambioFinalizadaAProgramada" classname="com.sigomei.servidor.service.system.SistemaE2Test" time="0.001"/>
   <testcase name="cp21_rechazarOrdenConCampoVacio" classname="com.sigomei.servidor.service.system.SistemaE2Test" time="0.002"/>
   <testcase name="cp30_rechazarInactivarTecnicoConOrdenesActivas" classname="com.sigomei.servidor.service.system.SistemaE2Test" time="0.002"/>
   <testcase name="cp31_rechazarInactivarEquipoRelacionadoAOrden" classname="com.sigomei.servidor.service.system.SistemaE2Test" time="0.003"/>
-  <testcase name="cp16_consultarHistorialFiltrado" classname="com.sigomei.servidor.service.system.SistemaE2Test" time="0.002"/>
-  <testcase name="cp12_actualizarOrdenRegistrada" classname="com.sigomei.servidor.service.system.SistemaE2Test" time="0.002"/>
-  <testcase name="cp22_rechazarOrdenConTecnicoIncompatible" classname="com.sigomei.servidor.service.system.SistemaE2Test" time="0.004"/>
-  <testcase name="cp10_registrarOrdenConEquipoYTecnicoCompatibles" classname="com.sigomei.servidor.service.system.SistemaE2Test" time="0.003"/>
+  <testcase name="cp16_consultarHistorialFiltrado" classname="com.sigomei.servidor.service.system.SistemaE2Test" time="0.001"/>
+  <testcase name="cp12_actualizarOrdenRegistrada" classname="com.sigomei.servidor.service.system.SistemaE2Test" time="0.003"/>
+  <testcase name="cp22_rechazarOrdenConTecnicoIncompatible" classname="com.sigomei.servidor.service.system.SistemaE2Test" time="0.002"/>
+  <testcase name="cp10_registrarOrdenConEquipoYTecnicoCompatibles" classname="com.sigomei.servidor.service.system.SistemaE2Test" time="0.001"/>
   <testcase name="cp02_registrarEquipoValido" classname="com.sigomei.servidor.service.system.SistemaE2Test" time="0.003"/>
   <testcase name="cp24_rechazarOrdenConTecnicoInactivo" classname="com.sigomei.servidor.service.system.SistemaE2Test" time="0.002"/>
-  <testcase name="cp15_cancelarOrdenProgramada" classname="com.sigomei.servidor.service.system.SistemaE2Test" time="0.001"/>
-  <testcase name="cp05_registrarTecnicoValido" classname="com.sigomei.servidor.service.system.SistemaE2Test" time="0.003"/>
-  <testcase name="cp26_rechazarFechaInicioAntesDeProgramada" classname="com.sigomei.servidor.service.system.SistemaE2Test" time="0.003"/>
-  <testcase name="cp32_mostrarErrorCuandoServidorRmiNoDisponible" classname="com.sigomei.servidor.service.system.SistemaE2Test" time="0.108"/>
-  <testcase name="cp07_actualizarTecnicoRegistrado" classname="com.sigomei.servidor.service.system.SistemaE2Test" time="0.002"/>
+  <testcase name="cp15_cancelarOrdenProgramada" classname="com.sigomei.servidor.service.system.SistemaE2Test" time="0.002"/>
+  <testcase name="cp05_registrarTecnicoValido" classname="com.sigomei.servidor.service.system.SistemaE2Test" time="0.004"/>
+  <testcase name="cp26_rechazarFechaInicioAntesDeProgramada" classname="com.sigomei.servidor.service.system.SistemaE2Test" time="0.001"/>
+  <testcase name="cp32_mostrarErrorCuandoServidorRmiNoDisponible" classname="com.sigomei.servidor.service.system.SistemaE2Test" time="0.131"/>
+  <testcase name="cp07_actualizarTecnicoRegistrado" classname="com.sigomei.servidor.service.system.SistemaE2Test" time="0.004"/>
   <testcase name="cp23_rechazarOrdenDuplicadaMismoEquipoYFecha" classname="com.sigomei.servidor.service.system.SistemaE2Test" time="0.002"/>
   <testcase name="cp35_mostrarErrorSiServidorSeDesconectaDuranteOperacion" classname="com.sigomei.servidor.service.system.SistemaE2Test" time="0.0">
     <skipped message="CP-35 requiere ejecucion manual: apagar el servidor durante una operacion con el cliente activo"/>
   </testcase>
-  <testcase name="cp03_filtrarEquiposMecanicos" classname="com.sigomei.servidor.service.system.SistemaE2Test" time="0.002"/>
-  <testcase name="cp25_rechazarCriticidadAltaConCertificacionI" classname="com.sigomei.servidor.service.system.SistemaE2Test" time="0.001"/>
-  <testcase name="cp17_cambiarTecnicoSinOrdenesAInactivo" classname="com.sigomei.servidor.service.system.SistemaE2Test" time="0.001"/>
+  <testcase name="cp03_filtrarEquiposMecanicos" classname="com.sigomei.servidor.service.system.SistemaE2Test" time="0.003"/>
+  <testcase name="cp25_rechazarCriticidadAltaConCertificacionI" classname="com.sigomei.servidor.service.system.SistemaE2Test" time="0.003"/>
+  <testcase name="cp17_cambiarTecnicoSinOrdenesAInactivo" classname="com.sigomei.servidor.service.system.SistemaE2Test" time="0.002"/>
   <testcase name="cp04_actualizarEquipoRegistrado" classname="com.sigomei.servidor.service.system.SistemaE2Test" time="0.003"/>
   <testcase name="cp20_rechazarTecnicoConCorreoVacio" classname="com.sigomei.servidor.service.system.SistemaE2Test" time="0.002"/>
-  <testcase name="cp19_rechazarEquipoConNombreVacio" classname="com.sigomei.servidor.service.system.SistemaE2Test" time="0.001"/>
+  <testcase name="cp19_rechazarEquipoConNombreVacio" classname="com.sigomei.servidor.service.system.SistemaE2Test" time="0.002"/>
   <testcase name="cp18_cambiarEquipoSinOrdenesAInactivo" classname="com.sigomei.servidor.service.system.SistemaE2Test" time="0.003"/>
 </testsuite>

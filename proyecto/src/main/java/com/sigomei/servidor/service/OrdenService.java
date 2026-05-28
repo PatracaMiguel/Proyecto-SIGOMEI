@@ -11,6 +11,9 @@ import com.sigomei.api.excepciones.ReglaNegocioException;
 import com.sigomei.api.excepciones.RegistroNoEncontradoException;
 import com.sigomei.api.excepciones.ValidacionException;
 import com.sigomei.servidor.config.ServerLog;
+import com.sigomei.servidor.repository.EquipoRepository;
+import com.sigomei.servidor.repository.OrdenRepository;
+import com.sigomei.servidor.repository.TecnicoRepository;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -19,8 +22,22 @@ import java.util.List;
 
 public class OrdenService {
 
+    private final OrdenRepository ordenRepository;
+    private final EquipoRepository equipoRepository;
+    private final TecnicoRepository tecnicoRepository;
+
     public OrdenService() {
         InMemorySigomeiStore.reset();
+        this.ordenRepository = null;
+        this.equipoRepository = null;
+        this.tecnicoRepository = null;
+    }
+
+    public OrdenService(OrdenRepository ordenRepository, EquipoRepository equipoRepository,
+                        TecnicoRepository tecnicoRepository) {
+        this.ordenRepository = ordenRepository;
+        this.equipoRepository = equipoRepository;
+        this.tecnicoRepository = tecnicoRepository;
     }
 
     public OrdenDTO registrarOrden(OrdenDTO orden)
@@ -38,12 +55,22 @@ public class OrdenService {
         validarFinalizacion(orden.getEstadoOrden(), orden.getFechaCierre(), orden.getCostoReal());
         validarOrdenActivaDuplicada(orden);
 
-        InMemorySigomeiStore.ORDENES.put(orden.getIdOrden(), copiar(orden));
+        OrdenDTO guardada;
+        if (ordenRepository == null) {
+            InMemorySigomeiStore.ORDENES.put(orden.getIdOrden(), copiar(orden));
+            guardada = copiar(orden);
+        } else {
+            guardada = ordenRepository.guardar(orden);
+        }
         ServerLog.info("Orden registrada id=" + orden.getIdOrden());
-        return copiar(orden);
+        return copiar(guardada);
     }
 
     public List<OrdenDTO> consultarOrdenes() {
+        if (ordenRepository != null) {
+            ServerLog.info("Consulta de ordenes");
+            return ordenRepository.consultarTodas();
+        }
         List<OrdenDTO> ordenes = new ArrayList<>();
         for (OrdenDTO orden : InMemorySigomeiStore.ORDENES.values()) {
             ordenes.add(copiar(orden));
@@ -53,6 +80,10 @@ public class OrdenService {
     }
 
     public List<OrdenDTO> filtrarOrdenes(EstadoOrden estado, LocalDate fechaInicio, LocalDate fechaCierre) {
+        if (ordenRepository != null) {
+            ServerLog.info("Filtro de ordenes estado=" + estado);
+            return ordenRepository.filtrar(estado, fechaInicio, fechaCierre);
+        }
         List<OrdenDTO> resultado = new ArrayList<>();
 
         for (OrdenDTO orden : InMemorySigomeiStore.ORDENES.values()) {
@@ -72,7 +103,7 @@ public class OrdenService {
     public OrdenDTO actualizarOrden(OrdenDTO orden)
             throws ValidacionException, ReglaNegocioException, RegistroNoEncontradoException {
 
-        if (orden == null || !InMemorySigomeiStore.ORDENES.containsKey(orden.getIdOrden())) {
+        if (orden == null || buscarOrdenPorId(orden.getIdOrden()) == null) {
             throw new RegistroNoEncontradoException("Orden no encontrada");
         }
 
@@ -83,15 +114,21 @@ public class OrdenService {
         validarFinalizacion(orden.getEstadoOrden(), orden.getFechaCierre(), orden.getCostoReal());
         validarOrdenActivaDuplicada(orden);
 
-        InMemorySigomeiStore.ORDENES.put(orden.getIdOrden(), copiar(orden));
+        OrdenDTO actualizada;
+        if (ordenRepository == null) {
+            InMemorySigomeiStore.ORDENES.put(orden.getIdOrden(), copiar(orden));
+            actualizada = copiar(orden);
+        } else {
+            actualizada = ordenRepository.actualizar(orden);
+        }
         ServerLog.info("Orden actualizada id=" + orden.getIdOrden());
-        return copiar(orden);
+        return copiar(actualizada);
     }
 
     public OrdenDTO cambiarEstadoOrden(int idOrden, EstadoOrden nuevoEstado, LocalDate fechaCierre, BigDecimal costoReal)
             throws ReglaNegocioException, RegistroNoEncontradoException {
 
-        OrdenDTO orden = InMemorySigomeiStore.ORDENES.get(idOrden);
+        OrdenDTO orden = buscarOrdenPorId(idOrden);
         if (orden == null) {
             throw new RegistroNoEncontradoException("Orden no encontrada");
         }
@@ -115,12 +152,20 @@ public class OrdenService {
             actualizada.setCostoReal(costoReal);
         }
 
-        InMemorySigomeiStore.ORDENES.put(idOrden, actualizada);
+        if (ordenRepository == null) {
+            InMemorySigomeiStore.ORDENES.put(idOrden, actualizada);
+        } else {
+            actualizada = ordenRepository.actualizar(actualizada);
+        }
         ServerLog.info("Estado de orden actualizado id=" + idOrden + " estado=" + nuevoEstado);
         return copiar(actualizada);
     }
 
     public List<OrdenDTO> consultarHistorialOrdenes(Integer idEquipo, Integer idTecnico, EstadoOrden estadoOrden) {
+        if (ordenRepository != null) {
+            ServerLog.info("Consulta historial ordenes");
+            return ordenRepository.consultarHistorial(idEquipo, idTecnico, estadoOrden);
+        }
         List<OrdenDTO> resultado = new ArrayList<>();
 
         for (OrdenDTO orden : InMemorySigomeiStore.ORDENES.values()) {
@@ -138,12 +183,20 @@ public class OrdenService {
     }
 
     public void eliminarOrden(int idOrden) throws RegistroNoEncontradoException {
-        if (!InMemorySigomeiStore.ORDENES.containsKey(idOrden)) {
+        if (buscarOrdenPorId(idOrden) == null) {
             throw new RegistroNoEncontradoException("Orden no encontrada");
         }
 
-        InMemorySigomeiStore.ORDENES.remove(idOrden);
+        if (ordenRepository == null) {
+            InMemorySigomeiStore.ORDENES.remove(idOrden);
+        } else {
+            ordenRepository.eliminar(idOrden);
+        }
         ServerLog.info("Orden eliminada id=" + idOrden);
+    }
+
+    private OrdenDTO buscarOrdenPorId(int idOrden) {
+        return ordenRepository == null ? InMemorySigomeiStore.ORDENES.get(idOrden) : ordenRepository.buscarPorId(idOrden);
     }
 
     private void validarOrdenBasica(OrdenDTO orden) throws ValidacionException {
@@ -159,7 +212,9 @@ public class OrdenService {
     }
 
     private EquipoDTO buscarEquipo(int idEquipo) throws RegistroNoEncontradoException {
-        EquipoDTO equipo = InMemorySigomeiStore.EQUIPOS.get(idEquipo);
+        EquipoDTO equipo = equipoRepository == null
+                ? InMemorySigomeiStore.EQUIPOS.get(idEquipo)
+                : equipoRepository.buscarPorId(idEquipo);
         if (equipo == null) {
             throw new RegistroNoEncontradoException("Equipo no encontrado");
         }
@@ -167,7 +222,9 @@ public class OrdenService {
     }
 
     private TecnicoDTO buscarTecnico(int idTecnico) throws RegistroNoEncontradoException {
-        TecnicoDTO tecnico = InMemorySigomeiStore.TECNICOS.get(idTecnico);
+        TecnicoDTO tecnico = tecnicoRepository == null
+                ? InMemorySigomeiStore.TECNICOS.get(idTecnico)
+                : tecnicoRepository.buscarPorId(idTecnico);
         if (tecnico == null) {
             throw new RegistroNoEncontradoException("Tecnico no encontrado");
         }
@@ -226,7 +283,10 @@ public class OrdenService {
     }
 
     private void validarOrdenActivaDuplicada(OrdenDTO nuevaOrden) throws ReglaNegocioException {
-        for (OrdenDTO orden : InMemorySigomeiStore.ORDENES.values()) {
+        List<OrdenDTO> ordenes = ordenRepository == null
+                ? new ArrayList<>(InMemorySigomeiStore.ORDENES.values())
+                : ordenRepository.consultarTodas();
+        for (OrdenDTO orden : ordenes) {
             boolean distintaOrden = orden.getIdOrden() != nuevaOrden.getIdOrden();
             boolean mismoEquipo = orden.getIdEquipo() == nuevaOrden.getIdEquipo();
             boolean mismaFecha = orden.getFechaProgramada().equals(nuevaOrden.getFechaProgramada());

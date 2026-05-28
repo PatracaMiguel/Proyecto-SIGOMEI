@@ -23,6 +23,10 @@ C:\Users\Migue\OneDrive\Documentos\PROYECTO_E5_CLIENTE-SERVIDOR\proyecto_Sigomei
 C:\Users\Migue\OneDrive\Documentos\PROYECTO_E5_CLIENTE-SERVIDOR\proyecto_Sigomei_v1.0\Proyecto-SIGOMEI_v1.0\proyecto\src\main\java\com\sigomei\servidor\config\PruebaConexion.java
 C:\Users\Migue\OneDrive\Documentos\PROYECTO_E5_CLIENTE-SERVIDOR\proyecto_Sigomei_v1.0\Proyecto-SIGOMEI_v1.0\proyecto\src\main\java\com\sigomei\servidor\config\ServerLog.java
 C:\Users\Migue\OneDrive\Documentos\PROYECTO_E5_CLIENTE-SERVIDOR\proyecto_Sigomei_v1.0\Proyecto-SIGOMEI_v1.0\proyecto\src\main\java\com\sigomei\servidor\repository\EquipoRepository.java
+C:\Users\Migue\OneDrive\Documentos\PROYECTO_E5_CLIENTE-SERVIDOR\proyecto_Sigomei_v1.0\Proyecto-SIGOMEI_v1.0\proyecto\src\main\java\com\sigomei\servidor\repository\JdbcEquipoRepository.java
+C:\Users\Migue\OneDrive\Documentos\PROYECTO_E5_CLIENTE-SERVIDOR\proyecto_Sigomei_v1.0\Proyecto-SIGOMEI_v1.0\proyecto\src\main\java\com\sigomei\servidor\repository\JdbcOrdenRepository.java
+C:\Users\Migue\OneDrive\Documentos\PROYECTO_E5_CLIENTE-SERVIDOR\proyecto_Sigomei_v1.0\Proyecto-SIGOMEI_v1.0\proyecto\src\main\java\com\sigomei\servidor\repository\JdbcTecnicoRepository.java
+C:\Users\Migue\OneDrive\Documentos\PROYECTO_E5_CLIENTE-SERVIDOR\proyecto_Sigomei_v1.0\Proyecto-SIGOMEI_v1.0\proyecto\src\main\java\com\sigomei\servidor\repository\JdbcUsuarioRepository.java
 C:\Users\Migue\OneDrive\Documentos\PROYECTO_E5_CLIENTE-SERVIDOR\proyecto_Sigomei_v1.0\Proyecto-SIGOMEI_v1.0\proyecto\src\main\java\com\sigomei\servidor\repository\OrdenRepository.java
 C:\Users\Migue\OneDrive\Documentos\PROYECTO_E5_CLIENTE-SERVIDOR\proyecto_Sigomei_v1.0\Proyecto-SIGOMEI_v1.0\proyecto\src\main\java\com\sigomei\servidor\repository\TecnicoRepository.java
 C:\Users\Migue\OneDrive\Documentos\PROYECTO_E5_CLIENTE-SERVIDOR\proyecto_Sigomei_v1.0\Proyecto-SIGOMEI_v1.0\proyecto\src\main\java\com\sigomei\servidor\repository\UsuarioRepository.java
