@@ -24,13 +24,19 @@ BUILD SUCCESS
 
 ## Ejecutar servidor RMI
 
-Desde `proyecto` y en powershell java -cp target\classes com.sigomei.servidor.rmi.SigomeiServer
+Desde `proyecto` y en powershell 
+java -cp target\classes com.sigomei.servidor.rmi.SigomeiServer
 El servidor publica el servicio remoto con el nombre `SIGOMEI`.
 
 ## Ejecutar cliente demo
 
 En otra terminal, desde `proyecto` ejecute java -cp target\classes com.sigomei.cliente.DemoClienteRmi
 El cliente demo solo usa RMI. No importa `ConexionBD`, no contiene credenciales y no se conecta directamente a MySQL.
+
+## Ejecutar cliente RMI
+Desde `proyecto` ejecute 
+mvn javafx:run
+El cliente utiliza JDBC para conectarse a MySQL 
 
 ## Logs
 La bitacora del servidor se genera en:

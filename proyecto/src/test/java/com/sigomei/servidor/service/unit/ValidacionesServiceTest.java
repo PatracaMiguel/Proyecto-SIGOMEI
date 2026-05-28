@@ -33,30 +33,30 @@ public class ValidacionesServiceTest {
 
         assertThrows(ValidacionException.class, () -> service.registrarEquipo(null));
         assertThrows(ValidacionException.class, () -> service.registrarEquipo(equipo(0, "Nuevo", "SER-01")));
-        assertThrows(ValidacionException.class, () -> service.registrarEquipo(equipo(20, "", "SER-01")));
+        assertThrows(ValidacionException.class, () -> service.registrarEquipo(equipo(4, "", "SER-01")));
         assertThrows(ValidacionException.class, () -> service.registrarEquipo(new EquipoDTO(
-                20, "Nuevo", null, "Marca", "Modelo", "SER-01", "Planta",
+                4, "Nuevo", null, "Marca", "Modelo", "SER-01", "Planta",
                 LocalDate.of(2026, 1, 1), EstadoOperativo.OPERATIVO, Criticidad.MEDIA)));
         assertThrows(ValidacionException.class, () -> service.registrarEquipo(new EquipoDTO(
-                20, "Nuevo", TipoEquipo.MECANICO, "", "Modelo", "SER-01", "Planta",
+                4, "Nuevo", TipoEquipo.MECANICO, "", "Modelo", "SER-01", "Planta",
                 LocalDate.of(2026, 1, 1), EstadoOperativo.OPERATIVO, Criticidad.MEDIA)));
         assertThrows(ValidacionException.class, () -> service.registrarEquipo(new EquipoDTO(
-                20, "Nuevo", TipoEquipo.MECANICO, "Marca", "", "SER-01", "Planta",
+                4, "Nuevo", TipoEquipo.MECANICO, "Marca", "", "SER-01", "Planta",
                 LocalDate.of(2026, 1, 1), EstadoOperativo.OPERATIVO, Criticidad.MEDIA)));
         assertThrows(ValidacionException.class, () -> service.registrarEquipo(new EquipoDTO(
-                20, "Nuevo", TipoEquipo.MECANICO, "Marca", "Modelo", "", "Planta",
+                4, "Nuevo", TipoEquipo.MECANICO, "Marca", "Modelo", "", "Planta",
                 LocalDate.of(2026, 1, 1), EstadoOperativo.OPERATIVO, Criticidad.MEDIA)));
         assertThrows(ValidacionException.class, () -> service.registrarEquipo(new EquipoDTO(
-                20, "Nuevo", TipoEquipo.MECANICO, "Marca", "Modelo", "SER-01", "",
+                4, "Nuevo", TipoEquipo.MECANICO, "Marca", "Modelo", "SER-01", "",
                 LocalDate.of(2026, 1, 1), EstadoOperativo.OPERATIVO, Criticidad.MEDIA)));
         assertThrows(ValidacionException.class, () -> service.registrarEquipo(new EquipoDTO(
-                20, "Nuevo", TipoEquipo.MECANICO, "Marca", "Modelo", "SER-01", "Planta",
+                4, "Nuevo", TipoEquipo.MECANICO, "Marca", "Modelo", "SER-01", "Planta",
                 null, EstadoOperativo.OPERATIVO, Criticidad.MEDIA)));
         assertThrows(ValidacionException.class, () -> service.registrarEquipo(new EquipoDTO(
-                20, "Nuevo", TipoEquipo.MECANICO, "Marca", "Modelo", "SER-01", "Planta",
+                4, "Nuevo", TipoEquipo.MECANICO, "Marca", "Modelo", "SER-01", "Planta",
                 LocalDate.of(2026, 1, 1), null, Criticidad.MEDIA)));
         assertThrows(ValidacionException.class, () -> service.registrarEquipo(new EquipoDTO(
-                20, "Nuevo", TipoEquipo.MECANICO, "Marca", "Modelo", "SER-01", "Planta",
+                4, "Nuevo", TipoEquipo.MECANICO, "Marca", "Modelo", "SER-01", "Planta",
                 LocalDate.of(2026, 1, 1), EstadoOperativo.OPERATIVO, null)));
     }
 
@@ -69,14 +69,14 @@ public class ValidacionesServiceTest {
         assertEquals(1, service.filtrarEquipos("bomba", TipoEquipo.MECANICO, Criticidad.MEDIA).size());
         assertEquals(0, service.filtrarEquipos("no existe", TipoEquipo.HIDRAULICO, Criticidad.ALTA).size());
 
-        assertThrows(ReglaNegocioException.class, () -> service.registrarEquipo(equipo(20, "Duplicado", "EQ-001")));
+        assertThrows(ReglaNegocioException.class, () -> service.registrarEquipo(equipo(4, "Duplicado", "EQ-001")));
         assertThrows(RegistroNoEncontradoException.class, () -> service.actualizarEquipo(null));
-        assertThrows(RegistroNoEncontradoException.class, () -> service.actualizarEquipo(equipo(999, "No existe", "SER-999")));
-        assertThrows(RegistroNoEncontradoException.class, () -> service.cambiarEstadoEquipo(999, EstadoOperativo.INACTIVO));
-        assertThrows(RegistroNoEncontradoException.class, () -> service.eliminarEquipo(999));
+        assertThrows(RegistroNoEncontradoException.class, () -> service.actualizarEquipo(equipo(4, "No existe", "SER-999")));
+        assertThrows(RegistroNoEncontradoException.class, () -> service.cambiarEstadoEquipo(4, EstadoOperativo.INACTIVO));
+        assertThrows(RegistroNoEncontradoException.class, () -> service.eliminarEquipo(4));
         assertThrows(ReglaNegocioException.class, () -> service.eliminarEquipo(1));
 
-        EquipoDTO activo = service.cambiarEstadoEquipo(10, EstadoOperativo.OPERATIVO);
+        EquipoDTO activo = service.cambiarEstadoEquipo(2, EstadoOperativo.OPERATIVO);
         assertEquals(EstadoOperativo.OPERATIVO, activo.getEstadoOperativo());
     }
 
@@ -86,27 +86,27 @@ public class ValidacionesServiceTest {
 
         assertThrows(ValidacionException.class, () -> service.registrarTecnico(null));
         assertThrows(ValidacionException.class, () -> service.registrarTecnico(tecnico(0, "Nuevo", "RFC01", "nuevo@mail.com")));
-        assertThrows(ValidacionException.class, () -> service.registrarTecnico(tecnico(20, "", "RFC01", "nuevo@mail.com")));
+        assertThrows(ValidacionException.class, () -> service.registrarTecnico(tecnico(6, "", "RFC01", "nuevo@mail.com")));
         assertThrows(ValidacionException.class, () -> service.registrarTecnico(new TecnicoDTO(
-                20, "Nuevo", "", "555", "nuevo@mail.com", TipoEquipo.MECANICO,
+                4, "Nuevo", "", "555", "nuevo@mail.com", TipoEquipo.MECANICO,
                 NivelCertificacion.II, LocalDate.of(2026, 1, 1), EstadoTecnico.ACTIVO)));
         assertThrows(ValidacionException.class, () -> service.registrarTecnico(new TecnicoDTO(
-                20, "Nuevo", "RFC01", "", "nuevo@mail.com", TipoEquipo.MECANICO,
+                4, "Nuevo", "RFC01", "", "nuevo@mail.com", TipoEquipo.MECANICO,
                 NivelCertificacion.II, LocalDate.of(2026, 1, 1), EstadoTecnico.ACTIVO)));
         assertThrows(ValidacionException.class, () -> service.registrarTecnico(new TecnicoDTO(
-                20, "Nuevo", "RFC01", "555", "", TipoEquipo.MECANICO,
+                4, "Nuevo", "RFC01", "555", "", TipoEquipo.MECANICO,
                 NivelCertificacion.II, LocalDate.of(2026, 1, 1), EstadoTecnico.ACTIVO)));
         assertThrows(ValidacionException.class, () -> service.registrarTecnico(new TecnicoDTO(
-                20, "Nuevo", "RFC01", "555", "nuevo@mail.com", null,
+                4, "Nuevo", "RFC01", "555", "nuevo@mail.com", null,
                 NivelCertificacion.II, LocalDate.of(2026, 1, 1), EstadoTecnico.ACTIVO)));
         assertThrows(ValidacionException.class, () -> service.registrarTecnico(new TecnicoDTO(
-                20, "Nuevo", "RFC01", "555", "nuevo@mail.com", TipoEquipo.MECANICO,
+                4, "Nuevo", "RFC01", "555", "nuevo@mail.com", TipoEquipo.MECANICO,
                 null, LocalDate.of(2026, 1, 1), EstadoTecnico.ACTIVO)));
         assertThrows(ValidacionException.class, () -> service.registrarTecnico(new TecnicoDTO(
-                20, "Nuevo", "RFC01", "555", "nuevo@mail.com", TipoEquipo.MECANICO,
+                4, "Nuevo", "RFC01", "555", "nuevo@mail.com", TipoEquipo.MECANICO,
                 NivelCertificacion.II, null, EstadoTecnico.ACTIVO)));
         assertThrows(ValidacionException.class, () -> service.registrarTecnico(new TecnicoDTO(
-                20, "Nuevo", "RFC01", "555", "nuevo@mail.com", TipoEquipo.MECANICO,
+                4, "Nuevo", "RFC01", "555", "nuevo@mail.com", TipoEquipo.MECANICO,
                 NivelCertificacion.II, LocalDate.of(2026, 1, 1), null)));
     }
 
@@ -119,15 +119,15 @@ public class ValidacionesServiceTest {
         assertEquals(1, service.filtrarTecnicos("ana", TipoEquipo.ELECTRICO, NivelCertificacion.II).size());
         assertEquals(0, service.filtrarTecnicos("no existe", TipoEquipo.HIDRAULICO, NivelCertificacion.III).size());
 
-        assertThrows(ReglaNegocioException.class, () -> service.registrarTecnico(tecnico(20, "Duplicado", "LOAA900101AA1", "otro@mail.com")));
-        assertThrows(ReglaNegocioException.class, () -> service.registrarTecnico(tecnico(21, "Duplicado", "RFC21", "ana@example.com")));
+        assertThrows(ReglaNegocioException.class, () -> service.registrarTecnico(tecnico(6, "Duplicado", "LOAA900101AA1", "otro@mail.com")));
+        assertThrows(ReglaNegocioException.class, () -> service.registrarTecnico(tecnico(6, "Duplicado", "RFC21", "ana@example.com")));
         assertThrows(RegistroNoEncontradoException.class, () -> service.actualizarTecnico(null));
-        assertThrows(RegistroNoEncontradoException.class, () -> service.actualizarTecnico(tecnico(999, "No existe", "RFC999", "x@mail.com")));
-        assertThrows(RegistroNoEncontradoException.class, () -> service.cambiarEstatusTecnico(999, EstadoTecnico.INACTIVO));
-        assertThrows(RegistroNoEncontradoException.class, () -> service.eliminarTecnico(999));
+        assertThrows(RegistroNoEncontradoException.class, () -> service.actualizarTecnico(tecnico(6, "No existe", "RFC999", "x@mail.com")));
+        assertThrows(RegistroNoEncontradoException.class, () -> service.cambiarEstatusTecnico(6, EstadoTecnico.INACTIVO));
+        assertThrows(RegistroNoEncontradoException.class, () -> service.eliminarTecnico(6));
         assertThrows(ReglaNegocioException.class, () -> service.cambiarEstatusTecnico(1, EstadoTecnico.INACTIVO));
 
-        TecnicoDTO activo = service.cambiarEstatusTecnico(10, EstadoTecnico.ACTIVO);
+        TecnicoDTO activo = service.cambiarEstatusTecnico(2, EstadoTecnico.ACTIVO);
         assertEquals(EstadoTecnico.ACTIVO, activo.getEstatus());
     }
 
@@ -137,30 +137,30 @@ public class ValidacionesServiceTest {
 
         assertThrows(ValidacionException.class, () -> service.registrarOrden(null));
         assertThrows(ValidacionException.class, () -> service.registrarOrden(orden(0, 1, 1, LocalDate.of(2026, 6, 1))));
-        assertThrows(ValidacionException.class, () -> service.registrarOrden(orden(20, 0, 1, LocalDate.of(2026, 6, 1))));
-        assertThrows(ValidacionException.class, () -> service.registrarOrden(orden(20, 1, 0, LocalDate.of(2026, 6, 1))));
+        assertThrows(ValidacionException.class, () -> service.registrarOrden(orden(4, 0, 1, LocalDate.of(2026, 6, 1))));
+        assertThrows(ValidacionException.class, () -> service.registrarOrden(orden(4, 1, 0, LocalDate.of(2026, 6, 1))));
         assertThrows(ValidacionException.class, () -> service.registrarOrden(new OrdenDTO(
-                20, 1, 1, null, LocalDate.of(2026, 6, 1), null, null, "Trabajo",
+                4, 1, 1, null, LocalDate.of(2026, 6, 1), null, null, "Trabajo",
                 new BigDecimal("100.00"), null, EstadoOrden.PROGRAMADA)));
         assertThrows(ValidacionException.class, () -> service.registrarOrden(new OrdenDTO(
-                20, 1, 1, TipoMantenimiento.PREVENTIVO, null, null, null, "Trabajo",
+                4, 1, 1, TipoMantenimiento.PREVENTIVO, null, null, null, "Trabajo",
                 new BigDecimal("100.00"), null, EstadoOrden.PROGRAMADA)));
         assertThrows(ValidacionException.class, () -> service.registrarOrden(new OrdenDTO(
-                20, 1, 1, TipoMantenimiento.PREVENTIVO, LocalDate.of(2026, 6, 1), null, null, "Trabajo",
+                4, 1, 1, TipoMantenimiento.PREVENTIVO, LocalDate.of(2026, 6, 1), null, null, "Trabajo",
                 new BigDecimal("100.00"), null, null)));
         assertThrows(ValidacionException.class, () -> service.registrarOrden(new OrdenDTO(
-                20, 1, 1, TipoMantenimiento.PREVENTIVO, LocalDate.of(2026, 6, 1), null, null, "Trabajo",
+                4, 1, 1, TipoMantenimiento.PREVENTIVO, LocalDate.of(2026, 6, 1), null, null, "Trabajo",
                 null, null, EstadoOrden.PROGRAMADA)));
         assertThrows(ValidacionException.class, () -> service.registrarOrden(new OrdenDTO(
-                20, 1, 1, TipoMantenimiento.PREVENTIVO, LocalDate.of(2026, 6, 1), null, null, "",
+                4, 1, 1, TipoMantenimiento.PREVENTIVO, LocalDate.of(2026, 6, 1), null, null, "",
                 new BigDecimal("100.00"), null, EstadoOrden.PROGRAMADA)));
 
-        assertThrows(RegistroNoEncontradoException.class, () -> service.registrarOrden(orden(20, 999, 1, LocalDate.of(2026, 6, 1))));
-        assertThrows(RegistroNoEncontradoException.class, () -> service.registrarOrden(orden(20, 1, 999, LocalDate.of(2026, 6, 1))));
+        assertThrows(RegistroNoEncontradoException.class, () -> service.registrarOrden(orden(4, 999, 1, LocalDate.of(2026, 6, 1))));
+        assertThrows(RegistroNoEncontradoException.class, () -> service.registrarOrden(orden(4, 1, 999, LocalDate.of(2026, 6, 1))));
         assertThrows(RegistroNoEncontradoException.class, () -> service.actualizarOrden(null));
-        assertThrows(RegistroNoEncontradoException.class, () -> service.actualizarOrden(orden(999, 1, 1, LocalDate.of(2026, 6, 1))));
-        assertThrows(RegistroNoEncontradoException.class, () -> service.cambiarEstadoOrden(999, EstadoOrden.CANCELADA, null, null));
-        assertThrows(RegistroNoEncontradoException.class, () -> service.eliminarOrden(999));
+        assertThrows(RegistroNoEncontradoException.class, () -> service.actualizarOrden(orden(4, 1, 1, LocalDate.of(2026, 6, 1))));
+        assertThrows(RegistroNoEncontradoException.class, () -> service.cambiarEstadoOrden(4, EstadoOrden.CANCELADA, null, null));
+        assertThrows(RegistroNoEncontradoException.class, () -> service.eliminarOrden(4));
     }
 
     @Test
@@ -176,11 +176,11 @@ public class ValidacionesServiceTest {
         assertEquals(0, service.consultarHistorialOrdenes(99, 99, EstadoOrden.CANCELADA).size());
 
         assertThrows(ReglaNegocioException.class, () -> service.registrarOrden(new OrdenDTO(
-                20, 1, 1, TipoMantenimiento.PREVENTIVO, LocalDate.of(2026, 6, 1), null,
+                4, 1, 1, TipoMantenimiento.PREVENTIVO, LocalDate.of(2026, 6, 1), null,
                 LocalDate.of(2026, 6, 2), "Trabajo", new BigDecimal("100.00"), null,
                 EstadoOrden.PROGRAMADA)));
         assertThrows(ReglaNegocioException.class, () -> service.registrarOrden(new OrdenDTO(
-                21, 1, 1, TipoMantenimiento.PREVENTIVO, LocalDate.of(2026, 6, 2), null,
+                5, 1, 1, TipoMantenimiento.PREVENTIVO, LocalDate.of(2026, 6, 2), null,
                 null, "Trabajo", new BigDecimal("100.00"), new BigDecimal("90.00"),
                 EstadoOrden.PROGRAMADA)));
 
@@ -218,3 +218,5 @@ public class ValidacionesServiceTest {
                 null, EstadoOrden.PROGRAMADA);
     }
 }
+
+
