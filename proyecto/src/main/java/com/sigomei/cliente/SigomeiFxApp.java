@@ -91,7 +91,7 @@ public class SigomeiFxApp extends Application {
                 "EQ-001", "Planta Norte", LocalDate.of(2024, 1, 10), EstadoOperativo.OPERATIVO, Criticidad.ALTA));
         equiposDemo.add(new EquipoDTO(2, "Bomba mecanica", TipoEquipo.MECANICO, "Flow", "BM-22",
                 "EQ-002", "Planta Sur", LocalDate.of(2024, 2, 12), EstadoOperativo.OPERATIVO, Criticidad.MEDIA));
-        equiposDemo.add(new EquipoDTO(10, "Prensa hidraulica", TipoEquipo.HIDRAULICO, "Hydra", "PH-10",
+        equiposDemo.add(new EquipoDTO(3, "Prensa hidraulica", TipoEquipo.HIDRAULICO, "Hydra", "PH-10",
                 "EQ-010", "Planta Oeste", LocalDate.of(2024, 3, 1), EstadoOperativo.OPERATIVO, Criticidad.BAJA));
 
         tecnicosDemo.add(new TecnicoDTO(1, "Ana Lopez", "LOAA900101AA1", "5551000001",
@@ -1294,7 +1294,7 @@ public class SigomeiFxApp extends Application {
     }
 
     private int siguienteIdEquipo() {
-        int mayor = 99;
+        int mayor = 0;
         for (EquipoDTO equipo : obtenerEquipos()) {
             if (equipo.getIdEquipo() > mayor) {
                 mayor = equipo.getIdEquipo();
@@ -1304,7 +1304,7 @@ public class SigomeiFxApp extends Application {
     }
 
     private int siguienteIdTecnico() {
-        int mayor = 99;
+        int mayor = 0;
         for (TecnicoDTO tecnico : obtenerTecnicos()) {
             if (tecnico.getIdTecnico() > mayor) {
                 mayor = tecnico.getIdTecnico();
@@ -1314,7 +1314,7 @@ public class SigomeiFxApp extends Application {
     }
 
     private int siguienteIdOrden() {
-        int mayor = 99;
+        int mayor = 0;
         for (OrdenDTO orden : obtenerOrdenes()) {
             if (orden.getIdOrden() > mayor) {
                 mayor = orden.getIdOrden();
