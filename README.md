@@ -1,4 +1,4 @@
-# Proyecto-SIGOMEI v1.0
+# Proyecto-SIGOMEI v1.0 
 Servidor RMI para la gestion de equipos, tecnicos y ordenes de mantenimiento.
 La capa de servicio aplica las reglas de negocio RN-01 a RN-08 y expone el contrato remoto definido para E2.
 
